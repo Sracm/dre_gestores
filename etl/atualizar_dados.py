@@ -114,12 +114,18 @@ def preparar_banco(conn):
             ano INTEGER, mes INTEGER, nomemes TEXT, tri_ano TEXT, bloco TEXT, titulo TEXT,
             descrnat TEXT, parceiro TEXT, orcado REAL, realizado REAL
         );
+        CREATE TABLE IF NOT EXISTS dre_detalhe_fsp (
+            ano INTEGER, mes INTEGER, nomemes TEXT, tri_ano TEXT, codcencus INTEGER,
+            bloco TEXT, titulo TEXT, descrnat TEXT, parceiro TEXT, orcado REAL, realizado REAL
+        );
         CREATE TABLE IF NOT EXISTS dre_filtros_anos (ano INT);
         CREATE TABLE IF NOT EXISTS dre_filtros_empresas (nome TEXT);
         CREATE TABLE IF NOT EXISTS dre_filtros_centros (codcencus INT, nome TEXT);
         CREATE INDEX IF NOT EXISTS idx_dre_combo ON dre_data(ano, mes, empresa, codcencus);
         CREATE INDEX IF NOT EXISTS idx_resumo_mensal ON dre_resumo_mensal(ano, empresa, codcencus);
         CREATE INDEX IF NOT EXISTS idx_dre_detalhe_rh_ano_mes ON dre_detalhe_rh(ano, mes);
+        CREATE INDEX IF NOT EXISTS idx_dre_detalhe_fsp_ano_mes ON dre_detalhe_fsp(ano, mes);
+        CREATE INDEX IF NOT EXISTS idx_dre_detalhe_fsp_cenc ON dre_detalhe_fsp(codcencus);
     """)
 
 
@@ -278,6 +284,28 @@ def transformar(conn):
     conn.executemany("UPDATE stg_detalhe SET nomemes = ? WHERE mes = ?",
                      [(nome, i) for i, nome in enumerate(NOMES_MES, start=1)])
 
+    conn.execute("DROP TABLE IF EXISTS temp.stg_detalhe_fsp")
+    conn.execute(f"""
+        CREATE TEMP TABLE stg_detalhe_fsp AS
+        WITH agg AS (
+            SELECT b.ano, b.mes, b.codcencus, b.bloco, b.titulo, COALESCE(n.descrnat, '') AS descrnat,
+                   COALESCE(p.nome, '') AS parceiro,
+                   SUM(b.realizado) AS realizado, SUM(b.orcado) AS orcado
+              FROM stg_base b
+              LEFT JOIN stg_natureza n ON n.codnat = b.codnat
+              LEFT JOIN stg_parceiro p ON p.codparc = b.codparc
+             GROUP BY 1, 2, 3, 4, 5, 6, 7
+        )
+        SELECT ano, mes, '' AS nomemes, 'T' || ((mes + 2) / 3) || '-' || ano AS tri_ano,
+               codcencus, bloco, titulo, descrnat, parceiro,
+               {_ORCADO_FINAL.format(particao="ano, mes, codcencus, bloco, descrnat, parceiro")} AS orcado,
+               realizado
+          FROM agg
+    """, params)
+    conn.execute("DELETE FROM stg_detalhe_fsp WHERE ABS(orcado) < 0.005 AND ABS(realizado) < 0.005")
+    conn.executemany("UPDATE stg_detalhe_fsp SET nomemes = ? WHERE mes = ?",
+                     [(nome, i) for i, nome in enumerate(NOMES_MES, start=1)])
+
 
 # ═══════════════════════════════════════════════════════════════════════════
 #  Validação e publicação
@@ -321,6 +349,9 @@ def publicar(conn, dt_ini, dt_fim):
 
         conn.execute(f"DELETE FROM main.dre_detalhe_rh WHERE {faixa}", p)
         conn.execute("INSERT INTO main.dre_detalhe_rh SELECT * FROM stg_detalhe")
+
+        conn.execute(f"DELETE FROM main.dre_detalhe_fsp WHERE {faixa}", p)
+        conn.execute("INSERT INTO main.dre_detalhe_fsp SELECT * FROM stg_detalhe_fsp")
 
         conn.execute("DELETE FROM main.dre_filtros_anos")
         conn.execute("INSERT INTO main.dre_filtros_anos SELECT DISTINCT ano FROM main.dre_data WHERE ano > 2000")

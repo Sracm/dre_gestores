@@ -64,19 +64,18 @@ def extrair_fatos(conn, dt_ini, dt_fim):
     cur = conn.cursor()
     cur.arraysize = 10000
     view_sql, view_hash = _sql_view_por_periodo(cur)
-    centros_parc = ",".join(str(c) for c in config.CENTROS_DETALHE_PARCEIRO)
     sql = f"""
         SELECT EXTRACT(YEAR FROM d.dtcomp)  AS ano,
                EXTRACT(MONTH FROM d.dtcomp) AS mes,
                d.codemp, d.codcencus, d.codnat, d.ref,
-               CASE WHEN d.codcencus IN ({centros_parc}) THEN d.codparc END AS codparc,
+               d.codparc,
                SUM(d.valor)     AS valor,
                SUM(d.orcamento) AS orcamento
           FROM ({view_sql}) d
          WHERE d.dtcomp >= :dt_ini AND d.dtcomp < :dt_fim
          GROUP BY EXTRACT(YEAR FROM d.dtcomp), EXTRACT(MONTH FROM d.dtcomp),
                   d.codemp, d.codcencus, d.codnat, d.ref,
-                  CASE WHEN d.codcencus IN ({centros_parc}) THEN d.codparc END
+                  d.codparc
     """
     cur.execute(sql, dt_ini=dt_ini, dt_fim=dt_fim)
     linhas = cur.fetchall()
