@@ -1,0 +1,44 @@
+﻿[
+    {
+        "CODEMP":  1,
+        "RAZAOABREV":  "MCR - MATRIZ",
+        "Real_Gestores":  3935.1,
+        "Real_Empresa":  3935.1,
+        "Orcado":  null
+    },
+    {
+        "CODEMP":  2,
+        "RAZAOABREV":  "MCR - SC",
+        "Real_Gestores":  1500271.6599999997,
+        "Real_Empresa":  1500271.6599999997,
+        "Orcado":  null
+    },
+    {
+        "CODEMP":  12,
+        "RAZAOABREV":  "VLS - SP",
+        "Real_Gestores":  2821320.17,
+        "Real_Empresa":  2821320.17,
+        "Orcado":  null
+    },
+    {
+        "CODEMP":  13,
+        "RAZAOABREV":  "VLS - RJ",
+        "Real_Gestores":  301029.39999999997,
+        "Real_Empresa":  301029.39999999997,
+        "Orcado":  null
+    },
+    {
+        "CODEMP":  19,
+        "RAZAOABREV":  "FORX SC",
+        "Real_Gestores":  2887292.7499999935,
+        "Real_Empresa":  2887292.7499999935,
+        "Orcado":  null
+    },
+    {
+        "CODEMP":  501,
+        "RAZAOABREV":  "Consolidação",
+        "Real_Gestores":  1414588.122,
+        "Real_Empresa":  1414588.1219999997,
+        "Orcado":  5710891.34
+    }
+]

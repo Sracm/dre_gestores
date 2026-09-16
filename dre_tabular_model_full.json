@@ -1,0 +1,1315 @@
+﻿{
+    "Tables":  [
+                   {
+                       "Measures":  [
+                                        {
+                                            "Name":  "ORCADO ANO",
+                                            "FormatString":  "#,0",
+                                            "Expression":  "\nCALCULATE(\n    SUM(VMQ_DREQLIK[ORCAMENTO]),\n    REMOVEFILTERS(DCALENDARIO[NOMEMES])\n)"
+                                        },
+                                        {
+                                            "Name":  "TOTAL ABSOLUTO ORCADO ANO",
+                                            "FormatString":  "",
+                                            "Expression":  "\nCALCULATE(\n\t[ORCADO ANO],\n\tALLSELECTED(\u0027DCALENDARIO\u0027[NOMEMES]),\n\tALLSELECTED(\u0027DCALENDARIO\u0027[NUMEROMES])\n)"
+                                        }
+                                    ],
+                       "Partitions":  [
+                                          {
+                                              "Query":  "let\n    Fonte = Oracle.Database(\"192.168.1.55/ORCL\", [HierarchicalNavigation=true]),\n    SANKHYA = Fonte{[Schema=\"SANKHYA\"]}[Data],\n    VMQ_DREQLIK1 = SANKHYA{[Name=\"VMQ_DREQLIK\"]}[Data]\nin\n    VMQ_DREQLIK1",
+                                              "Name":  "VMQ_DREQLIK",
+                                              "SourceType":  "M"
+                                          }
+                                      ],
+                       "Name":  "VMQ_DREQLIK",
+                       "Columns":  [
+                                       {
+                                           "Name":  "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+                                           "DataType":  "Int64",
+                                           "Type":  "RowNumber"
+                                       },
+                                       {
+                                           "Name":  "BASE",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "CODEMP",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "CODCENCUS",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "CODNAT",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "DTCOMP",
+                                           "DataType":  "DateTime",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "DTREF",
+                                           "DataType":  "DateTime",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "NUNOTA",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "CODPARC",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "REF",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "VALOR",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "chave",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\nCONCATENATE(\n    VMQ_DREQLIK[CODCENCUS],\n    CONCATENATE(VMQ_DREQLIK[CODNAT],\n    VMQ_DREQLIK[REF]))"
+                                       },
+                                       {
+                                           "Name":  "TOTAL MATRIZ.",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\n            IF(\n                NOT(ISBLANK(VMQ_DREQLIK[VALOR])\n                ),\n                \"MARGEM\"\n            )"
+                                       },
+                                       {
+                                           "Name":  "ORCAMENTO",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "FATOR",
+                                           "DataType":  "Double",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\n            RELATED(VMQ_CADDRE[FATOR])"
+                                       },
+                                       {
+                                           "Name":  "VLR.",
+                                           "DataType":  "Double",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\n                VMQ_DREQLIK[VALOR]*VMQ_DREQLIK[FATOR]"
+                                       },
+                                       {
+                                           "Name":  "MARGEM",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\n            IF(\n                NOT(ISBLANK(VMQ_DREQLIK[VALOR])\n                ),\n                \"MARGEM\"\n            )"
+                                       },
+                                       {
+                                           "Name":  "chave bonif",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\nCONCATENATE(VMQ_DREQLIK[CODCENCUS],CONCATENATE(VMQ_DREQLIK[CODNAT],IF(VMQ_DREQLIK[REF]=\"VALORNF\",\"CUSTOGER\",VMQ_DREQLIK[REF])))"
+                                       },
+                                       {
+                                           "Name":  "CheckBonif",
+                                           "DataType":  "Unknown",
+                                           "Type":  "Calculated",
+                                           "Expression":  "RELATED(bonifChave[chave])"
+                                       },
+                                       {
+                                           "Name":  "fator2",
+                                           "DataType":  "Double",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\nSWITCH(\n    TRUE(),\n    -- Regra para CUSTOGER (retorna 0)\n    VMQ_DREQLIK[REF] = \"CUSTOGER\" \u0026\u0026 VMQ_DREQLIK[CODNAT] IN {12010301, 12010302}, 0,\n    \n    -- Regra para VALORNF (retorna -1 ou 1)\n    VMQ_DREQLIK[REF] = \"VALORNF\" \u0026\u0026 VMQ_DREQLIK[CODNAT] = 12010301, -1,\n    VMQ_DREQLIK[REF] = \"VALORNF\" \u0026\u0026 VMQ_DREQLIK[CODNAT] = 12010302, 1,\n    \n    -- Caso não entre em nenhuma regra acima, traz o FATOR original\n    VMQ_DREQLIK[FATOR]\n)\n"
+                                       },
+                                       {
+                                           "Name":  "valor10",
+                                           "DataType":  "Double",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\n            VMQ_DREQLIK[fator2]*VMQ_DREQLIK[VALOR]"
+                                       },
+                                       {
+                                           "Name":  "chave bonif2",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\nVMQ_DREQLIK[CODCENCUS] \u0026 \nVMQ_DREQLIK[CODNAT] \u0026 \nIF(\n    VMQ_DREQLIK[CODNAT] IN {12010301, 12010302},\n    IF(VMQ_DREQLIK[REF] = \"VALORNF\", \"CUSTOGER\", VMQ_DREQLIK[REF]),\n    VMQ_DREQLIK[REF]\n)\n\n\n//CONCATENATE(VMQ_DREQLIK[CODCENCUS],CONCATENATE(VMQ_DREQLIK[CODNAT],IF(VMQ_DREQLIK[REF]=\"VALORNF\",\"CUSTOGER\",VMQ_DREQLIK[REF]))))"
+                                       },
+                                       {
+                                           "Name":  "TESTE",
+                                           "DataType":  "Double",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\nVAR Cod = VMQ_DREQLIK[CODCENCUS]\nRETURN\nIF(\n    Cod \u003e= 12000000 \u0026\u0026 Cod \u003c 13000000,\n    -19,\n    VMQ_DREQLIK[CODPARC]\n)"
+                                       }
+                                   ]
+                   },
+                   {
+                       "Measures":  [
+
+                                    ],
+                       "Partitions":  [
+                                          {
+                                              "Query":  "Calendar(Date(2015,1,1), Date(2015,1,1))",
+                                              "Name":  "DateTableTemplate_92288efd-c80f-46a2-b20b-43a15b235733",
+                                              "SourceType":  "Calculated"
+                                          }
+                                      ],
+                       "Name":  "DateTableTemplate_92288efd-c80f-46a2-b20b-43a15b235733",
+                       "Columns":  [
+                                       {
+                                           "Name":  "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+                                           "DataType":  "Int64",
+                                           "Type":  "RowNumber"
+                                       },
+                                       {
+                                           "Name":  "Date",
+                                           "DataType":  "DateTime",
+                                           "Type":  "CalculatedTableColumn"
+                                       },
+                                       {
+                                           "Name":  "Ano",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "YEAR([Date])"
+                                       },
+                                       {
+                                           "Name":  "MonthNo",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "MONTH([Date])"
+                                       },
+                                       {
+                                           "Name":  "Mês",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "FORMAT([Date], \"MMMM\")"
+                                       },
+                                       {
+                                           "Name":  "QuarterNo",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "INT(([MonthNo] + 2) / 3)"
+                                       },
+                                       {
+                                           "Name":  "Trimestre",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\"Qtr \" \u0026 [QuarterNo]"
+                                       },
+                                       {
+                                           "Name":  "Dia",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "DAY([Date])"
+                                       }
+                                   ]
+                   },
+                   {
+                       "Measures":  [
+
+                                    ],
+                       "Partitions":  [
+                                          {
+                                              "Query":  "Calendar(Date(Year(MIN(\u0027VMQ_DREQLIK\u0027[DTREF])), 1, 1), Date(Year(MAX(\u0027VMQ_DREQLIK\u0027[DTREF])), 12, 31))",
+                                              "Name":  "LocalDateTable_0d21529a-cf2e-44b8-9c03-661d79912a5a",
+                                              "SourceType":  "Calculated"
+                                          }
+                                      ],
+                       "Name":  "LocalDateTable_0d21529a-cf2e-44b8-9c03-661d79912a5a",
+                       "Columns":  [
+                                       {
+                                           "Name":  "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+                                           "DataType":  "Int64",
+                                           "Type":  "RowNumber"
+                                       },
+                                       {
+                                           "Name":  "Date",
+                                           "DataType":  "DateTime",
+                                           "Type":  "CalculatedTableColumn"
+                                       },
+                                       {
+                                           "Name":  "Ano",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "YEAR([Date])"
+                                       },
+                                       {
+                                           "Name":  "MonthNo",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "MONTH([Date])"
+                                       },
+                                       {
+                                           "Name":  "Mês",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "FORMAT([Date], \"MMMM\")"
+                                       },
+                                       {
+                                           "Name":  "QuarterNo",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "INT(([MonthNo] + 2) / 3)"
+                                       },
+                                       {
+                                           "Name":  "Trimestre",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\"Qtr \" \u0026 [QuarterNo]"
+                                       },
+                                       {
+                                           "Name":  "Dia",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "DAY([Date])"
+                                       }
+                                   ]
+                   },
+                   {
+                       "Measures":  [
+
+                                    ],
+                       "Partitions":  [
+                                          {
+                                              "Query":  "let\n    Fonte = Oracle.Database(\"192.168.1.55/ORCL\", [HierarchicalNavigation=true]),\n    SANKHYA = Fonte{[Schema=\"SANKHYA\"]}[Data],\n    VMQ_TSICUS1 = SANKHYA{[Name=\"VMQ_TSICUS\"]}[Data]\nin\n    VMQ_TSICUS1",
+                                              "Name":  "VMQ_TSICUS",
+                                              "SourceType":  "M"
+                                          }
+                                      ],
+                       "Name":  "VMQ_TSICUS",
+                       "Columns":  [
+                                       {
+                                           "Name":  "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+                                           "DataType":  "Int64",
+                                           "Type":  "RowNumber"
+                                       },
+                                       {
+                                           "Name":  "CODCENCUS",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "CODCENCUSPAI",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "ATIVO",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "ANALITICO",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "GRAU",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "CODUSURESP",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "DTINCLUSAO",
+                                           "DataType":  "DateTime",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "DESCRCENCUS",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       }
+                                   ]
+                   },
+                   {
+                       "Measures":  [
+
+                                    ],
+                       "Partitions":  [
+                                          {
+                                              "Query":  "Calendar(Date(Year(MIN(\u0027VMQ_TSICUS\u0027[DTINCLUSAO])), 1, 1), Date(Year(MAX(\u0027VMQ_TSICUS\u0027[DTINCLUSAO])), 12, 31))",
+                                              "Name":  "LocalDateTable_50f9ef6d-2445-47ee-859c-127b66432a8b",
+                                              "SourceType":  "Calculated"
+                                          }
+                                      ],
+                       "Name":  "LocalDateTable_50f9ef6d-2445-47ee-859c-127b66432a8b",
+                       "Columns":  [
+                                       {
+                                           "Name":  "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+                                           "DataType":  "Int64",
+                                           "Type":  "RowNumber"
+                                       },
+                                       {
+                                           "Name":  "Date",
+                                           "DataType":  "DateTime",
+                                           "Type":  "CalculatedTableColumn"
+                                       },
+                                       {
+                                           "Name":  "Ano",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "YEAR([Date])"
+                                       },
+                                       {
+                                           "Name":  "MonthNo",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "MONTH([Date])"
+                                       },
+                                       {
+                                           "Name":  "Mês",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "FORMAT([Date], \"MMMM\")"
+                                       },
+                                       {
+                                           "Name":  "QuarterNo",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "INT(([MonthNo] + 2) / 3)"
+                                       },
+                                       {
+                                           "Name":  "Trimestre",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\"Qtr \" \u0026 [QuarterNo]"
+                                       },
+                                       {
+                                           "Name":  "Dia",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "DAY([Date])"
+                                       }
+                                   ]
+                   },
+                   {
+                       "Measures":  [
+
+                                    ],
+                       "Partitions":  [
+                                          {
+                                              "Query":  "let\n    Fonte = Oracle.Database(\"192.168.1.55/ORCL\", [HierarchicalNavigation=true]),\n    SANKHYA = Fonte{[Schema=\"SANKHYA\"]}[Data],\n    VMQ_TGFNAT1 = SANKHYA{[Name=\"VMQ_TGFNAT\"]}[Data]\nin\n    VMQ_TGFNAT1",
+                                              "Name":  "VMQ_TGFNAT",
+                                              "SourceType":  "M"
+                                          }
+                                      ],
+                       "Name":  "VMQ_TGFNAT",
+                       "Columns":  [
+                                       {
+                                           "Name":  "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+                                           "DataType":  "Int64",
+                                           "Type":  "RowNumber"
+                                       },
+                                       {
+                                           "Name":  "CODNAT",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "DESCRNAT",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "INCRESULT",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "CODNATPAI",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "GRAU",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "ATIVA",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "ANALITICA",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "TIPNAT",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       }
+                                   ]
+                   },
+                   {
+                       "Measures":  [
+                                        {
+                                            "Name":  "SOMA ORCADO",
+                                            "FormatString":  "",
+                                            "Expression":  "\nVAR Titulo = SELECTEDVALUE(VMQ_CADDRE[TITULO])\n     VAR  CustoMerca =\n        CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]),VMQ_CADDRE[BLOCO]= \"2.Custo Mercadoria Vendida\"       \n           \n           )\n    VAR Margem = IF([Quantidade Bloco] = 6,SUM(VMQ_DREQLIK[ORCAMENTO]), CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]),ALLSELECTED(VMQ_CADDRE)) + CustoMerca )\n           \n           RETURN\nSWITCH(TRUE(),\nTitulo = \"2.Bonificação Clientes\", SUM(VMQ_DREQLIK[ORCAMENTO])*2,\nISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[ORCAMENTO]),\nMargem)"
+                                        },
+                                        {
+                                            "Name":  "ORCAMENTO",
+                                            "FormatString":  "#,0",
+                                            "Expression":  "\nVAR ItemMargem = SELECTEDVALUE(\u0027Margem de Contribuição\u0027[Item])\nVAR VendaLiq = CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]), VMQ_CADDRE[BLOCO] = \"1.Venda Liquida\",REMOVEFILTERS(VMQ_CADDRE[BLOCO]))\nVAR CustoMercadoriaVendida= CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]),VMQ_CADDRE[BLOCO]=\"2.Custo Mercadoria Vendida\",REMOVEFILTERS(VMQ_CADDRE[BLOCO]))\nRETURN\nIF(NOT(ISINSCOPE(VMQ_DREQLIK[MARGEM])),VendaLiq + CustoMercadoriaVendida , SUM(VMQ_DREQLIK[ORCAMENTO]))"
+                                        },
+                                        {
+                                            "Name":  "VENDA BRUTA ORCADO",
+                                            "FormatString":  "",
+                                            "Expression":  "\n            CALCULATE([ORÇADO (R$).old],\n            FILTER(ALLSELECTED(VMQ_CADDRE),\n            VMQ_CADDRE[TITULO]= \"1.Venda Bruta\"),  REMOVEFILTERS(VMQ_CADDRE[TITULO]))\n            \n           \n "
+                                        },
+                                        {
+                                            "Name":  "VB orçado",
+                                            "FormatString":  "",
+                                            "Expression":  "\nVAR Resultado =\n    DIVIDE([ORCAMENTO], [VENDA BRUTA ORCADO])\nRETURN\nIF(\n    ISINSCOPE(VMQ_CADDRE[TITULO]),\n    Resultado,\n    Resultado\n)\n"
+                                        },
+                                        {
+                                            "Name":  "VENDA BRUTA REALIZADO",
+                                            "FormatString":  "",
+                                            "Expression":  "\n            CALCULATE(SUM(VMQ_DREQLIK[VLR.]),\n            FILTER(ALLSELECTED(VMQ_CADDRE),\n            VMQ_CADDRE[TITULO]= \"1.Venda Bruta\"))\n            \n          \n"
+                                        },
+                                        {
+                                            "Name":  "VB REALIZADO",
+                                            "FormatString":  "",
+                                            "Expression":  "\nVAR Resultado =\n    DIVIDE([SOMA REALIZADO], [VENDA BRUTA ORCADO])\nRETURN\nIF(\n    ISINSCOPE(VMQ_CADDRE[TITULO]),\n    Resultado,\n    Resultado\n)\n"
+                                        },
+                                        {
+                                            "Name":  "Quantidade Bloco",
+                                            "FormatString":  "",
+                                            "Expression":  "DISTINCTCOUNT(VMQ_CADDRE[BLOCO])"
+                                        },
+                                        {
+                                            "Name":  "VLR CUSTOGER",
+                                            "FormatString":  "",
+                                            "Expression":  "\nCALCULATE(SUM(VMQ_DREQLIK[VALOR]),\nVMQ_DREQLIK[REF] =\"CUSTOGER\")"
+                                        },
+                                        {
+                                            "Name":  "VLR IMPOSTO",
+                                            "FormatString":  "",
+                                            "Expression":  "\nCALCULATE(SUM(VMQ_DREQLIK[VALOR]),\nVMQ_DREQLIK[REF] =\"IMPOSTO\")"
+                                        },
+                                        {
+                                            "Name":  "REALIZADO",
+                                            "FormatString":  "",
+                                            "Expression":  "\n                SUM(VMQ_DREQLIK[VLR.])"
+                                        },
+                                        {
+                                            "Name":  "SOMA REALIZADO",
+                                            "FormatString":  "#,0",
+                                            "Expression":  "\n\nVAR Bloco =\n    SELECTEDVALUE(VMQ_CADDRE[BLOCO])\n\nVAR Titulo =\n    SELECTEDVALUE(VMQ_CADDRE[TITULO])\nVAR CustoMerca =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[VALOR]),\n        VMQ_CADDRE[BLOCO] = \"2.Custo Mercadoria Vendida\"\n    )\n\nVAR Bonfic =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[VALOR]),\n        bonifChave[chave] \u003c\u003e BLANK(),\n        VMQ_DREQLIK[REF] = \"VALORNF\",\n        REMOVEFILTERS(VMQ_CADDRE),\n        TREATAS(\n            VALUES(VMQ_CADDRE[CODCENCUS]),\n            VMQ_DREQLIK[CODCENCUS]\n        )\n    )\n    VAR Margem =\n  \n        SUM(VMQ_DREQLIK[VLR.]) -\n           ( Bonfic -\n        (CALCULATE(SUM(VMQ_DREQLIK[VLR.]),VMQ_CADDRE[TITULO]= \"2.Bonificação Clientes\")*-1))\n    \n        VAR despesacomvenda =\n       ( Bonfic -\n        (CALCULATE(SUM(VMQ_DREQLIK[VLR.]),VMQ_CADDRE[TITULO]= \"2.Bonificação Clientes\")*-1) \n       + (SUM(VMQ_DREQLIK[VLR.]) *-1) ) *-1\n\nVAR Resultado =\n    SWITCH(\n        TRUE(),\n       AND(NOT ISINSCOPE(VMQ_CADDRE[TITULO]), Bloco = \"3.Despesas com Vendas\"),despesacomvenda ,\n        Titulo = \"2.Bonificação Clientes\", Bonfic,\n        ISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[VLR.]),\n        Margem\n    )\nRETURN\nIF(Resultado = 0, BLANK(), Resultado)"
+                                        },
+                                        {
+                                            "Name":  "%s/ VB orçado",
+                                            "FormatString":  "0.0%;-0.0%;0.0%",
+                                            "Expression":  "\n        IFERROR( IF(ISINSCOPE(VMQ_CADDRE[TITULO]), IFERROR( [ORÇADO (R$).]/ [VENDA BRUTA ORCADO],\"\"),[ORÇADO (R$).]/[VENDA BRUTA ORCADO]),\"\")"
+                                        },
+                                        {
+                                            "Name":  "ORÇADO (R$).old",
+                                            "FormatString":  "#,0",
+                                            "Expression":  "\nVAR Bloco =\n    SELECTEDVALUE(VMQ_CADDRE[BLOCO])\n\nVAR Titulo =\n    SELECTEDVALUE(VMQ_CADDRE[TITULO])\nVAR CustoMerca =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[ORCAMENTO]),\n        VMQ_CADDRE[BLOCO] = \"2.Custo Mercadoria Vendida\"\n    )\nVAR Margem =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[ORCAMENTO]),\n        ALLSELECTED(VMQ_CADDRE)\n        )\n        + CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]),VMQ_CADDRE[TITULO] = \"2.Bonificação Clientes\")\n\nVAR Despesacomvenda =\n\nSUM(VMQ_DREQLIK[ORCAMENTO])\n//CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]),VMQ_CADDRE[TITULO] = \"2.Bonificação Clientes\")\n\nVAR Resultado =\n    SWITCH(\n        TRUE(),\n        Bloco = \"3.Despesas com Vendas\", Despesacomvenda,\n        Titulo = \"2.Bonificação Clientes\", SUM(VMQ_DREQLIK[ORCAMENTO]) * 2,\n        ISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[ORCAMENTO]),\n        Margem\n    )\nRETURN\nIF(\n    OR(ISBLANK(Resultado), Resultado = 0),\n    BLANK(),\n    Resultado\n)\n"
+                                        },
+                                        {
+                                            "Name":  "%s/ VB REALIZADO",
+                                            "FormatString":  "0.0%;-0.0%;0.0%",
+                                            "Expression":  "\n        IFERROR( IF(ISINSCOPE(VMQ_CADDRE[TITULO]), IFERROR( [REALIZADO (R$)..]/ [VENDA BRUTA REALIZADO],\"\"),[REALIZADO (R$)..]/[VENDA BRUTA REALIZADO]),\"\")\n\n\n\n  "
+                                        },
+                                        {
+                                            "Name":  "REALIZADO.",
+                                            "FormatString":  "#,0",
+                                            "Expression":  "\nVAR ItemMargem = SELECTEDVALUE(\u0027Margem de Contribuição\u0027[Item])\nVAR VendaLiq = CALCULATE(SUM(VMQ_DREQLIK[VLR.]), VMQ_CADDRE[BLOCO] = \"1.Venda Liquida\",REMOVEFILTERS(VMQ_CADDRE[BLOCO]))\nVAR CustoMercadoriaVendida= CALCULATE(SUM(VMQ_DREQLIK[valor10]),VMQ_CADDRE[BLOCO]=\"2.Custo Mercadoria Vendida\",REMOVEFILTERS(VMQ_CADDRE[BLOCO]))\nRETURN\nIF(NOT(ISINSCOPE(VMQ_DREQLIK[MARGEM])),VendaLiq + CustoMercadoriaVendida , SUM(VMQ_DREQLIK[VLR.]))"
+                                        },
+                                        {
+                                            "Name":  "R/O",
+                                            "FormatString":  "0.0%;-0.0%;0.0%",
+                                            "Expression":  "\nDIVIDE(\n    [REALIZADO (R$)..] - [ORÇADO (R$).],\n    ABS([ORÇADO (R$).]),\n    0\n)"
+                                        },
+                                        {
+                                            "Name":  "soma realizado teste",
+                                            "FormatString":  "",
+                                            "Expression":  "\n                SUM(VMQ_DREQLIK[VLR.])"
+                                        },
+                                        {
+                                            "Name":  "R/O AJUSTADO",
+                                            "FormatString":  "0.00%;-0.00%;0.00%",
+                                            "Expression":  "\nVAR Resultado = [R/O]\nRETURN\n( Resultado)"
+                                        },
+                                        {
+                                            "Name":  "SOMA ORCAMENTO.",
+                                            "FormatString":  "",
+                                            "Expression":  "\nVAR Titulo =\n    SELECTEDVALUE(VMQ_CADDRE[TITULO])\n\nVAR CustoMerca =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[ORCAMENTO]),\n        VMQ_CADDRE[BLOCO] = \"2.Custo Mercadoria Vendida\"\n    )\n\nVAR Margem =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[ORCAMENTO]),\n        ALLSELECTED(VMQ_CADDRE)\n    ) + CustoMerca\n\n-- 🔹 Soma dos subtotais de todos os blocos\nVAR SubtotalBlocos =\n    SUMX(\n        FILTER(\n            VALUES(VMQ_CADDRE[BLOCO]),\n            VMQ_CADDRE[BLOCO] IN {\n                \"1.Venda Liquida\",\n                \"2.Custo Mercadoria Vendida\",\n                \"3.Despesas com Vendas\",\n                \"4.Despesas Comercial Operacional\"\n            }\n        ),\n        CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]))\n    )\n\nVAR Resultado =\n    SWITCH(\n        TRUE(),\n        -- Regras específicas\n        Titulo = \"2.Bonificação Clientes\", SUM(VMQ_DREQLIK[ORCAMENTO]),\n\n        -- Se o nível atual é um bloco, retorna o subtotal dele\n        ISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[ORCAMENTO]),\n\n        -- Caso contrário, soma geral dos blocos + margem\n        Margem + SubtotalBlocos\n    )\n\nRETURN\nIF(\n    OR(ISBLANK(Resultado), Resultado = 0),\n    BLANK(),\n    Resultado\n)\n"
+                                        },
+                                        {
+                                            "Name":  "(%) S/ VB orçado.",
+                                            "FormatString":  "0.00%;-0.00%;0.00%",
+                                            "Expression":  "\n        IFERROR( IF(ISINSCOPE(VMQ_CADDRE[TITULO]), IFERROR( [ORCAMENTO]/ [REALIZADO.],\"\"),[ORCAMENTO]/[REALIZADO.]),\"\")"
+                                        },
+                                        {
+                                            "Name":  "% S/ VB ORCADO .",
+                                            "FormatString":  "0.00%;-0.00%;0.00%",
+                                            "Expression":  "\n         IF(\n    ISINSCOPE(VMQ_CADDRE[TITULO]),\n    DIVIDE([ORCAMENTO], [VENDA BRUTA ORCADO]),\n    DIVIDE([ORCAMENTO], [VENDA BRUTA ORCADO])\n)"
+                                        },
+                                        {
+                                            "Name":  "%s/ VB REALIZADO.",
+                                            "FormatString":  "0.00%;-0.00%;0.00%",
+                                            "Expression":  "\n        IFERROR( IF(ISINSCOPE(VMQ_CADDRE[TITULO]), IFERROR( [REALIZADO.]/ [VENDA BRUTA REALIZADO],\"\"),[REALIZADO.]/[VENDA BRUTA REALIZADO]),\"\")\n\n\n"
+                                        },
+                                        {
+                                            "Name":  "R/O.",
+                                            "FormatString":  "0.00%;-0.00%;0.00%",
+                                            "Expression":  "\n          IFERROR( ( [REALIZADO (R$)..]/[ORCAMENTO])-1,\"\")"
+                                        },
+                                        {
+                                            "Name":  "R/O AJUSTADO.",
+                                            "FormatString":  "0.00%;-0.00%;0.00%",
+                                            "Expression":  "\nVAR Resultado = [R/O.]\nRETURN\nIF(Resultado = -1, BLANK(), Resultado)"
+                                        },
+                                        {
+                                            "Name":  "(%) RELIZADO VS ORÇADO",
+                                            "FormatString":  "0.00%;-0.00%;0.00%",
+                                            "Expression":  "\n                [REALIZADO.]/[ORCAMENTO]"
+                                        },
+                                        {
+                                            "Name":  "(%) REAL",
+                                            "FormatString":  "0.00%;-0.00%;0.00%",
+                                            "Expression":  "\n                  DIVIDE([REALIZADO.], [ORCAMENTO])"
+                                        },
+                                        {
+                                            "Name":  "DIF. REALIZADO X ORÇADO",
+                                            "FormatString":  "",
+                                            "Expression":  "\n                [REALIZADO.]-[ORCAMENTO]"
+                                        },
+                                        {
+                                            "Name":  "DIF. REALIZADO X ORÇADO GESTORES",
+                                            "FormatString":  "",
+                                            "Expression":  "\n                [REALIZADO]-[ORCAMENTO]"
+                                        },
+                                        {
+                                            "Name":  "(%) REAL GESTORES",
+                                            "FormatString":  "",
+                                            "Expression":  "\n                  DIVIDE([REALIZADO], [ORCAMENTO])"
+                                        },
+                                        {
+                                            "Name":  "SOMA REALIZADO3",
+                                            "FormatString":  "#,0",
+                                            "Expression":  "\n\nVAR Bloco =\n    SELECTEDVALUE(VMQ_CADDRE[BLOCO])\n\nVAR Titulo =\n    SELECTEDVALUE(VMQ_CADDRE[TITULO])\n\nVAR ValorAtual =\n    SUM(VMQ_DREQLIK[VLR.])\n\nVAR CustoMerca =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[VALOR]),\n        VMQ_CADDRE[BLOCO] = \"2.Custo Mercadoria Vendida\"\n    )\n\nVAR Bonfic =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[VALOR]),\n        bonifChave[chave] \u003c\u003e BLANK(),\n        VMQ_DREQLIK[REF] = \"VALORNF\",\n        REMOVEFILTERS(VMQ_CADDRE),\n        TREATAS(\n            VALUES(VMQ_CADDRE[CODCENCUS]),\n            VMQ_DREQLIK[CODCENCUS]\n        )\n    )\n\nVAR Margem =\n    SUM(VMQ_DREQLIK[VLR.]) -\n    ( Bonfic -\n        (CALCULATE(\n            SUM(VMQ_DREQLIK[VLR.]),\n            VMQ_CADDRE[TITULO] = \"2.Bonificação Clientes\"\n        ) * -1)\n    )\n\nVAR despesacomvenda =\n    ( Bonfic -\n        (CALCULATE(\n            SUM(VMQ_DREQLIK[VLR.]),\n            VMQ_CADDRE[TITULO] = \"2.Bonificação Clientes\"\n        ) * -1) \n        + (SUM(VMQ_DREQLIK[VLR.]) * -1)\n    ) * -1\n\nVAR TesteBonificacao =\n    Titulo = \"2.Bonificação Clientes\" \u0026\u0026\n    ISINSCOPE(VMQ_CADDRE[TITULO]) \u0026\u0026\n    NOT ISINSCOPE(VMQ_CADDRE[DESCRNAT])\n\nVAR Resultado =\n    SWITCH(\n        TRUE(),\n\n        -- TOTAL DO BLOCO\n        NOT ISINSCOPE(VMQ_CADDRE[TITULO]) \n            \u0026\u0026 Bloco = \"3.Despesas com Vendas\",\n            despesacomvenda,\n\n        -- BONIFICAÇÃO (só no título)\n        TesteBonificacao,\n            [REALIZADO],\n\n        -- NÍVEL TÍTULO\n        ISINSCOPE(VMQ_CADDRE[TITULO]) \u0026\u0026\n        NOT ISINSCOPE(VMQ_CADDRE[DESCRNAT]),\n            ValorAtual,\n\n        -- NÍVEL BLOCO\n        ISINSCOPE(VMQ_CADDRE[BLOCO]) \u0026\u0026\n        NOT ISINSCOPE(VMQ_CADDRE[TITULO]),\n            ValorAtual,\n\n        -- MARGEM\n        Margem\n    )\n\nRETURN\n--  REGRA GLOBAL (remove tudo que for vazio ou zero)\nIF(\n    ISBLANK(Resultado) || Resultado = 0,\n    BLANK(),\n    Resultado\n)"
+                                        },
+                                        {
+                                            "Name":  "SOMA ORCAMENTO AJUSTADA",
+                                            "FormatString":  "",
+                                            "Expression":  "\n\nVAR Bloco =\n    SELECTEDVALUE(VMQ_CADDRE[BLOCO])\n\nVAR Titulo =\n    SELECTEDVALUE(VMQ_CADDRE[TITULO])\n\nVAR Base =\n    SUM(VMQ_DREQLIK[ORCAMENTO])\n\nVAR Bonificacao =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[ORCAMENTO]),\n        VMQ_CADDRE[TITULO] = \"2.Bonificação Clientes\"\n    )\n\nVAR Margem =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[ORCAMENTO]),\n        REMOVEFILTERS(VMQ_CADDRE[BLOCO])\n    )\n\nVAR Resultado =\n    SWITCH(\n        TRUE(),\n\n        Bloco = \"3.Despesas com Vendas\", Base,\n\n        Titulo = \"2.Bonificação Clientes\", Bonificacao,\n\n        ISINSCOPE(VMQ_CADDRE[TITULO]), Base,\n\n        -- TOTAL (soma correta dos blocos visíveis)\n        SUMX(\n            VALUES(VMQ_CADDRE[BLOCO]),\n            CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]))\n        )\n    )\n\nRETURN\nIF(\n    OR(ISBLANK(Resultado), Resultado = 0),\n    BLANK(),\n    Resultado\n)"
+                                        },
+                                        {
+                                            "Name":  "SOMA REALIZADO AJUSTADA",
+                                            "FormatString":  "",
+                                            "Expression":  "\n\nVAR Bloco =\n    SELECTEDVALUE(VMQ_CADDRE[BLOCO])\n\nVAR Titulo =\n    SELECTEDVALUE(VMQ_CADDRE[TITULO])\n\nVAR Base =\n    SUM(VMQ_DREQLIK[VALOR])\n\nVAR Bonificacao =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[VALOR]),\n        VMQ_CADDRE[TITULO] = \"2.Bonificação Clientes\"\n    )\n\nVAR Resultado =\n    SWITCH(\n        TRUE(),\n\n        -- Regra específica\n        Bloco = \"3.Despesas com Vendas\", Base,\n\n        -- Bonificação (se tiver regra diferenciada)\n        Titulo = \"2.Bonificação Clientes\", Bonificacao,\n\n        -- Linhas normais (nível título)\n        ISINSCOPE(VMQ_CADDRE[TITULO]), Base,\n\n        -- TOTAL CORRETO (soma dos blocos visíveis)\n        SUMX(\n            VALUES(VMQ_CADDRE[BLOCO]),\n            CALCULATE(SUM(VMQ_DREQLIK[VALOR]))\n        )\n    )\n\nRETURN\nIF(\n    OR(ISBLANK(Resultado), Resultado = 0),\n    BLANK(),\n    Resultado\n)"
+                                        },
+                                        {
+                                            "Name":  "REALIZADO (R$).",
+                                            "FormatString":  "",
+                                            "Expression":  "\n\nVAR Bloco =\n    SELECTEDVALUE(VMQ_CADDRE[BLOCO])\n\nVAR Titulo =\n    SELECTEDVALUE(VMQ_CADDRE[TITULO])\nVAR CustoMerca =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[VALOR]),\n        VMQ_CADDRE[BLOCO] = \"2.Custo Mercadoria Vendida\"\n    )\n\nVAR Bonfic =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[valor10]),\n        bonifChave[chave] \u003c\u003e BLANK(),\n        VMQ_DREQLIK[REF] = \"VALORNF\",\n        REMOVEFILTERS(VMQ_CADDRE),\n        TREATAS(\n            VALUES(VMQ_CADDRE[CODCENCUS]),\n            VMQ_DREQLIK[CODCENCUS]\n        )\n    )\n    VAR Margem =\n  \n        SUM(VMQ_DREQLIK[VLR.]) -\n           ( Bonfic -\n        (CALCULATE(SUM(VMQ_DREQLIK[VLR.]),VMQ_CADDRE[TITULO]= \"2.Bonificação Clientes\")*-1))\n    \n        VAR despesacomvenda =\n       ( Bonfic -\n        (CALCULATE(SUM(VMQ_DREQLIK[valor10]),VMQ_CADDRE[TITULO]= \"2.Bonificação Clientes\")*-1) \n       + (SUM(VMQ_DREQLIK[valor10]) *-1) ) *-1\n\nVAR Resultado =\n    SWITCH(\n        TRUE(),\n       AND(NOT ISINSCOPE(VMQ_CADDRE[TITULO]), Bloco = \"3.Despesas com Vendas\"),SUM(VMQ_DREQLIK[valor10]) ,\n        Titulo = \"2.Bonificação Clientes\", Bonfic,\n        ISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[VLR.]),\n        Margem\n    )\nRETURN\nIF(\n    Resultado = 0,\n    BLANK(),\n    IF(\n        SELECTEDVALUE(VMQ_CADDRE[TITULO]) = \"2.Bonificação Clientes\",\n        SUM(VMQ_DREQLIK[valor10]),\n        Resultado\n    )\n)"
+                                        },
+                                        {
+                                            "Name":  "teste antonio",
+                                            "FormatString":  "#,0",
+                                            "Expression":  "\nVAR Bloco =\n    SELECTEDVALUE(VMQ_CADDRE[BLOCO])\n\nVAR Titulo =\n    SELECTEDVALUE(VMQ_CADDRE[TITULO])\nVAR CustoMerca =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[ORCAMENTO]),\n        VMQ_CADDRE[BLOCO] = \"2.Custo Mercadoria Vendida\"\n    )\nVAR Margem =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[ORCAMENTO]),\n        ALLSELECTED(VMQ_CADDRE)\n        )\n        + CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]),VMQ_CADDRE[TITULO] = \"2.Bonificação Clientes\")\n\nVAR Despesacomvenda =\n\nSUM(VMQ_DREQLIK[ORCAMENTO])+\nCALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]),VMQ_CADDRE[TITULO] = \"2.Bonificação Clientes\")\n\nVAR Resultado =\n    SWITCH(\n        TRUE(),\n        Bloco = \"3.Despesas com Vendas\", Despesacomvenda,\n        Titulo = \"2.Bonificação Clientes\", SUM(VMQ_DREQLIK[ORCAMENTO]) * 2,\n        ISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[ORCAMENTO]),\n        Margem\n    )\nRETURN\nIF(\n    OR(ISBLANK(Resultado), Resultado = 0),\n    BLANK(),\n    Resultado\n)\n"
+                                        },
+                                        {
+                                            "Name":  "ORÇADO (R$).",
+                                            "FormatString":  "#,0",
+                                            "Expression":  "\nVAR Bloco =\n    SELECTEDVALUE(VMQ_CADDRE[BLOCO])\n\nVAR Titulo =\n    SELECTEDVALUE(VMQ_CADDRE[TITULO])\n\nVAR CustoMerca =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[ORCAMENTO]),\n        VMQ_CADDRE[BLOCO] = \"2.Custo Mercadoria Vendida\"\n    )\n\nVAR Margem =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[ORCAMENTO]),\n        ALLSELECTED(VMQ_CADDRE)\n    )\n    + CALCULATE(\n        SUM(VMQ_DREQLIK[ORCAMENTO]),\n        VMQ_CADDRE[TITULO] = \"2.Bonificação Clientes\"\n    )\n\nVAR Despesacomvenda =\n    IF(\n        Titulo = \"3.Impostos s/ bonificações\",\n        SUM(VMQ_DREQLIK[ORCAMENTO]),\n        SUM(VMQ_DREQLIK[ORCAMENTO]) +\n        CALCULATE(\n            SUM(VMQ_DREQLIK[ORCAMENTO]),\n            VMQ_CADDRE[TITULO] = \"2.Bonificação Clientes\"\n        )\n    )\n\nVAR Resultado =\n    SWITCH(\n        TRUE(),\n        Bloco = \"3.Despesas com Vendas\", Despesacomvenda,\n        Titulo = \"2.Bonificação Clientes\", SUM(VMQ_DREQLIK[ORCAMENTO]) * 2,\n        ISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[ORCAMENTO]),\n        Margem\n    )\n\nRETURN\nIF(\n    OR(ISBLANK(Resultado), Resultado = 0),\n    BLANK(),\n    Resultado\n)"
+                                        },
+                                        {
+                                            "Name":  "teste antonio OTIMIZADA",
+                                            "FormatString":  "#,0",
+                                            "Expression":  "\nVAR Bloco =\n    SELECTEDVALUE(VMQ_CADDRE[BLOCO])\n\nVAR Titulo =\n    SELECTEDVALUE(VMQ_CADDRE[TITULO])\n\n-- Valor base (reutilizável)\nVAR ValorBase =\n    SUM(VMQ_DREQLIK[ORCAMENTO])\n\n-- Bonificação calculada uma única vez\nVAR Bonificacao =\n    CALCULATE(\n        SUM(VMQ_DREQLIK[ORCAMENTO]),\n        VMQ_CADDRE[TITULO] = \"2.Bonificação Clientes\"\n    )\n\n-- Margem otimizada\nVAR Margem =\n    CALCULATE(\n        ValorBase,\n        ALLSELECTED(VMQ_CADDRE)\n    ) + Bonificacao\n\n-- Regra de despesas com venda (com exceção corrigida)\nVAR Despesacomvenda =\n    IF(\n        Titulo = \"3.Impostos s/ bonificações\",\n        ValorBase,\n        ValorBase + Bonificacao\n    )\n\nVAR Resultado =\n    SWITCH(\n        TRUE(),\n        Bloco = \"3.Despesas com Vendas\", Despesacomvenda,\n        Titulo = \"2.Bonificação Clientes\", ValorBase * 2,\n        ISINSCOPE(VMQ_CADDRE[BLOCO]), ValorBase,\n        Margem\n    )\n\nRETURN\nIF(\n    NOT ISBLANK(Resultado) \u0026\u0026 Resultado \u003c\u003e 0,\n    Resultado\n)"
+                                        },
+                                        {
+                                            "Name":  "orcado mes vs orcado ano",
+                                            "FormatString":  "0.00%;-0.00%;0.00%",
+                                            "Expression":  "\n                [ORCAMENTO]/[ORCADO ANO]"
+                                        },
+                                        {
+                                            "Name":  "ORCADO % CAPM",
+                                            "FormatString":  "0.00%;-0.00%;0.00%",
+                                            "Expression":  "\n                [ORCAMENTO]/[TOTAL ABSOLUTO ORCADO ANO]"
+                                        },
+                                        {
+                                            "Name":  "RETORNO ESPERADO ANUAL",
+                                            "FormatString":  "",
+                                            "Expression":  "\nFORMAT(7190413.3314, \"#,##0.00\")"
+                                        },
+                                        {
+                                            "Name":  "RETORNO SPERADO MES",
+                                            "FormatString":  "#,0",
+                                            "Expression":  "\n[ORCADO % CAPM]* [RETORNO ESPERADO ANUAL]"
+                                        },
+                                        {
+                                            "Name":  "DIF ORCADO E ORCADO ESPERADO",
+                                            "FormatString":  "",
+                                            "Expression":  "\n            [ORCAMENTO]-[RETORNO SPERADO MES]"
+                                        },
+                                        {
+                                            "Name":  "SOMA REALIZADO MES ANTERIOR",
+                                            "FormatString":  "#,0",
+                                            "Expression":  "\nVAR DataAtual = MAX(DCALENDARIO[Date])\nRETURN\nCALCULATE(\n    [REALIZADO.],\n    FILTER(\n        ALL(DCALENDARIO),\n        DCALENDARIO[Date] \u003e= EOMONTH(DataAtual, -2) + 1 \u0026\u0026\n        DCALENDARIO[Date] \u003c= EOMONTH(DataAtual, -1)\n    )\n)"
+                                        },
+                                        {
+                                            "Name":  "SOMA REALIZADO ANO ANTERIOR",
+                                            "FormatString":  "#,0",
+                                            "Expression":  "\nVAR DataAtual = MAX(DCALENDARIO[Date])\nRETURN\nCALCULATE(\n    [REALIZADO.],\n    FILTER(\n        ALL(DCALENDARIO),\n        DCALENDARIO[Date] \u003e= DATE(YEAR(DataAtual) - 1, MONTH(DataAtual), 1) \u0026\u0026\n        DCALENDARIO[Date] \u003c= EOMONTH(DATE(YEAR(DataAtual) - 1, MONTH(DataAtual), 1), 0)\n    )\n)"
+                                        },
+                                        {
+                                            "Name":  "AH (MES)",
+                                            "FormatString":  "0.00%;-0.00%;0.00%",
+                                            "Expression":  "\nDIVIDE(\n    [REALIZADO.] - [SOMA REALIZADO MES ANTERIOR],\n    [SOMA REALIZADO MES ANTERIOR]\n)"
+                                        },
+                                        {
+                                            "Name":  "AH(ANO)",
+                                            "FormatString":  "0.00%;-0.00%;0.00%",
+                                            "Expression":  "\nDIVIDE(\n    [REALIZADO.] - [SOMA REALIZADO ANO ANTERIOR],\n    [SOMA REALIZADO ANO ANTERIOR]\n)"
+                                        },
+                                        {
+                                            "Name":  "%s/ VB REALIZADO MES ANTERIOR",
+                                            "FormatString":  "0.00%;-0.00%;0.00%",
+                                            "Expression":  "\nVAR DataAtual = MAX(DCALENDARIO[Date])\nRETURN\nCALCULATE(\n    [%s/ VB REALIZADO.],\n    FILTER(\n        ALL(DCALENDARIO),\n        DCALENDARIO[Date] \u003e= EOMONTH(DataAtual, -2) + 1 \u0026\u0026\n        DCALENDARIO[Date] \u003c= EOMONTH(DataAtual, -1)\n    )\n)"
+                                        },
+                                        {
+                                            "Name":  "%s/ VB REALIZADO ANO ANTERIOR",
+                                            "FormatString":  "0.00%;-0.00%;0.00%",
+                                            "Expression":  "\nVAR DataAtual = MAX(DCALENDARIO[Date])\nVAR DataInicio =\n    DATE(YEAR(DataAtual) - 1, MONTH(DataAtual), 1)\nVAR DataFim =\n    EOMONTH(DataInicio, 0)\nRETURN\nCALCULATE(\n    [%s/ VB REALIZADO.],\n    FILTER(\n        ALL(DCALENDARIO),\n        DCALENDARIO[Date] \u003e= DataInicio \u0026\u0026\n        DCALENDARIO[Date] \u003c= DataFim\n    )\n)"
+                                        },
+                                        {
+                                            "Name":  "AH %/ VB REALIZADO MES",
+                                            "FormatString":  "0.00%;-0.00%;0.00%",
+                                            "Expression":  "\n\nVAR Atual = IFERROR( VALUE([%s/ VB REALIZADO.]), 0 )\nVAR Anterior = IFERROR( VALUE([%s/ VB REALIZADO MES ANTERIOR]), 0 )\n\nRETURN\nIF(\n    Anterior \u003c\u003e 0, \n    DIVIDE(Atual - Anterior, Anterior),\n    BLANK()\n)"
+                                        },
+                                        {
+                                            "Name":  "AH %/ VB REALIZADO ANO",
+                                            "FormatString":  "0.00%;-0.00%;0.00%",
+                                            "Expression":  "\n\nVAR Atual = IFERROR( VALUE([%s/ VB REALIZADO.]), 0 )\nVAR Anterior = IFERROR( VALUE([%s/ VB REALIZADO ANO ANTERIOR]), 0 )\n\nRETURN\nIF(\n    Anterior \u003c\u003e 0, \n    DIVIDE(Atual - Anterior, Anterior, BLANK()),\n    BLANK()\n)"
+                                        },
+                                        {
+                                            "Name":  "VALOR10",
+                                            "FormatString":  "",
+                                            "Expression":  "\n    SUM(VMQ_DREQLIK[valor10])"
+                                        },
+                                        {
+                                            "Name":  "REALIZADO (R$)..",
+                                            "FormatString":  "#,0",
+                                            "Expression":  "\n\nVAR TituloAtual = SELECTEDVALUE(VMQ_CADDRE[TITULO])\n\n-- 1. Calculamos o Valor10 respeitando o filtro da linha (sem REMOVEFILTERS total)\nVAR Bonific_Linha = \n    CALCULATE(\n        SUM(VMQ_DREQLIK[valor10]),\n        bonifChave[chave] \u003c\u003e BLANK(),\n        VMQ_DREQLIK[REF] = \"VALORNF\",\n        -- Usamos KEEPFILTERS para garantir que ele respeite se é BONIF ou DEVOLUCAO\n        KEEPFILTERS(VMQ_CADDRE), \n        TREATAS(VALUES(VMQ_CADDRE[CODCENCUS]), VMQ_DREQLIK[CODCENCUS])\n    )\n\n-- 2. Valor padrão para os demais itens da DRE\nVAR ValorPadrao = SUM(VMQ_DREQLIK[VLR.])\n\n-- 3. A mágica para o Total: SUMX percorre os itens e soma o que for correto\nVAR Resultado = \n    SUMX(\n        -- Adicionamos as descrições detalhadas na iteração para o total bater\n        SUMMARIZE(VMQ_CADDRE, VMQ_CADDRE[BLOCO], VMQ_CADDRE[TITULO], VMQ_CADDRE[DESCRNAT]),\n        IF(\n            VMQ_CADDRE[TITULO] = \"2.Bonificação Clientes\",\n            -- Se for bonificação, recalcula o Bonific_Linha no contexto desta iteração\n            CALCULATE(\n                SUM(VMQ_DREQLIK[valor10]),\n                bonifChave[chave] \u003c\u003e BLANK(),\n                VMQ_DREQLIK[REF] = \"VALORNF\",\n                TREATAS(VALUES(VMQ_CADDRE[CODCENCUS]), VMQ_DREQLIK[CODCENCUS])\n            ),\n            CALCULATE(SUM(VMQ_DREQLIK[VLR.]))\n        )\n    )\n\nRETURN\nIF(Resultado = 0, BLANK(), Resultado)"
+                                        },
+                                        {
+                                            "Name":  "..",
+                                            "FormatString":  "",
+                                            "Expression":  ""
+                                        }
+                                    ],
+                       "Partitions":  [
+                                          {
+                                              "Query":  "let\n    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i44FAA==\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#\"Coluna 1\" = _t]),\n    #\"Tipo Alterado\" = Table.TransformColumnTypes(Fonte,{{\"Coluna 1\", type text}}),\n    #\"Colunas Removidas\" = Table.RemoveColumns(#\"Tipo Alterado\",{\"Coluna 1\"})\nin\n    #\"Colunas Removidas\"",
+                                              "Name":  "MEDIDAS",
+                                              "SourceType":  "M"
+                                          }
+                                      ],
+                       "Name":  "MEDIDAS",
+                       "Columns":  [
+                                       {
+                                           "Name":  "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+                                           "DataType":  "Int64",
+                                           "Type":  "RowNumber"
+                                       }
+                                   ]
+                   },
+                   {
+                       "Measures":  [
+                                        {
+                                            "Name":  ".",
+                                            "FormatString":  "",
+                                            "Expression":  ""
+                                        }
+                                    ],
+                       "Partitions":  [
+                                          {
+                                              "Query":  "\nCALENDAR( min(VMQ_DREQLIK[DTREF]), max(VMQ_DREQLIK[DTREF]) )",
+                                              "Name":  "DCALENDARIO",
+                                              "SourceType":  "Calculated"
+                                          }
+                                      ],
+                       "Name":  "DCALENDARIO",
+                       "Columns":  [
+                                       {
+                                           "Name":  "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+                                           "DataType":  "Int64",
+                                           "Type":  "RowNumber"
+                                       },
+                                       {
+                                           "Name":  "Date",
+                                           "DataType":  "DateTime",
+                                           "Type":  "CalculatedTableColumn"
+                                       },
+                                       {
+                                           "Name":  "ANO",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\nYEAR(DCALENDARIO[Date])"
+                                       },
+                                       {
+                                           "Name":  "NUMEROMES",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\nMONTH(DCALENDARIO[Date])"
+                                       },
+                                       {
+                                           "Name":  "ORDEMMES",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\nWEEKDAY(DCALENDARIO[Date])"
+                                       },
+                                       {
+                                           "Name":  "NOMEMES",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\nFORMAT(DCALENDARIO[Date],\"MMM\")"
+                                       },
+                                       {
+                                           "Name":  "TRIMESTRE",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\n                 \"T\" \u0026 QUARTER(DCALENDARIO[Date])"
+                                       },
+                                       {
+                                           "Name":  "TRI ANO",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\n                [TRIMESTRE]\u0026 \"-\"\u0026 DCALENDARIO[ANO]"
+                                       },
+                                       {
+                                           "Name":  "TRIMESTRE NUM",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "YEAR(DCALENDARIO[Date]) * 100 + QUARTER(DCALENDARIO[Date])\n"
+                                       },
+                                       {
+                                           "Name":  "SEM",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\n            IF(DCALENDARIO[NUMEROMES] \u003c7,\"1º Sem.\",\"2º Sem.\")"
+                                       },
+                                       {
+                                           "Name":  "Ano Trimestre",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "FORMAT(YEAR([Date]), \"0000\") \u0026 \" T\" \u0026 FORMAT(ROUNDUP(MONTH([Date])/3,0), \"0\")"
+                                       },
+                                       {
+                                           "Name":  "ANO CURTO",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\n            FORMAT(DCALENDARIO[Date],\"YY\")"
+                                       },
+                                       {
+                                           "Name":  "ANO E MES",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\n                   DCALENDARIO[NOMEMES]\u0026\"/\"\u0026 DCALENDARIO[ANO CURTO]"
+                                       }
+                                   ]
+                   },
+                   {
+                       "Measures":  [
+
+                                    ],
+                       "Partitions":  [
+                                          {
+                                              "Query":  "let\n    Fonte = Oracle.Database(\"192.168.1.55/ORCL\", [HierarchicalNavigation=true]),\n    SANKHYA = Fonte{[Schema=\"SANKHYA\"]}[Data],\n    VMQ_CADDRE1 = SANKHYA{[Name=\"VMQ_CADDRE\"]}[Data]\nin\n    VMQ_CADDRE1",
+                                              "Name":  "VMQ_CADDRE",
+                                              "SourceType":  "M"
+                                          }
+                                      ],
+                       "Name":  "VMQ_CADDRE",
+                       "Columns":  [
+                                       {
+                                           "Name":  "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+                                           "DataType":  "Int64",
+                                           "Type":  "RowNumber"
+                                       },
+                                       {
+                                           "Name":  "BLOCO",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "TITULO",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "FATOR",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "CODNAT",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "CODCENCUS",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "REF",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "chave",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\nCONCATENATE(VMQ_CADDRE[CODCENCUS],CONCATENATE(VMQ_CADDRE[CODNAT],VMQ_CADDRE[REF]))"
+                                       },
+                                       {
+                                           "Name":  "chave2",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\nCONCATENATE(\n    VMQ_CADDRE[CODCENCUS],\n    CONCATENATE(\n        VMQ_CADDRE[CODNAT],\n        IF(\n            VMQ_CADDRE[CODNAT] IN {12010301, 12010302} \u0026\u0026\n            VMQ_CADDRE[REF] = \"CUSTOGER\",\n            \"VALORNF\",\n            VMQ_CADDRE[REF]\n        )\n    )\n)"
+                                       },
+                                       {
+                                           "Name":  "CONTA",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "DESCRNAT",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\nLOOKUPVALUE(VMQ_TGFNAT[DESCRNAT],VMQ_TGFNAT[CODNAT],VMQ_CADDRE[CODNAT])"
+                                       },
+                                       {
+                                           "Name":  "chave bonif2",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\nVMQ_CADDRE[CODCENCUS] \u0026 \nVMQ_CADDRE[CODNAT] \u0026 \nIF(\n    VMQ_CADDRE[CODNAT] IN {12010301, 12010302},\n    IF(VMQ_CADDRE[REF] = \"VALORNF\", \"CUSTOGER\", VMQ_CADDRE[REF]),\n    VMQ_CADDRE[REF] \n)\n"
+                                       }
+                                   ]
+                   },
+                   {
+                       "Measures":  [
+
+                                    ],
+                       "Partitions":  [
+                                          {
+                                              "Query":  "let\n    Fonte = Oracle.Database(\"192.168.1.55/ORCL\", [HierarchicalNavigation=true]),\n    SANKHYA = Fonte{[Schema=\"SANKHYA\"]}[Data],\n    VMQ_TSIEMP1 = SANKHYA{[Name=\"VMQ_TSIEMP\"]}[Data],\n    #\"Linhas Filtradas\" = Table.SelectRows(VMQ_TSIEMP1, each ([CODEMP] \u003c\u003e 7 and [CODEMP] \u003c\u003e 8 and [CODEMP] \u003c\u003e 9 and [CODEMP] \u003c\u003e 10 and [CODEMP] \u003c\u003e 502))\nin\n    #\"Linhas Filtradas\"",
+                                              "Name":  "VMQ_TSIEMP",
+                                              "SourceType":  "M"
+                                          }
+                                      ],
+                       "Name":  "VMQ_TSIEMP",
+                       "Columns":  [
+                                       {
+                                           "Name":  "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+                                           "DataType":  "Int64",
+                                           "Type":  "RowNumber"
+                                       },
+                                       {
+                                           "Name":  "CODEMP",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "RAZAOABREV",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       }
+                                   ]
+                   },
+                   {
+                       "Measures":  [
+
+                                    ],
+                       "Partitions":  [
+                                          {
+                                              "Query":  "let\n    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"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\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [chave = _t]),\n    #\"Tipo Alterado\" = Table.TransformColumnTypes(Fonte,{{\"chave\", type text}})\nin\n    #\"Tipo Alterado\"",
+                                              "Name":  "bonifChave",
+                                              "SourceType":  "M"
+                                          }
+                                      ],
+                       "Name":  "bonifChave",
+                       "Columns":  [
+                                       {
+                                           "Name":  "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+                                           "DataType":  "Int64",
+                                           "Type":  "RowNumber"
+                                       },
+                                       {
+                                           "Name":  "chave",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       }
+                                   ]
+                   },
+                   {
+                       "Measures":  [
+
+                                    ],
+                       "Partitions":  [
+                                          {
+                                              "Query":  "let\n    Fonte = DateTime.LocalNow(),\n    #\"Convertido para Tabela\" = #table(1, {{Fonte}}),\n    #\"Colunas Renomeadas\" = Table.RenameColumns(#\"Convertido para Tabela\",{{\"Column1\", \"dta hora atualização\"}})\nin\n    #\"Colunas Renomeadas\"",
+                                              "Name":  "Consulta1",
+                                              "SourceType":  "M"
+                                          }
+                                      ],
+                       "Name":  "Consulta1",
+                       "Columns":  [
+                                       {
+                                           "Name":  "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+                                           "DataType":  "Int64",
+                                           "Type":  "RowNumber"
+                                       },
+                                       {
+                                           "Name":  "dta hora atualização",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "certo",
+                                           "DataType":  "DateTime",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\n        UTCNOW() -0.125"
+                                       }
+                                   ]
+                   },
+                   {
+                       "Measures":  [
+
+                                    ],
+                       "Partitions":  [
+                                          {
+                                              "Query":  "Calendar(Date(Year(MIN(\u0027Consulta1\u0027[certo])), 1, 1), Date(Year(MAX(\u0027Consulta1\u0027[certo])), 12, 31))",
+                                              "Name":  "LocalDateTable_a59b3bc8-2507-4184-9ea3-a7bb0c084a19",
+                                              "SourceType":  "Calculated"
+                                          }
+                                      ],
+                       "Name":  "LocalDateTable_a59b3bc8-2507-4184-9ea3-a7bb0c084a19",
+                       "Columns":  [
+                                       {
+                                           "Name":  "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+                                           "DataType":  "Int64",
+                                           "Type":  "RowNumber"
+                                       },
+                                       {
+                                           "Name":  "Date",
+                                           "DataType":  "DateTime",
+                                           "Type":  "CalculatedTableColumn"
+                                       },
+                                       {
+                                           "Name":  "Ano",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "YEAR([Date])"
+                                       },
+                                       {
+                                           "Name":  "MonthNo",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "MONTH([Date])"
+                                       },
+                                       {
+                                           "Name":  "Mês",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "FORMAT([Date], \"MMMM\")"
+                                       },
+                                       {
+                                           "Name":  "QuarterNo",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "INT(([MonthNo] + 2) / 3)"
+                                       },
+                                       {
+                                           "Name":  "Trimestre",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\"Qtr \" \u0026 [QuarterNo]"
+                                       },
+                                       {
+                                           "Name":  "Dia",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "DAY([Date])"
+                                       }
+                                   ]
+                   },
+                   {
+                       "Measures":  [
+
+                                    ],
+                       "Partitions":  [
+                                          {
+                                              "Query":  "let\n    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"i45W8k0sSk/NVUhJVXDOzyspykwqzTy8/PDifKXYWAA=\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Item = _t]),\n    #\"Tipo Alterado\" = Table.TransformColumnTypes(Fonte,{{\"Item\", type text}})\nin\n    #\"Tipo Alterado\"",
+                                              "Name":  "Margem de Contribuição",
+                                              "SourceType":  "M"
+                                          }
+                                      ],
+                       "Name":  "Margem de Contribuição",
+                       "Columns":  [
+                                       {
+                                           "Name":  "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+                                           "DataType":  "Int64",
+                                           "Type":  "RowNumber"
+                                       },
+                                       {
+                                           "Name":  "Item",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       }
+                                   ]
+                   },
+                   {
+                       "Measures":  [
+
+                                    ],
+                       "Partitions":  [
+                                          {
+                                              "Query":  "Calendar(Date(Year(MIN(\u0027DCALENDARIO\u0027[Date])), 1, 1), Date(Year(MAX(\u0027DCALENDARIO\u0027[Date])), 12, 31))",
+                                              "Name":  "LocalDateTable_983e61f9-a866-40c7-83bf-7b1bcc0bb7f1",
+                                              "SourceType":  "Calculated"
+                                          }
+                                      ],
+                       "Name":  "LocalDateTable_983e61f9-a866-40c7-83bf-7b1bcc0bb7f1",
+                       "Columns":  [
+                                       {
+                                           "Name":  "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+                                           "DataType":  "Int64",
+                                           "Type":  "RowNumber"
+                                       },
+                                       {
+                                           "Name":  "Date",
+                                           "DataType":  "DateTime",
+                                           "Type":  "CalculatedTableColumn"
+                                       },
+                                       {
+                                           "Name":  "Ano",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "YEAR([Date])"
+                                       },
+                                       {
+                                           "Name":  "MonthNo",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "MONTH([Date])"
+                                       },
+                                       {
+                                           "Name":  "Mês",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "FORMAT([Date], \"MMMM\")"
+                                       },
+                                       {
+                                           "Name":  "QuarterNo",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "INT(([MonthNo] + 2) / 3)"
+                                       },
+                                       {
+                                           "Name":  "Trimestre",
+                                           "DataType":  "String",
+                                           "Type":  "Calculated",
+                                           "Expression":  "\"Qtr \" \u0026 [QuarterNo]"
+                                       },
+                                       {
+                                           "Name":  "Dia",
+                                           "DataType":  "Int64",
+                                           "Type":  "Calculated",
+                                           "Expression":  "DAY([Date])"
+                                       }
+                                   ]
+                   },
+                   {
+                       "Measures":  [
+
+                                    ],
+                       "Partitions":  [
+                                          {
+                                              "Query":  "let\n    Fonte = Oracle.Database(\"192.168.1.55/ORCL\", [HierarchicalNavigation=true]),\n    SANKHYA = Fonte{[Schema=\"SANKHYA\"]}[Data],\n    VW_MQ_TGFPAR_POWER_BI1 = SANKHYA{[Name=\"VW_MQ_TGFPAR_POWER_BI\"]}[Data]\nin\n    VW_MQ_TGFPAR_POWER_BI1",
+                                              "Name":  "VW_MQ_TGFPAR_POWER_BI",
+                                              "SourceType":  "M"
+                                          }
+                                      ],
+                       "Name":  "VW_MQ_TGFPAR_POWER_BI",
+                       "Columns":  [
+                                       {
+                                           "Name":  "RowNumber-2662979B-1795-4F74-8F37-6A1BA8059B61",
+                                           "DataType":  "Int64",
+                                           "Type":  "RowNumber"
+                                       },
+                                       {
+                                           "Name":  "ATIVO",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "CODIGO",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "NOME",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "RAZAOSOCIAL",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "TELEFONE",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "EMAIL",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "PAIS",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "CONTINENTE",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "PAIS_EXPORTACAO",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "UF",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "CIDADE",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "CODREDE",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "REDE",
+                                           "DataType":  "String",
+                                           "Type":  "Data"
+                                       },
+                                       {
+                                           "Name":  "COMISSAO",
+                                           "DataType":  "Double",
+                                           "Type":  "Data"
+                                       }
+                                   ]
+                   }
+               ],
+    "Relationships":  [
+                          {
+                              "ToColumn":  "Date",
+                              "IsActive":  true,
+                              "CrossFilteringBehavior":  "OneDirection",
+                              "ToTable":  "LocalDateTable_0d21529a-cf2e-44b8-9c03-661d79912a5a",
+                              "FromTable":  "VMQ_DREQLIK",
+                              "FromColumn":  "DTREF"
+                          },
+                          {
+                              "ToColumn":  "Date",
+                              "IsActive":  true,
+                              "CrossFilteringBehavior":  "OneDirection",
+                              "ToTable":  "LocalDateTable_50f9ef6d-2445-47ee-859c-127b66432a8b",
+                              "FromTable":  "VMQ_TSICUS",
+                              "FromColumn":  "DTINCLUSAO"
+                          },
+                          {
+                              "ToColumn":  "CODCENCUS",
+                              "IsActive":  true,
+                              "CrossFilteringBehavior":  "OneDirection",
+                              "ToTable":  "VMQ_TSICUS",
+                              "FromTable":  "VMQ_CADDRE",
+                              "FromColumn":  "CODCENCUS"
+                          },
+                          {
+                              "ToColumn":  "CODNAT",
+                              "IsActive":  true,
+                              "CrossFilteringBehavior":  "OneDirection",
+                              "ToTable":  "VMQ_TGFNAT",
+                              "FromTable":  "VMQ_CADDRE",
+                              "FromColumn":  "CODNAT"
+                          },
+                          {
+                              "ToColumn":  "CODEMP",
+                              "IsActive":  true,
+                              "CrossFilteringBehavior":  "OneDirection",
+                              "ToTable":  "VMQ_TSIEMP",
+                              "FromTable":  "VMQ_DREQLIK",
+                              "FromColumn":  "CODEMP"
+                          },
+                          {
+                              "ToColumn":  "Date",
+                              "IsActive":  true,
+                              "CrossFilteringBehavior":  "OneDirection",
+                              "ToTable":  "LocalDateTable_a59b3bc8-2507-4184-9ea3-a7bb0c084a19",
+                              "FromTable":  "Consulta1",
+                              "FromColumn":  "certo"
+                          },
+                          {
+                              "ToColumn":  "Date",
+                              "IsActive":  true,
+                              "CrossFilteringBehavior":  "OneDirection",
+                              "ToTable":  "LocalDateTable_983e61f9-a866-40c7-83bf-7b1bcc0bb7f1",
+                              "FromTable":  "DCALENDARIO",
+                              "FromColumn":  "Date"
+                          },
+                          {
+                              "ToColumn":  "Date",
+                              "IsActive":  true,
+                              "CrossFilteringBehavior":  "OneDirection",
+                              "ToTable":  "DCALENDARIO",
+                              "FromTable":  "VMQ_DREQLIK",
+                              "FromColumn":  "DTCOMP"
+                          },
+                          {
+                              "ToColumn":  "chave bonif2",
+                              "IsActive":  true,
+                              "CrossFilteringBehavior":  "OneDirection",
+                              "ToTable":  "VMQ_CADDRE",
+                              "FromTable":  "VMQ_DREQLIK",
+                              "FromColumn":  "chave bonif2"
+                          },
+                          {
+                              "ToColumn":  "CODIGO",
+                              "IsActive":  true,
+                              "CrossFilteringBehavior":  "OneDirection",
+                              "ToTable":  "VW_MQ_TGFPAR_POWER_BI",
+                              "FromTable":  "VMQ_DREQLIK",
+                              "FromColumn":  "CODPARC"
+                          }
+                      ]
+}

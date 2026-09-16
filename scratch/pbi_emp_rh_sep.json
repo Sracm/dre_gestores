@@ -1,0 +1,164 @@
+﻿[
+    {
+        "mes":  9,
+        "empresa":  "Consolidação",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "SERVIÇOS DE CONSULTORIA E ASSESSORIA",
+        "orcado":  -6675,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "empresa":  "Consolidação",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "3.Folha de pagamento e Beneficios",
+        "descrnat":  "SERVIÇOS ADMINISTRATIVOS",
+        "orcado":  -15000,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "empresa":  "Consolidação",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "CONTABILIDADE TERCEIRIZADA",
+        "orcado":  -3300,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "empresa":  "Consolidação",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MENSALIDADE DE SISTEMAS",
+        "orcado":  -1330,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "empresa":  "Consolidação",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "ASSESSORIA JURIDICA",
+        "orcado":  -1518,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "empresa":  "Consolidação",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "ENDOMARKETING",
+        "orcado":  -2400,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "empresa":  "Consolidação",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "DESPESAS COM RECRUTAMENTO E SELEÇÃO",
+        "orcado":  -1046,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "empresa":  "Consolidação",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MEDICINA DO TRABALHO",
+        "orcado":  -1000,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "empresa":  "Consolidação",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "CONFRATERNIZAÇÕES E COFFEE BREAK",
+        "orcado":  -800,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "empresa":  "Consolidação",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "3.Folha de pagamento e Beneficios",
+        "descrnat":  "BONUS - PREMIAÇÃO TRIMESTRAL",
+        "orcado":  -103378,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "empresa":  "Consolidação",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "3.Folha de pagamento e Beneficios",
+        "descrnat":  "BOLSAS E TREINAMENTOS",
+        "orcado":  -8000,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "empresa":  "Consolidação",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "3.Folha de pagamento e Beneficios",
+        "descrnat":  "SERVIÇOS ADMINISTRATIVOS 13",
+        "orcado":  -1250,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "empresa":  "VLS - SP",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "3.Folha de pagamento e Beneficios",
+        "descrnat":  "BOLSAS E TREINAMENTOS",
+        "orcado":  0,
+        "realizado":  -1248
+    },
+    {
+        "mes":  9,
+        "empresa":  "MCR - MATRIZ",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MEDICINA DO TRABALHO",
+        "orcado":  0,
+        "realizado":  -393.41
+    },
+    {
+        "mes":  9,
+        "empresa":  "MCR - MATRIZ",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "ASSESSORIA JURIDICA",
+        "orcado":  0,
+        "realizado":  -1617.4741692552
+    },
+    {
+        "mes":  9,
+        "empresa":  "VLS - SP",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MENSALIDADE DE SISTEMAS",
+        "orcado":  0,
+        "realizado":  -1000
+    },
+    {
+        "mes":  9,
+        "empresa":  "VLS - SP",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MEDICINA DO TRABALHO",
+        "orcado":  0,
+        "realizado":  -440.30999999999995
+    },
+    {
+        "mes":  9,
+        "empresa":  "VLS - SP",
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "3.Folha de pagamento e Beneficios",
+        "descrnat":  "SERVIÇOS ADMINISTRATIVOS 13",
+        "orcado":  0,
+        "realizado":  -1250
+    }
+]

@@ -1,0 +1,575 @@
+NAME: VB or‡ado CAPTION: VB or‡ado
+EXPR: VAR Resultado =
+    DIVIDE([ORCAMENTO], [VENDA BRUTA ORCADO])
+RETURN
+IF(
+    ISINSCOPE(VMQ_CADDRE[TITULO]),
+    Resultado,
+    Resultado
+)
+--------------------
+NAME: VENDA BRUTA REALIZADO CAPTION: VENDA BRUTA REALIZADO
+EXPR: CALCULATE(SUM(VMQ_DREQLIK[VLR.]),
+            FILTER(ALLSELECTED(VMQ_CADDRE),
+            VMQ_CADDRE[TITULO]= "1.Venda Bruta"))
+--------------------
+NAME: VB REALIZADO CAPTION: VB REALIZADO
+EXPR: VAR Resultado =
+    DIVIDE([SOMA REALIZADO], [VENDA BRUTA ORCADO])
+RETURN
+IF(
+    ISINSCOPE(VMQ_CADDRE[TITULO]),
+    Resultado,
+    Resultado
+)
+--------------------
+NAME: REALIZADO CAPTION: REALIZADO
+EXPR: SUM(VMQ_DREQLIK[VLR.])
+--------------------
+NAME: SOMA REALIZADO CAPTION: SOMA REALIZADO
+EXPR: VAR Bloco =
+    SELECTEDVALUE(VMQ_CADDRE[BLOCO])
+
+VAR Titulo =
+    SELECTEDVALUE(VMQ_CADDRE[TITULO])
+VAR CustoMerca =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[VALOR]),
+        VMQ_CADDRE[BLOCO] = "2.Custo Mercadoria Vendida"
+    )
+
+VAR Bonfic =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[VALOR]),
+        bonifChave[chave] <> BLANK(),
+        VMQ_DREQLIK[REF] = "VALORNF",
+        REMOVEFILTERS(VMQ_CADDRE),
+        TREATAS(
+            VALUES(VMQ_CADDRE[CODCENCUS]),
+            VMQ_DREQLIK[CODCENCUS]
+        )
+    )
+    VAR Margem =
+  
+        SUM(VMQ_DREQLIK[VLR.]) -
+           ( Bonfic -
+        (CALCULATE(SUM(VMQ_DREQLIK[VLR.]),VMQ_CADDRE[TITULO]= "2.Bonifica‡Æo Clientes")*-1))
+    
+        VAR despesacomvenda =
+       ( Bonfic -
+        (CALCULATE(SUM(VMQ_DREQLIK[VLR.]),VMQ_CADDRE[TITULO]= "2.Bonifica‡Æo Clientes")*-1) 
+       + (SUM(VMQ_DREQLIK[VLR.]) *-1) ) *-1
+
+VAR Resultado =
+    SWITCH(
+        TRUE(),
+       AND(NOT ISINSCOPE(VMQ_CADDRE[TITULO]), Bloco = "3.Despesas com Vendas"),despesacomvenda ,
+        Titulo = "2.Bonifica‡Æo Clientes", Bonfic,
+        ISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[VLR.]),
+        Margem
+    )
+RETURN
+IF(Resultado = 0, BLANK(), Resultado)
+--------------------
+NAME: %s/ VB or‡ado CAPTION: %s/ VB or‡ado
+EXPR: IFERROR( IF(ISINSCOPE(VMQ_CADDRE[TITULO]), IFERROR( [OR€ADO (R$).]/ [VENDA BRUTA ORCADO],""),[OR€ADO (R$).]/[VENDA BRUTA ORCADO]),"")
+--------------------
+NAME: OR€ADO (R$).old CAPTION: OR€ADO (R$).old
+EXPR: VAR Bloco =
+    SELECTEDVALUE(VMQ_CADDRE[BLOCO])
+
+VAR Titulo =
+    SELECTEDVALUE(VMQ_CADDRE[TITULO])
+VAR CustoMerca =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        VMQ_CADDRE[BLOCO] = "2.Custo Mercadoria Vendida"
+    )
+VAR Margem =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        ALLSELECTED(VMQ_CADDRE)
+        )
+        + CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]),VMQ_CADDRE[TITULO] = "2.Bonifica‡Æo Clientes")
+
+VAR Despesacomvenda =
+
+SUM(VMQ_DREQLIK[ORCAMENTO])
+//CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]),VMQ_CADDRE[TITULO] = "2.Bonifica‡Æo Clientes")
+
+VAR Resultado =
+    SWITCH(
+        TRUE(),
+        Bloco = "3.Despesas com Vendas", Despesacomvenda,
+        Titulo = "2.Bonifica‡Æo Clientes", SUM(VMQ_DREQLIK[ORCAMENTO]) * 2,
+        ISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[ORCAMENTO]),
+        Margem
+    )
+RETURN
+IF(
+    OR(ISBLANK(Resultado), Resultado = 0),
+    BLANK(),
+    Resultado
+)
+--------------------
+NAME: %s/ VB REALIZADO CAPTION: %s/ VB REALIZADO
+EXPR: IFERROR( IF(ISINSCOPE(VMQ_CADDRE[TITULO]), IFERROR( [REALIZADO (R$)..]/ [VENDA BRUTA REALIZADO],""),[REALIZADO (R$)..]/[VENDA BRUTA REALIZADO]),"")
+--------------------
+NAME: REALIZADO. CAPTION: REALIZADO.
+EXPR: VAR ItemMargem = SELECTEDVALUE('Margem de Contribui‡Æo'[Item])
+VAR VendaLiq = CALCULATE(SUM(VMQ_DREQLIK[VLR.]), VMQ_CADDRE[BLOCO] = "1.Venda Liquida",REMOVEFILTERS(VMQ_CADDRE[BLOCO]))
+VAR CustoMercadoriaVendida= CALCULATE(SUM(VMQ_DREQLIK[valor10]),VMQ_CADDRE[BLOCO]="2.Custo Mercadoria Vendida",REMOVEFILTERS(VMQ_CADDRE[BLOCO]))
+RETURN
+IF(NOT(ISINSCOPE(VMQ_DREQLIK[MARGEM])),VendaLiq + CustoMercadoriaVendida , SUM(VMQ_DREQLIK[VLR.]))
+--------------------
+NAME: soma realizado teste CAPTION: soma realizado teste
+EXPR: SUM(VMQ_DREQLIK[VLR.])
+--------------------
+NAME: (%) S/ VB or‡ado. CAPTION: (%) S/ VB or‡ado.
+EXPR: IFERROR( IF(ISINSCOPE(VMQ_CADDRE[TITULO]), IFERROR( [ORCAMENTO]/ [REALIZADO.],""),[ORCAMENTO]/[REALIZADO.]),"")
+--------------------
+NAME: %s/ VB REALIZADO. CAPTION: %s/ VB REALIZADO.
+EXPR: IFERROR( IF(ISINSCOPE(VMQ_CADDRE[TITULO]), IFERROR( [REALIZADO.]/ [VENDA BRUTA REALIZADO],""),[REALIZADO.]/[VENDA BRUTA REALIZADO]),"")
+--------------------
+NAME: (%) RELIZADO VS OR€ADO CAPTION: (%) RELIZADO VS OR€ADO
+EXPR: [REALIZADO.]/[ORCAMENTO]
+--------------------
+NAME: DIF. REALIZADO X OR€ADO CAPTION: DIF. REALIZADO X OR€ADO
+EXPR: [REALIZADO.]-[ORCAMENTO]
+--------------------
+NAME: DIF. REALIZADO X OR€ADO GESTORES CAPTION: DIF. REALIZADO X OR€ADO GESTORES
+EXPR: [REALIZADO]-[ORCAMENTO]
+--------------------
+NAME: SOMA REALIZADO3 CAPTION: SOMA REALIZADO3
+EXPR: VAR Bloco =
+    SELECTEDVALUE(VMQ_CADDRE[BLOCO])
+
+VAR Titulo =
+    SELECTEDVALUE(VMQ_CADDRE[TITULO])
+
+VAR ValorAtual =
+    SUM(VMQ_DREQLIK[VLR.])
+
+VAR CustoMerca =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[VALOR]),
+        VMQ_CADDRE[BLOCO] = "2.Custo Mercadoria Vendida"
+    )
+
+VAR Bonfic =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[VALOR]),
+        bonifChave[chave] <> BLANK(),
+        VMQ_DREQLIK[REF] = "VALORNF",
+        REMOVEFILTERS(VMQ_CADDRE),
+        TREATAS(
+            VALUES(VMQ_CADDRE[CODCENCUS]),
+            VMQ_DREQLIK[CODCENCUS]
+        )
+    )
+
+VAR Margem =
+    SUM(VMQ_DREQLIK[VLR.]) -
+    ( Bonfic -
+        (CALCULATE(
+            SUM(VMQ_DREQLIK[VLR.]),
+            VMQ_CADDRE[TITULO] = "2.Bonifica‡Æo Clientes"
+        ) * -1)
+    )
+
+VAR despesacomvenda =
+    ( Bonfic -
+        (CALCULATE(
+            SUM(VMQ_DREQLIK[VLR.]),
+            VMQ_CADDRE[TITULO] = "2.Bonifica‡Æo Clientes"
+        ) * -1) 
+        + (SUM(VMQ_DREQLIK[VLR.]) * -1)
+    ) * -1
+
+VAR TesteBonificacao =
+    Titulo = "2.Bonifica‡Æo Clientes" &&
+    ISINSCOPE(VMQ_CADDRE[TITULO]) &&
+    NOT ISINSCOPE(VMQ_CADDRE[DESCRNAT])
+
+VAR Resultado =
+    SWITCH(
+        TRUE(),
+
+        -- TOTAL DO BLOCO
+        NOT ISINSCOPE(VMQ_CADDRE[TITULO]) 
+            && Bloco = "3.Despesas com Vendas",
+            despesacomvenda,
+
+        -- BONIFICA€ÇO (s¢ no t¡tulo)
+        TesteBonificacao,
+            [REALIZADO],
+
+        -- NÖVEL TÖTULO
+        ISINSCOPE(VMQ_CADDRE[TITULO]) &&
+        NOT ISINSCOPE(VMQ_CADDRE[DESCRNAT]),
+            ValorAtual,
+
+        -- NÖVEL BLOCO
+        ISINSCOPE(VMQ_CADDRE[BLOCO]) &&
+        NOT ISINSCOPE(VMQ_CADDRE[TITULO]),
+            ValorAtual,
+
+        -- MARGEM
+        Margem
+    )
+
+RETURN
+--  REGRA GLOBAL (remove tudo que for vazio ou zero)
+IF(
+    ISBLANK(Resultado) || Resultado = 0,
+    BLANK(),
+    Resultado
+)
+--------------------
+NAME: SOMA REALIZADO AJUSTADA CAPTION: SOMA REALIZADO AJUSTADA
+EXPR: VAR Bloco =
+    SELECTEDVALUE(VMQ_CADDRE[BLOCO])
+
+VAR Titulo =
+    SELECTEDVALUE(VMQ_CADDRE[TITULO])
+
+VAR Base =
+    SUM(VMQ_DREQLIK[VALOR])
+
+VAR Bonificacao =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[VALOR]),
+        VMQ_CADDRE[TITULO] = "2.Bonifica‡Æo Clientes"
+    )
+
+VAR Resultado =
+    SWITCH(
+        TRUE(),
+
+        -- Regra espec¡fica
+        Bloco = "3.Despesas com Vendas", Base,
+
+        -- Bonifica‡Æo (se tiver regra diferenciada)
+        Titulo = "2.Bonifica‡Æo Clientes", Bonificacao,
+
+        -- Linhas normais (n¡vel t¡tulo)
+        ISINSCOPE(VMQ_CADDRE[TITULO]), Base,
+
+        -- TOTAL CORRETO (soma dos blocos vis¡veis)
+        SUMX(
+            VALUES(VMQ_CADDRE[BLOCO]),
+            CALCULATE(SUM(VMQ_DREQLIK[VALOR]))
+        )
+    )
+
+RETURN
+IF(
+    OR(ISBLANK(Resultado), Resultado = 0),
+    BLANK(),
+    Resultado
+)
+--------------------
+NAME: REALIZADO (R$). CAPTION: REALIZADO (R$).
+EXPR: VAR Bloco =
+    SELECTEDVALUE(VMQ_CADDRE[BLOCO])
+
+VAR Titulo =
+    SELECTEDVALUE(VMQ_CADDRE[TITULO])
+VAR CustoMerca =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[VALOR]),
+        VMQ_CADDRE[BLOCO] = "2.Custo Mercadoria Vendida"
+    )
+
+VAR Bonfic =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[valor10]),
+        bonifChave[chave] <> BLANK(),
+        VMQ_DREQLIK[REF] = "VALORNF",
+        REMOVEFILTERS(VMQ_CADDRE),
+        TREATAS(
+            VALUES(VMQ_CADDRE[CODCENCUS]),
+            VMQ_DREQLIK[CODCENCUS]
+        )
+    )
+    VAR Margem =
+  
+        SUM(VMQ_DREQLIK[VLR.]) -
+           ( Bonfic -
+        (CALCULATE(SUM(VMQ_DREQLIK[VLR.]),VMQ_CADDRE[TITULO]= "2.Bonifica‡Æo Clientes")*-1))
+    
+        VAR despesacomvenda =
+       ( Bonfic -
+        (CALCULATE(SUM(VMQ_DREQLIK[valor10]),VMQ_CADDRE[TITULO]= "2.Bonifica‡Æo Clientes")*-1) 
+       + (SUM(VMQ_DREQLIK[valor10]) *-1) ) *-1
+
+VAR Resultado =
+    SWITCH(
+        TRUE(),
+       AND(NOT ISINSCOPE(VMQ_CADDRE[TITULO]), Bloco = "3.Despesas com Vendas"),SUM(VMQ_DREQLIK[valor10]) ,
+        Titulo = "2.Bonifica‡Æo Clientes", Bonfic,
+        ISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[VLR.]),
+        Margem
+    )
+RETURN
+IF(
+    Resultado = 0,
+    BLANK(),
+    IF(
+        SELECTEDVALUE(VMQ_CADDRE[TITULO]) = "2.Bonifica‡Æo Clientes",
+        SUM(VMQ_DREQLIK[valor10]),
+        Resultado
+    )
+)
+--------------------
+NAME: teste antonio CAPTION: teste antonio
+EXPR: VAR Bloco =
+    SELECTEDVALUE(VMQ_CADDRE[BLOCO])
+
+VAR Titulo =
+    SELECTEDVALUE(VMQ_CADDRE[TITULO])
+VAR CustoMerca =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        VMQ_CADDRE[BLOCO] = "2.Custo Mercadoria Vendida"
+    )
+VAR Margem =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        ALLSELECTED(VMQ_CADDRE)
+        )
+        + CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]),VMQ_CADDRE[TITULO] = "2.Bonifica‡Æo Clientes")
+
+VAR Despesacomvenda =
+
+SUM(VMQ_DREQLIK[ORCAMENTO])+
+CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]),VMQ_CADDRE[TITULO] = "2.Bonifica‡Æo Clientes")
+
+VAR Resultado =
+    SWITCH(
+        TRUE(),
+        Bloco = "3.Despesas com Vendas", Despesacomvenda,
+        Titulo = "2.Bonifica‡Æo Clientes", SUM(VMQ_DREQLIK[ORCAMENTO]) * 2,
+        ISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[ORCAMENTO]),
+        Margem
+    )
+RETURN
+IF(
+    OR(ISBLANK(Resultado), Resultado = 0),
+    BLANK(),
+    Resultado
+)
+--------------------
+NAME: OR€ADO (R$). CAPTION: OR€ADO (R$).
+EXPR: VAR Bloco =
+    SELECTEDVALUE(VMQ_CADDRE[BLOCO])
+
+VAR Titulo =
+    SELECTEDVALUE(VMQ_CADDRE[TITULO])
+
+VAR CustoMerca =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        VMQ_CADDRE[BLOCO] = "2.Custo Mercadoria Vendida"
+    )
+
+VAR Margem =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        ALLSELECTED(VMQ_CADDRE)
+    )
+    + CALCULATE(
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        VMQ_CADDRE[TITULO] = "2.Bonifica‡Æo Clientes"
+    )
+
+VAR Despesacomvenda =
+    IF(
+        Titulo = "3.Impostos s/ bonifica‡äes",
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        SUM(VMQ_DREQLIK[ORCAMENTO]) +
+        CALCULATE(
+            SUM(VMQ_DREQLIK[ORCAMENTO]),
+            VMQ_CADDRE[TITULO] = "2.Bonifica‡Æo Clientes"
+        )
+    )
+
+VAR Resultado =
+    SWITCH(
+        TRUE(),
+        Bloco = "3.Despesas com Vendas", Despesacomvenda,
+        Titulo = "2.Bonifica‡Æo Clientes", SUM(VMQ_DREQLIK[ORCAMENTO]) * 2,
+        ISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[ORCAMENTO]),
+        Margem
+    )
+
+RETURN
+IF(
+    OR(ISBLANK(Resultado), Resultado = 0),
+    BLANK(),
+    Resultado
+)
+--------------------
+NAME: teste antonio OTIMIZADA CAPTION: teste antonio OTIMIZADA
+EXPR: VAR Bloco =
+    SELECTEDVALUE(VMQ_CADDRE[BLOCO])
+
+VAR Titulo =
+    SELECTEDVALUE(VMQ_CADDRE[TITULO])
+
+-- Valor base (reutiliz vel)
+VAR ValorBase =
+    SUM(VMQ_DREQLIK[ORCAMENTO])
+
+-- Bonifica‡Æo calculada uma £nica vez
+VAR Bonificacao =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        VMQ_CADDRE[TITULO] = "2.Bonifica‡Æo Clientes"
+    )
+
+-- Margem otimizada
+VAR Margem =
+    CALCULATE(
+        ValorBase,
+        ALLSELECTED(VMQ_CADDRE)
+    ) + Bonificacao
+
+-- Regra de despesas com venda (com exce‡Æo corrigida)
+VAR Despesacomvenda =
+    IF(
+        Titulo = "3.Impostos s/ bonifica‡äes",
+        ValorBase,
+        ValorBase + Bonificacao
+    )
+
+VAR Resultado =
+    SWITCH(
+        TRUE(),
+        Bloco = "3.Despesas com Vendas", Despesacomvenda,
+        Titulo = "2.Bonifica‡Æo Clientes", ValorBase * 2,
+        ISINSCOPE(VMQ_CADDRE[BLOCO]), ValorBase,
+        Margem
+    )
+
+RETURN
+IF(
+    NOT ISBLANK(Resultado) && Resultado <> 0,
+    Resultado
+)
+--------------------
+NAME: SOMA REALIZADO MES ANTERIOR CAPTION: SOMA REALIZADO MES ANTERIOR
+EXPR: VAR DataAtual = MAX(DCALENDARIO[Date])
+RETURN
+CALCULATE(
+    [REALIZADO.],
+    FILTER(
+        ALL(DCALENDARIO),
+        DCALENDARIO[Date] >= EOMONTH(DataAtual, -2) + 1 &&
+        DCALENDARIO[Date] <= EOMONTH(DataAtual, -1)
+    )
+)
+--------------------
+NAME: SOMA REALIZADO ANO ANTERIOR CAPTION: SOMA REALIZADO ANO ANTERIOR
+EXPR: VAR DataAtual = MAX(DCALENDARIO[Date])
+RETURN
+CALCULATE(
+    [REALIZADO.],
+    FILTER(
+        ALL(DCALENDARIO),
+        DCALENDARIO[Date] >= DATE(YEAR(DataAtual) - 1, MONTH(DataAtual), 1) &&
+        DCALENDARIO[Date] <= EOMONTH(DATE(YEAR(DataAtual) - 1, MONTH(DataAtual), 1), 0)
+    )
+)
+--------------------
+NAME: %s/ VB REALIZADO MES ANTERIOR CAPTION: %s/ VB REALIZADO MES ANTERIOR
+EXPR: VAR DataAtual = MAX(DCALENDARIO[Date])
+RETURN
+CALCULATE(
+    [%s/ VB REALIZADO.],
+    FILTER(
+        ALL(DCALENDARIO),
+        DCALENDARIO[Date] >= EOMONTH(DataAtual, -2) + 1 &&
+        DCALENDARIO[Date] <= EOMONTH(DataAtual, -1)
+    )
+)
+--------------------
+NAME: %s/ VB REALIZADO ANO ANTERIOR CAPTION: %s/ VB REALIZADO ANO ANTERIOR
+EXPR: VAR DataAtual = MAX(DCALENDARIO[Date])
+VAR DataInicio =
+    DATE(YEAR(DataAtual) - 1, MONTH(DataAtual), 1)
+VAR DataFim =
+    EOMONTH(DataInicio, 0)
+RETURN
+CALCULATE(
+    [%s/ VB REALIZADO.],
+    FILTER(
+        ALL(DCALENDARIO),
+        DCALENDARIO[Date] >= DataInicio &&
+        DCALENDARIO[Date] <= DataFim
+    )
+)
+--------------------
+NAME: AH %/ VB REALIZADO MES CAPTION: AH %/ VB REALIZADO MES
+EXPR: VAR Atual = IFERROR( VALUE([%s/ VB REALIZADO.]), 0 )
+VAR Anterior = IFERROR( VALUE([%s/ VB REALIZADO MES ANTERIOR]), 0 )
+
+RETURN
+IF(
+    Anterior <> 0, 
+    DIVIDE(Atual - Anterior, Anterior),
+    BLANK()
+)
+--------------------
+NAME: AH %/ VB REALIZADO ANO CAPTION: AH %/ VB REALIZADO ANO
+EXPR: VAR Atual = IFERROR( VALUE([%s/ VB REALIZADO.]), 0 )
+VAR Anterior = IFERROR( VALUE([%s/ VB REALIZADO ANO ANTERIOR]), 0 )
+
+RETURN
+IF(
+    Anterior <> 0, 
+    DIVIDE(Atual - Anterior, Anterior, BLANK()),
+    BLANK()
+)
+--------------------
+NAME: REALIZADO (R$).. CAPTION: REALIZADO (R$)..
+EXPR: VAR TituloAtual = SELECTEDVALUE(VMQ_CADDRE[TITULO])
+
+-- 1. Calculamos o Valor10 respeitando o filtro da linha (sem REMOVEFILTERS total)
+VAR Bonific_Linha = 
+    CALCULATE(
+        SUM(VMQ_DREQLIK[valor10]),
+        bonifChave[chave] <> BLANK(),
+        VMQ_DREQLIK[REF] = "VALORNF",
+        -- Usamos KEEPFILTERS para garantir que ele respeite se ‚ BONIF ou DEVOLUCAO
+        KEEPFILTERS(VMQ_CADDRE), 
+        TREATAS(VALUES(VMQ_CADDRE[CODCENCUS]), VMQ_DREQLIK[CODCENCUS])
+    )
+
+-- 2. Valor padrÆo para os demais itens da DRE
+VAR ValorPadrao = SUM(VMQ_DREQLIK[VLR.])
+
+-- 3. A m gica para o Total: SUMX percorre os itens e soma o que for correto
+VAR Resultado = 
+    SUMX(
+        -- Adicionamos as descri‡äes detalhadas na itera‡Æo para o total bater
+        SUMMARIZE(VMQ_CADDRE, VMQ_CADDRE[BLOCO], VMQ_CADDRE[TITULO], VMQ_CADDRE[DESCRNAT]),
+        IF(
+            VMQ_CADDRE[TITULO] = "2.Bonifica‡Æo Clientes",
+            -- Se for bonifica‡Æo, recalcula o Bonific_Linha no contexto desta itera‡Æo
+            CALCULATE(
+                SUM(VMQ_DREQLIK[valor10]),
+                bonifChave[chave] <> BLANK(),
+                VMQ_DREQLIK[REF] = "VALORNF",
+                TREATAS(VALUES(VMQ_CADDRE[CODCENCUS]), VMQ_DREQLIK[CODCENCUS])
+            ),
+            CALCULATE(SUM(VMQ_DREQLIK[VLR.]))
+        )
+    )
+
+RETURN
+IF(Resultado = 0, BLANK(), Resultado)
+--------------------
+NAME: .. CAPTION: ..
+EXPR: BLANK()
+--------------------

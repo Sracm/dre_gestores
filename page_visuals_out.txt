@@ -1,0 +1,85 @@
+
+Type: slicer | ID: 0548727f3b1a02e4e084 | Title: 
+  Projection Values: ['DCALENDARIO.SEM']
+
+Type: slicer | ID: 14caba13b30bd875faa0 | Title: 
+  Projection Values: ['DCALENDARIO.TRIMESTRE']
+
+Type: slicer | ID: 296ab43839bb43cb387e | Title: 
+  Projection Values: ['DCALENDARIO.ANO']
+
+Type: card | ID: 3d956585e86550bdd1f4 | Title: 
+  Projection Values: ['Min(Consulta1.certo)']
+
+Type: pivotTable | ID: 688f961a41b2f82056d0 | Title: 
+  Projection Columns: ['DCALENDARIO.NOMEMES']
+  Projection Rows: ['Margem de Contribuição.Item', 'VMQ_DREQLIK.MARGEM', 'VMQ_CADDRE.BLOCO', 'VMQ_CADDRE.TITULO', 'VMQ_TGFNAT.DESCRNAT']
+  Projection Values: ['MEDIDAS.teste antonio 2', 'MEDIDAS.REALIZADO (R$) TESTE.', 'MEDIDAS.%s/ VB orçado', 'MEDIDAS.%s/ VB REALIZADO', 'MEDIDAS.R/O', 'MEDIDAS...']
+  Filters (14):
+    {'name': '9301e835f5b1afeb5dbc', 'ordinal': 0, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_DREQLIK'}}, 'Property': 'REF'}}, 'type': 'Categorical', 'howCreated': 'User'}
+    {'name': '984a5c0efa2fee3fbeed', 'ordinal': 1, 'field': {'Measure': {'Expression': {'SourceRef': {'Entity': 'base'}}, 'Property': 'Total de Soma de valor para bloco'}}, 'type': 'Advanced', 'howCreated': 'User'}
+    {'name': '92eb93483d34519c1088', 'ordinal': 2, 'field': {'Measure': {'Expression': {'SourceRef': {'Entity': '2.TABELA MEDIDAS'}}, 'Property': 'SOMA REALIZADO GESTORES'}}, 'type': 'Advanced', 'howCreated': 'User'}
+    {'name': 'f451e22383dcdf9fad2b', 'ordinal': 3, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_TGFNAT'}}, 'Property': 'DESCRNAT'}}, 'type': 'Categorical'}
+    {'name': '57583e0b20d7a5e4a74c', 'ordinal': 4, 'field': {'Measure': {'Expression': {'SourceRef': {'Entity': 'MEDIDAS'}}, 'Property': 'SOMA REALIZADO'}}, 'type': 'Advanced', 'howCreated': 'User'}
+    {'name': '28c69e0c8ba1ca621a02', 'ordinal': 5, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_CADDRE'}}, 'Property': 'BLOCO'}}, 'type': 'Categorical', 'filter': {'Version': 2, 'From': [{'Name': 'v', 'Entity': 'VMQ_CADDRE', 'Type': 0}], 'Where': [{'Condition': {'In': {'Expressions': [{'Column': {'Expression': {'SourceRef': {'Source': 'v'}}, 'Property': 'BLOCO'}}], 'Values': [[{'Literal': {'Value': "'1.Venda Liquida'"}}], [{'Literal': {'Value': "'3.Despesas com Vendas'"}}], [{'Literal': {'Value': "'4.Despesas Comercial Operacional'"}}], [{'Literal': {'Value': "'5.Despesas Administrativa Operacional'"}}], [{'Literal': {'Value': "'6.Receitas/Despesas Financeiras'"}}]]}}}]}, 'objects': {'general': [{'properties': {}}]}}
+    {'name': 'b7267ee2679897444884', 'ordinal': 6, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_CADDRE'}}, 'Property': 'TITULO'}}, 'type': 'Categorical', 'objects': {'general': [{'properties': {'isInvertedSelectionMode': {'expr': {'Literal': {'Value': 'true'}}}}}]}}
+    {'name': '6334fd65b30b56bb9244', 'ordinal': 7, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'DCALENDARIO'}}, 'Property': 'NOMEMES'}}, 'type': 'Categorical'}
+    {'name': '8c786cd0ef35a43fede1', 'ordinal': 8, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_TSICUS'}}, 'Property': 'DESCRCENCUS'}}, 'type': 'Categorical', 'howCreated': 'User'}
+    {'name': 'e71ce171b6978ca27bd5', 'ordinal': 9, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_DREQLIK'}}, 'Property': 'NUNOTA'}}, 'type': 'Advanced', 'howCreated': 'User'}
+    {'name': 'e127ccbacdc1321eb0ef', 'ordinal': 10, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_DREQLIK'}}, 'Property': 'TOTAL MATRIZ.'}}, 'type': 'Categorical', 'howCreated': 'User'}
+    {'name': 'c37a142997be66a4c2c5', 'ordinal': 11, 'field': {'Measure': {'Expression': {'SourceRef': {'Entity': 'MEDIDAS'}}, 'Property': 'SOMA ORCADO'}}, 'type': 'Advanced', 'filter': {'Version': 2, 'From': [{'Name': 'm', 'Entity': 'MEDIDAS', 'Type': 0}], 'Where': [{'Condition': {'Not': {'Expression': {'Comparison': {'ComparisonKind': 0, 'Left': {'Measure': {'Expression': {'SourceRef': {'Source': 'm'}}, 'Property': 'SOMA ORCADO'}}, 'Right': {'Literal': {'Value': 'null'}}}}}}}]}, 'howCreated': 'User'}
+    {'name': 'a6a4a757ea60abc5bfc8', 'ordinal': 12, 'field': {'Measure': {'Expression': {'SourceRef': {'Entity': 'MEDIDAS'}}, 'Property': 'ORCAMENTO'}}, 'type': 'Advanced', 'howCreated': 'User'}
+    {'name': '23a459f09604b6a965ad', 'ordinal': 13, 'field': {'Measure': {'Expression': {'SourceRef': {'Entity': 'MEDIDAS'}}, 'Property': 'REALIZADO'}}, 'type': 'Advanced', 'howCreated': 'User'}
+
+Type: shape | ID: 7813efba091f4d309c96 | Title: 
+
+Type: textbox | ID: 7c0314d22302a12a86c2 | Title: 
+
+Type: lineClusteredColumnComboChart | ID: 8533538d2859023170d6 | Title: 
+  Projection Category: ['DCALENDARIO.TRI ANO']
+  Projection Y: ['MEDIDAS.ORÇADO (R$).', 'MEDIDAS.REALIZADO (R$)..']
+  Filters (12):
+    {'name': '9301e835f5b1afeb5dbc', 'ordinal': 0, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_DREQLIK'}}, 'Property': 'REF'}}, 'type': 'Categorical', 'howCreated': 'User'}
+    {'name': '984a5c0efa2fee3fbeed', 'ordinal': 1, 'field': {'Measure': {'Expression': {'SourceRef': {'Entity': 'base'}}, 'Property': 'Total de Soma de valor para bloco'}}, 'type': 'Advanced', 'howCreated': 'User'}
+    {'name': '92eb93483d34519c1088', 'ordinal': 2, 'field': {'Measure': {'Expression': {'SourceRef': {'Entity': '2.TABELA MEDIDAS'}}, 'Property': 'SOMA REALIZADO GESTORES'}}, 'type': 'Advanced', 'howCreated': 'User'}
+    {'name': 'f451e22383dcdf9fad2b', 'ordinal': 3, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_TGFNAT'}}, 'Property': 'DESCRNAT'}}, 'type': 'Categorical', 'howCreated': 'User'}
+    {'name': '28c69e0c8ba1ca621a02', 'ordinal': 5, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_CADDRE'}}, 'Property': 'BLOCO'}}, 'type': 'Categorical', 'filter': {'Version': 2, 'From': [{'Name': 'v', 'Entity': 'VMQ_CADDRE', 'Type': 0}], 'Where': [{'Condition': {'In': {'Expressions': [{'Column': {'Expression': {'SourceRef': {'Source': 'v'}}, 'Property': 'BLOCO'}}], 'Values': [[{'Literal': {'Value': "'1.Venda Liquida'"}}], [{'Literal': {'Value': "'3.Despesas com Vendas'"}}], [{'Literal': {'Value': "'4.Despesas Comercial Operacional'"}}], [{'Literal': {'Value': "'5.Despesas Administrativa Operacional'"}}], [{'Literal': {'Value': "'6.Receitas/Despesas Financeiras'"}}]]}}}]}, 'howCreated': 'User', 'objects': {'general': [{'properties': {}}]}}
+    {'name': 'b7267ee2679897444884', 'ordinal': 6, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_CADDRE'}}, 'Property': 'TITULO'}}, 'type': 'Categorical', 'howCreated': 'User', 'objects': {'general': [{'properties': {'isInvertedSelectionMode': {'expr': {'Literal': {'Value': 'true'}}}}}]}}
+    {'name': '8c786cd0ef35a43fede1', 'ordinal': 8, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_TSICUS'}}, 'Property': 'DESCRCENCUS'}}, 'type': 'Categorical', 'howCreated': 'User'}
+    {'name': 'e71ce171b6978ca27bd5', 'ordinal': 9, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_DREQLIK'}}, 'Property': 'NUNOTA'}}, 'type': 'Advanced', 'howCreated': 'User'}
+    {'name': 'e127ccbacdc1321eb0ef', 'ordinal': 10, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_DREQLIK'}}, 'Property': 'TOTAL MATRIZ.'}}, 'type': 'Categorical', 'howCreated': 'User'}
+    {'name': 'c37a142997be66a4c2c5', 'ordinal': 11, 'field': {'Measure': {'Expression': {'SourceRef': {'Entity': 'MEDIDAS'}}, 'Property': 'SOMA ORCADO'}}, 'type': 'Advanced', 'howCreated': 'User'}
+    {'name': 'a6a4a757ea60abc5bfc8', 'ordinal': 12, 'field': {'Measure': {'Expression': {'SourceRef': {'Entity': 'MEDIDAS'}}, 'Property': 'ORCAMENTO'}}, 'type': 'Advanced', 'howCreated': 'User'}
+    {'name': '23a459f09604b6a965ad', 'ordinal': 13, 'field': {'Measure': {'Expression': {'SourceRef': {'Entity': 'MEDIDAS'}}, 'Property': 'REALIZADO'}}, 'type': 'Advanced', 'howCreated': 'User'}
+
+Type: slicer | ID: abba64b4c9b8f8ac612b | Title: 
+  Projection Values: ['VMQ_TSIEMP.RAZAOABREV']
+
+Type: image | ID: ce6627c759e4ada8689d | Title: 
+
+Type: lineChart | ID: d3eb369d61ffcad86297 | Title: 
+  Projection Category: ['DCALENDARIO.NOMEMES']
+  Projection Y: ['MEDIDAS.ORÇADO (R$).', 'MEDIDAS.REALIZADO (R$)..']
+  Filters (12):
+    {'name': '9301e835f5b1afeb5dbc', 'ordinal': 0, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_DREQLIK'}}, 'Property': 'REF'}}, 'type': 'Categorical', 'howCreated': 'User'}
+    {'name': '984a5c0efa2fee3fbeed', 'ordinal': 1, 'field': {'Measure': {'Expression': {'SourceRef': {'Entity': 'base'}}, 'Property': 'Total de Soma de valor para bloco'}}, 'type': 'Advanced', 'howCreated': 'User'}
+    {'name': '92eb93483d34519c1088', 'ordinal': 2, 'field': {'Measure': {'Expression': {'SourceRef': {'Entity': '2.TABELA MEDIDAS'}}, 'Property': 'SOMA REALIZADO GESTORES'}}, 'type': 'Advanced', 'howCreated': 'User'}
+    {'name': 'f451e22383dcdf9fad2b', 'ordinal': 3, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_TGFNAT'}}, 'Property': 'DESCRNAT'}}, 'type': 'Categorical', 'howCreated': 'User'}
+    {'name': '28c69e0c8ba1ca621a02', 'ordinal': 5, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_CADDRE'}}, 'Property': 'BLOCO'}}, 'type': 'Categorical', 'filter': {'Version': 2, 'From': [{'Name': 'v', 'Entity': 'VMQ_CADDRE', 'Type': 0}], 'Where': [{'Condition': {'In': {'Expressions': [{'Column': {'Expression': {'SourceRef': {'Source': 'v'}}, 'Property': 'BLOCO'}}], 'Values': [[{'Literal': {'Value': "'1.Venda Liquida'"}}], [{'Literal': {'Value': "'3.Despesas com Vendas'"}}], [{'Literal': {'Value': "'4.Despesas Comercial Operacional'"}}], [{'Literal': {'Value': "'5.Despesas Administrativa Operacional'"}}], [{'Literal': {'Value': "'6.Receitas/Despesas Financeiras'"}}]]}}}]}, 'howCreated': 'User', 'objects': {'general': [{'properties': {}}]}}
+    {'name': 'b7267ee2679897444884', 'ordinal': 6, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_CADDRE'}}, 'Property': 'TITULO'}}, 'type': 'Categorical', 'howCreated': 'User', 'objects': {'general': [{'properties': {'isInvertedSelectionMode': {'expr': {'Literal': {'Value': 'true'}}}}}]}}
+    {'name': '8c786cd0ef35a43fede1', 'ordinal': 8, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_TSICUS'}}, 'Property': 'DESCRCENCUS'}}, 'type': 'Categorical', 'howCreated': 'User'}
+    {'name': 'e71ce171b6978ca27bd5', 'ordinal': 9, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_DREQLIK'}}, 'Property': 'NUNOTA'}}, 'type': 'Advanced', 'howCreated': 'User'}
+    {'name': 'e127ccbacdc1321eb0ef', 'ordinal': 10, 'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_DREQLIK'}}, 'Property': 'TOTAL MATRIZ.'}}, 'type': 'Categorical', 'howCreated': 'User'}
+    {'name': 'c37a142997be66a4c2c5', 'ordinal': 11, 'field': {'Measure': {'Expression': {'SourceRef': {'Entity': 'MEDIDAS'}}, 'Property': 'SOMA ORCADO'}}, 'type': 'Advanced', 'howCreated': 'User'}
+    {'name': 'a6a4a757ea60abc5bfc8', 'ordinal': 12, 'field': {'Measure': {'Expression': {'SourceRef': {'Entity': 'MEDIDAS'}}, 'Property': 'ORCAMENTO'}}, 'type': 'Advanced', 'howCreated': 'User'}
+    {'name': '23a459f09604b6a965ad', 'ordinal': 13, 'field': {'Measure': {'Expression': {'SourceRef': {'Entity': 'MEDIDAS'}}, 'Property': 'REALIZADO'}}, 'type': 'Advanced', 'howCreated': 'User'}
+
+Type: slicer | ID: dbd5a5d85cd409859771 | Title: 
+  Projection Values: ['DCALENDARIO.NOMEMES']
+
+Type: textbox | ID: dd9650d925a67637fd34 | Title: 
+
+Type: shape | ID: e57a21b217a1c5ff776e | Title: 
+
+Type: slicer | ID: f1049c8f66de09089802 | Title: 
+  Projection Values: ['VMQ_TSICUS.DESCRCENCUS']

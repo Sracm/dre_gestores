@@ -1,0 +1,727 @@
+==========================================
+TABLE: VMQ_DREQLIK | MEASURE: ORCADO ANO
+EXPR:
+
+CALCULATE(
+    SUM(VMQ_DREQLIK[ORCAMENTO]),
+    REMOVEFILTERS(DCALENDARIO[NOMEMES])
+)
+==========================================
+TABLE: VMQ_DREQLIK | MEASURE: TOTAL ABSOLUTO ORCADO ANO
+EXPR:
+
+CALCULATE(
+	[ORCADO ANO],
+	ALLSELECTED('DCALENDARIO'[NOMEMES]),
+	ALLSELECTED('DCALENDARIO'[NUMEROMES])
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: SOMA ORCADO
+EXPR:
+
+VAR Titulo = SELECTEDVALUE(VMQ_CADDRE[TITULO])
+     VAR  CustoMerca =
+        CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]),VMQ_CADDRE[BLOCO]= "2.Custo Mercadoria Vendida"       
+           
+           )
+    VAR Margem = IF([Quantidade Bloco] = 6,SUM(VMQ_DREQLIK[ORCAMENTO]), CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]),ALLSELECTED(VMQ_CADDRE)) + CustoMerca )
+           
+           RETURN
+SWITCH(TRUE(),
+Titulo = "2.Bonificação Clientes", SUM(VMQ_DREQLIK[ORCAMENTO])*2,
+ISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[ORCAMENTO]),
+Margem)
+==========================================
+TABLE: MEDIDAS | MEASURE: VENDA BRUTA ORCADO
+EXPR:
+
+            CALCULATE([ORÇADO (R$).old],
+            FILTER(ALLSELECTED(VMQ_CADDRE),
+            VMQ_CADDRE[TITULO]= "1.Venda Bruta"),  REMOVEFILTERS(VMQ_CADDRE[TITULO]))
+==========================================
+TABLE: MEDIDAS | MEASURE: VB orçado
+EXPR:
+
+VAR Resultado =
+    DIVIDE([ORCAMENTO], [VENDA BRUTA ORCADO])
+RETURN
+IF(
+    ISINSCOPE(VMQ_CADDRE[TITULO]),
+    Resultado,
+    Resultado
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: VENDA BRUTA REALIZADO
+EXPR:
+
+            CALCULATE(SUM(VMQ_DREQLIK[VLR.]),
+            FILTER(ALLSELECTED(VMQ_CADDRE),
+            VMQ_CADDRE[TITULO]= "1.Venda Bruta"))
+==========================================
+TABLE: MEDIDAS | MEASURE: VB REALIZADO
+EXPR:
+
+VAR Resultado =
+    DIVIDE([SOMA REALIZADO], [VENDA BRUTA ORCADO])
+RETURN
+IF(
+    ISINSCOPE(VMQ_CADDRE[TITULO]),
+    Resultado,
+    Resultado
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: REALIZADO
+EXPR:
+
+                SUM(VMQ_DREQLIK[VLR.])
+==========================================
+TABLE: MEDIDAS | MEASURE: SOMA REALIZADO
+EXPR:
+
+
+VAR Bloco =
+    SELECTEDVALUE(VMQ_CADDRE[BLOCO])
+
+VAR Titulo =
+    SELECTEDVALUE(VMQ_CADDRE[TITULO])
+VAR CustoMerca =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[VALOR]),
+        VMQ_CADDRE[BLOCO] = "2.Custo Mercadoria Vendida"
+    )
+
+VAR Bonfic =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[VALOR]),
+        bonifChave[chave] <> BLANK(),
+        VMQ_DREQLIK[REF] = "VALORNF",
+        REMOVEFILTERS(VMQ_CADDRE),
+        TREATAS(
+            VALUES(VMQ_CADDRE[CODCENCUS]),
+            VMQ_DREQLIK[CODCENCUS]
+        )
+    )
+    VAR Margem =
+  
+        SUM(VMQ_DREQLIK[VLR.]) -
+           ( Bonfic -
+        (CALCULATE(SUM(VMQ_DREQLIK[VLR.]),VMQ_CADDRE[TITULO]= "2.Bonificação Clientes")*-1))
+    
+        VAR despesacomvenda =
+       ( Bonfic -
+        (CALCULATE(SUM(VMQ_DREQLIK[VLR.]),VMQ_CADDRE[TITULO]= "2.Bonificação Clientes")*-1) 
+       + (SUM(VMQ_DREQLIK[VLR.]) *-1) ) *-1
+
+VAR Resultado =
+    SWITCH(
+        TRUE(),
+       AND(NOT ISINSCOPE(VMQ_CADDRE[TITULO]), Bloco = "3.Despesas com Vendas"),despesacomvenda ,
+        Titulo = "2.Bonificação Clientes", Bonfic,
+        ISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[VLR.]),
+        Margem
+    )
+RETURN
+IF(Resultado = 0, BLANK(), Resultado)
+==========================================
+TABLE: MEDIDAS | MEASURE: %s/ VB orçado
+EXPR:
+
+        IFERROR( IF(ISINSCOPE(VMQ_CADDRE[TITULO]), IFERROR( [ORÇADO (R$).]/ [VENDA BRUTA ORCADO],""),[ORÇADO (R$).]/[VENDA BRUTA ORCADO]),"")
+==========================================
+TABLE: MEDIDAS | MEASURE: ORÇADO (R$).old
+EXPR:
+
+VAR Bloco =
+    SELECTEDVALUE(VMQ_CADDRE[BLOCO])
+
+VAR Titulo =
+    SELECTEDVALUE(VMQ_CADDRE[TITULO])
+VAR CustoMerca =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        VMQ_CADDRE[BLOCO] = "2.Custo Mercadoria Vendida"
+    )
+VAR Margem =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        ALLSELECTED(VMQ_CADDRE)
+        )
+        + CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]),VMQ_CADDRE[TITULO] = "2.Bonificação Clientes")
+
+VAR Despesacomvenda =
+
+SUM(VMQ_DREQLIK[ORCAMENTO])
+//CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]),VMQ_CADDRE[TITULO] = "2.Bonificação Clientes")
+
+VAR Resultado =
+    SWITCH(
+        TRUE(),
+        Bloco = "3.Despesas com Vendas", Despesacomvenda,
+        Titulo = "2.Bonificação Clientes", SUM(VMQ_DREQLIK[ORCAMENTO]) * 2,
+        ISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[ORCAMENTO]),
+        Margem
+    )
+RETURN
+IF(
+    OR(ISBLANK(Resultado), Resultado = 0),
+    BLANK(),
+    Resultado
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: %s/ VB REALIZADO
+EXPR:
+
+        IFERROR( IF(ISINSCOPE(VMQ_CADDRE[TITULO]), IFERROR( [REALIZADO (R$)..]/ [VENDA BRUTA REALIZADO],""),[REALIZADO (R$)..]/[VENDA BRUTA REALIZADO]),"")
+==========================================
+TABLE: MEDIDAS | MEASURE: REALIZADO.
+EXPR:
+
+VAR ItemMargem = SELECTEDVALUE('Margem de Contribuição'[Item])
+VAR VendaLiq = CALCULATE(SUM(VMQ_DREQLIK[VLR.]), VMQ_CADDRE[BLOCO] = "1.Venda Liquida",REMOVEFILTERS(VMQ_CADDRE[BLOCO]))
+VAR CustoMercadoriaVendida= CALCULATE(SUM(VMQ_DREQLIK[valor10]),VMQ_CADDRE[BLOCO]="2.Custo Mercadoria Vendida",REMOVEFILTERS(VMQ_CADDRE[BLOCO]))
+RETURN
+IF(NOT(ISINSCOPE(VMQ_DREQLIK[MARGEM])),VendaLiq + CustoMercadoriaVendida , SUM(VMQ_DREQLIK[VLR.]))
+==========================================
+TABLE: MEDIDAS | MEASURE: R/O
+EXPR:
+
+DIVIDE(
+    [REALIZADO (R$)..] - [ORÇADO (R$).],
+    ABS([ORÇADO (R$).]),
+    0
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: soma realizado teste
+EXPR:
+
+                SUM(VMQ_DREQLIK[VLR.])
+==========================================
+TABLE: MEDIDAS | MEASURE: R/O AJUSTADO
+EXPR:
+
+VAR Resultado = [R/O]
+RETURN
+( Resultado)
+==========================================
+TABLE: MEDIDAS | MEASURE: (%) S/ VB orçado.
+EXPR:
+
+        IFERROR( IF(ISINSCOPE(VMQ_CADDRE[TITULO]), IFERROR( [ORCAMENTO]/ [REALIZADO.],""),[ORCAMENTO]/[REALIZADO.]),"")
+==========================================
+TABLE: MEDIDAS | MEASURE: % S/ VB ORCADO .
+EXPR:
+
+         IF(
+    ISINSCOPE(VMQ_CADDRE[TITULO]),
+    DIVIDE([ORCAMENTO], [VENDA BRUTA ORCADO]),
+    DIVIDE([ORCAMENTO], [VENDA BRUTA ORCADO])
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: %s/ VB REALIZADO.
+EXPR:
+
+        IFERROR( IF(ISINSCOPE(VMQ_CADDRE[TITULO]), IFERROR( [REALIZADO.]/ [VENDA BRUTA REALIZADO],""),[REALIZADO.]/[VENDA BRUTA REALIZADO]),"")
+==========================================
+TABLE: MEDIDAS | MEASURE: R/O.
+EXPR:
+
+          IFERROR( ( [REALIZADO (R$)..]/[ORCAMENTO])-1,"")
+==========================================
+TABLE: MEDIDAS | MEASURE: R/O AJUSTADO.
+EXPR:
+
+VAR Resultado = [R/O.]
+RETURN
+IF(Resultado = -1, BLANK(), Resultado)
+==========================================
+TABLE: MEDIDAS | MEASURE: (%) RELIZADO VS ORÇADO
+EXPR:
+
+                [REALIZADO.]/[ORCAMENTO]
+==========================================
+TABLE: MEDIDAS | MEASURE: DIF. REALIZADO X ORÇADO
+EXPR:
+
+                [REALIZADO.]-[ORCAMENTO]
+==========================================
+TABLE: MEDIDAS | MEASURE: DIF. REALIZADO X ORÇADO GESTORES
+EXPR:
+
+                [REALIZADO]-[ORCAMENTO]
+==========================================
+TABLE: MEDIDAS | MEASURE: SOMA REALIZADO3
+EXPR:
+
+
+VAR Bloco =
+    SELECTEDVALUE(VMQ_CADDRE[BLOCO])
+
+VAR Titulo =
+    SELECTEDVALUE(VMQ_CADDRE[TITULO])
+
+VAR ValorAtual =
+    SUM(VMQ_DREQLIK[VLR.])
+
+VAR CustoMerca =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[VALOR]),
+        VMQ_CADDRE[BLOCO] = "2.Custo Mercadoria Vendida"
+    )
+
+VAR Bonfic =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[VALOR]),
+        bonifChave[chave] <> BLANK(),
+        VMQ_DREQLIK[REF] = "VALORNF",
+        REMOVEFILTERS(VMQ_CADDRE),
+        TREATAS(
+            VALUES(VMQ_CADDRE[CODCENCUS]),
+            VMQ_DREQLIK[CODCENCUS]
+        )
+    )
+
+VAR Margem =
+    SUM(VMQ_DREQLIK[VLR.]) -
+    ( Bonfic -
+        (CALCULATE(
+            SUM(VMQ_DREQLIK[VLR.]),
+            VMQ_CADDRE[TITULO] = "2.Bonificação Clientes"
+        ) * -1)
+    )
+
+VAR despesacomvenda =
+    ( Bonfic -
+        (CALCULATE(
+            SUM(VMQ_DREQLIK[VLR.]),
+            VMQ_CADDRE[TITULO] = "2.Bonificação Clientes"
+        ) * -1) 
+        + (SUM(VMQ_DREQLIK[VLR.]) * -1)
+    ) * -1
+
+VAR TesteBonificacao =
+    Titulo = "2.Bonificação Clientes" &&
+    ISINSCOPE(VMQ_CADDRE[TITULO]) &&
+    NOT ISINSCOPE(VMQ_CADDRE[DESCRNAT])
+
+VAR Resultado =
+    SWITCH(
+        TRUE(),
+
+        -- TOTAL DO BLOCO
+        NOT ISINSCOPE(VMQ_CADDRE[TITULO]) 
+            && Bloco = "3.Despesas com Vendas",
+            despesacomvenda,
+
+        -- BONIFICAÇÃO (só no título)
+        TesteBonificacao,
+            [REALIZADO],
+
+        -- NÍVEL TÍTULO
+        ISINSCOPE(VMQ_CADDRE[TITULO]) &&
+        NOT ISINSCOPE(VMQ_CADDRE[DESCRNAT]),
+            ValorAtual,
+
+        -- NÍVEL BLOCO
+        ISINSCOPE(VMQ_CADDRE[BLOCO]) &&
+        NOT ISINSCOPE(VMQ_CADDRE[TITULO]),
+            ValorAtual,
+
+        -- MARGEM
+        Margem
+    )
+
+RETURN
+--  REGRA GLOBAL (remove tudo que for vazio ou zero)
+IF(
+    ISBLANK(Resultado) || Resultado = 0,
+    BLANK(),
+    Resultado
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: SOMA REALIZADO AJUSTADA
+EXPR:
+
+
+VAR Bloco =
+    SELECTEDVALUE(VMQ_CADDRE[BLOCO])
+
+VAR Titulo =
+    SELECTEDVALUE(VMQ_CADDRE[TITULO])
+
+VAR Base =
+    SUM(VMQ_DREQLIK[VALOR])
+
+VAR Bonificacao =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[VALOR]),
+        VMQ_CADDRE[TITULO] = "2.Bonificação Clientes"
+    )
+
+VAR Resultado =
+    SWITCH(
+        TRUE(),
+
+        -- Regra específica
+        Bloco = "3.Despesas com Vendas", Base,
+
+        -- Bonificação (se tiver regra diferenciada)
+        Titulo = "2.Bonificação Clientes", Bonificacao,
+
+        -- Linhas normais (nível título)
+        ISINSCOPE(VMQ_CADDRE[TITULO]), Base,
+
+        -- TOTAL CORRETO (soma dos blocos visíveis)
+        SUMX(
+            VALUES(VMQ_CADDRE[BLOCO]),
+            CALCULATE(SUM(VMQ_DREQLIK[VALOR]))
+        )
+    )
+
+RETURN
+IF(
+    OR(ISBLANK(Resultado), Resultado = 0),
+    BLANK(),
+    Resultado
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: REALIZADO (R$).
+EXPR:
+
+
+VAR Bloco =
+    SELECTEDVALUE(VMQ_CADDRE[BLOCO])
+
+VAR Titulo =
+    SELECTEDVALUE(VMQ_CADDRE[TITULO])
+VAR CustoMerca =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[VALOR]),
+        VMQ_CADDRE[BLOCO] = "2.Custo Mercadoria Vendida"
+    )
+
+VAR Bonfic =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[valor10]),
+        bonifChave[chave] <> BLANK(),
+        VMQ_DREQLIK[REF] = "VALORNF",
+        REMOVEFILTERS(VMQ_CADDRE),
+        TREATAS(
+            VALUES(VMQ_CADDRE[CODCENCUS]),
+            VMQ_DREQLIK[CODCENCUS]
+        )
+    )
+    VAR Margem =
+  
+        SUM(VMQ_DREQLIK[VLR.]) -
+           ( Bonfic -
+        (CALCULATE(SUM(VMQ_DREQLIK[VLR.]),VMQ_CADDRE[TITULO]= "2.Bonificação Clientes")*-1))
+    
+        VAR despesacomvenda =
+       ( Bonfic -
+        (CALCULATE(SUM(VMQ_DREQLIK[valor10]),VMQ_CADDRE[TITULO]= "2.Bonificação Clientes")*-1) 
+       + (SUM(VMQ_DREQLIK[valor10]) *-1) ) *-1
+
+VAR Resultado =
+    SWITCH(
+        TRUE(),
+       AND(NOT ISINSCOPE(VMQ_CADDRE[TITULO]), Bloco = "3.Despesas com Vendas"),SUM(VMQ_DREQLIK[valor10]) ,
+        Titulo = "2.Bonificação Clientes", Bonfic,
+        ISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[VLR.]),
+        Margem
+    )
+RETURN
+IF(
+    Resultado = 0,
+    BLANK(),
+    IF(
+        SELECTEDVALUE(VMQ_CADDRE[TITULO]) = "2.Bonificação Clientes",
+        SUM(VMQ_DREQLIK[valor10]),
+        Resultado
+    )
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: teste antonio
+EXPR:
+
+VAR Bloco =
+    SELECTEDVALUE(VMQ_CADDRE[BLOCO])
+
+VAR Titulo =
+    SELECTEDVALUE(VMQ_CADDRE[TITULO])
+VAR CustoMerca =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        VMQ_CADDRE[BLOCO] = "2.Custo Mercadoria Vendida"
+    )
+VAR Margem =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        ALLSELECTED(VMQ_CADDRE)
+        )
+        + CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]),VMQ_CADDRE[TITULO] = "2.Bonificação Clientes")
+
+VAR Despesacomvenda =
+
+SUM(VMQ_DREQLIK[ORCAMENTO])+
+CALCULATE(SUM(VMQ_DREQLIK[ORCAMENTO]),VMQ_CADDRE[TITULO] = "2.Bonificação Clientes")
+
+VAR Resultado =
+    SWITCH(
+        TRUE(),
+        Bloco = "3.Despesas com Vendas", Despesacomvenda,
+        Titulo = "2.Bonificação Clientes", SUM(VMQ_DREQLIK[ORCAMENTO]) * 2,
+        ISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[ORCAMENTO]),
+        Margem
+    )
+RETURN
+IF(
+    OR(ISBLANK(Resultado), Resultado = 0),
+    BLANK(),
+    Resultado
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: ORÇADO (R$).
+EXPR:
+
+VAR Bloco =
+    SELECTEDVALUE(VMQ_CADDRE[BLOCO])
+
+VAR Titulo =
+    SELECTEDVALUE(VMQ_CADDRE[TITULO])
+
+VAR CustoMerca =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        VMQ_CADDRE[BLOCO] = "2.Custo Mercadoria Vendida"
+    )
+
+VAR Margem =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        ALLSELECTED(VMQ_CADDRE)
+    )
+    + CALCULATE(
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        VMQ_CADDRE[TITULO] = "2.Bonificação Clientes"
+    )
+
+VAR Despesacomvenda =
+    IF(
+        Titulo = "3.Impostos s/ bonificações",
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        SUM(VMQ_DREQLIK[ORCAMENTO]) +
+        CALCULATE(
+            SUM(VMQ_DREQLIK[ORCAMENTO]),
+            VMQ_CADDRE[TITULO] = "2.Bonificação Clientes"
+        )
+    )
+
+VAR Resultado =
+    SWITCH(
+        TRUE(),
+        Bloco = "3.Despesas com Vendas", Despesacomvenda,
+        Titulo = "2.Bonificação Clientes", SUM(VMQ_DREQLIK[ORCAMENTO]) * 2,
+        ISINSCOPE(VMQ_CADDRE[BLOCO]), SUM(VMQ_DREQLIK[ORCAMENTO]),
+        Margem
+    )
+
+RETURN
+IF(
+    OR(ISBLANK(Resultado), Resultado = 0),
+    BLANK(),
+    Resultado
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: teste antonio OTIMIZADA
+EXPR:
+
+VAR Bloco =
+    SELECTEDVALUE(VMQ_CADDRE[BLOCO])
+
+VAR Titulo =
+    SELECTEDVALUE(VMQ_CADDRE[TITULO])
+
+-- Valor base (reutilizável)
+VAR ValorBase =
+    SUM(VMQ_DREQLIK[ORCAMENTO])
+
+-- Bonificação calculada uma única vez
+VAR Bonificacao =
+    CALCULATE(
+        SUM(VMQ_DREQLIK[ORCAMENTO]),
+        VMQ_CADDRE[TITULO] = "2.Bonificação Clientes"
+    )
+
+-- Margem otimizada
+VAR Margem =
+    CALCULATE(
+        ValorBase,
+        ALLSELECTED(VMQ_CADDRE)
+    ) + Bonificacao
+
+-- Regra de despesas com venda (com exceção corrigida)
+VAR Despesacomvenda =
+    IF(
+        Titulo = "3.Impostos s/ bonificações",
+        ValorBase,
+        ValorBase + Bonificacao
+    )
+
+VAR Resultado =
+    SWITCH(
+        TRUE(),
+        Bloco = "3.Despesas com Vendas", Despesacomvenda,
+        Titulo = "2.Bonificação Clientes", ValorBase * 2,
+        ISINSCOPE(VMQ_CADDRE[BLOCO]), ValorBase,
+        Margem
+    )
+
+RETURN
+IF(
+    NOT ISBLANK(Resultado) && Resultado <> 0,
+    Resultado
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: orcado mes vs orcado ano
+EXPR:
+
+                [ORCAMENTO]/[ORCADO ANO]
+==========================================
+TABLE: MEDIDAS | MEASURE: ORCADO % CAPM
+EXPR:
+
+                [ORCAMENTO]/[TOTAL ABSOLUTO ORCADO ANO]
+==========================================
+TABLE: MEDIDAS | MEASURE: DIF ORCADO E ORCADO ESPERADO
+EXPR:
+
+            [ORCAMENTO]-[RETORNO SPERADO MES]
+==========================================
+TABLE: MEDIDAS | MEASURE: SOMA REALIZADO MES ANTERIOR
+EXPR:
+
+VAR DataAtual = MAX(DCALENDARIO[Date])
+RETURN
+CALCULATE(
+    [REALIZADO.],
+    FILTER(
+        ALL(DCALENDARIO),
+        DCALENDARIO[Date] >= EOMONTH(DataAtual, -2) + 1 &&
+        DCALENDARIO[Date] <= EOMONTH(DataAtual, -1)
+    )
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: SOMA REALIZADO ANO ANTERIOR
+EXPR:
+
+VAR DataAtual = MAX(DCALENDARIO[Date])
+RETURN
+CALCULATE(
+    [REALIZADO.],
+    FILTER(
+        ALL(DCALENDARIO),
+        DCALENDARIO[Date] >= DATE(YEAR(DataAtual) - 1, MONTH(DataAtual), 1) &&
+        DCALENDARIO[Date] <= EOMONTH(DATE(YEAR(DataAtual) - 1, MONTH(DataAtual), 1), 0)
+    )
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: %s/ VB REALIZADO MES ANTERIOR
+EXPR:
+
+VAR DataAtual = MAX(DCALENDARIO[Date])
+RETURN
+CALCULATE(
+    [%s/ VB REALIZADO.],
+    FILTER(
+        ALL(DCALENDARIO),
+        DCALENDARIO[Date] >= EOMONTH(DataAtual, -2) + 1 &&
+        DCALENDARIO[Date] <= EOMONTH(DataAtual, -1)
+    )
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: %s/ VB REALIZADO ANO ANTERIOR
+EXPR:
+
+VAR DataAtual = MAX(DCALENDARIO[Date])
+VAR DataInicio =
+    DATE(YEAR(DataAtual) - 1, MONTH(DataAtual), 1)
+VAR DataFim =
+    EOMONTH(DataInicio, 0)
+RETURN
+CALCULATE(
+    [%s/ VB REALIZADO.],
+    FILTER(
+        ALL(DCALENDARIO),
+        DCALENDARIO[Date] >= DataInicio &&
+        DCALENDARIO[Date] <= DataFim
+    )
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: AH %/ VB REALIZADO MES
+EXPR:
+
+
+VAR Atual = IFERROR( VALUE([%s/ VB REALIZADO.]), 0 )
+VAR Anterior = IFERROR( VALUE([%s/ VB REALIZADO MES ANTERIOR]), 0 )
+
+RETURN
+IF(
+    Anterior <> 0, 
+    DIVIDE(Atual - Anterior, Anterior),
+    BLANK()
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: AH %/ VB REALIZADO ANO
+EXPR:
+
+
+VAR Atual = IFERROR( VALUE([%s/ VB REALIZADO.]), 0 )
+VAR Anterior = IFERROR( VALUE([%s/ VB REALIZADO ANO ANTERIOR]), 0 )
+
+RETURN
+IF(
+    Anterior <> 0, 
+    DIVIDE(Atual - Anterior, Anterior, BLANK()),
+    BLANK()
+)
+==========================================
+TABLE: MEDIDAS | MEASURE: REALIZADO (R$)..
+EXPR:
+
+
+VAR TituloAtual = SELECTEDVALUE(VMQ_CADDRE[TITULO])
+
+-- 1. Calculamos o Valor10 respeitando o filtro da linha (sem REMOVEFILTERS total)
+VAR Bonific_Linha = 
+    CALCULATE(
+        SUM(VMQ_DREQLIK[valor10]),
+        bonifChave[chave] <> BLANK(),
+        VMQ_DREQLIK[REF] = "VALORNF",
+        -- Usamos KEEPFILTERS para garantir que ele respeite se é BONIF ou DEVOLUCAO
+        KEEPFILTERS(VMQ_CADDRE), 
+        TREATAS(VALUES(VMQ_CADDRE[CODCENCUS]), VMQ_DREQLIK[CODCENCUS])
+    )
+
+-- 2. Valor padrão para os demais itens da DRE
+VAR ValorPadrao = SUM(VMQ_DREQLIK[VLR.])
+
+-- 3. A mágica para o Total: SUMX percorre os itens e soma o que for correto
+VAR Resultado = 
+    SUMX(
+        -- Adicionamos as descrições detalhadas na iteração para o total bater
+        SUMMARIZE(VMQ_CADDRE, VMQ_CADDRE[BLOCO], VMQ_CADDRE[TITULO], VMQ_CADDRE[DESCRNAT]),
+        IF(
+            VMQ_CADDRE[TITULO] = "2.Bonificação Clientes",
+            -- Se for bonificação, recalcula o Bonific_Linha no contexto desta iteração
+            CALCULATE(
+                SUM(VMQ_DREQLIK[valor10]),
+                bonifChave[chave] <> BLANK(),
+                VMQ_DREQLIK[REF] = "VALORNF",
+                TREATAS(VALUES(VMQ_CADDRE[CODCENCUS]), VMQ_DREQLIK[CODCENCUS])
+            ),
+            CALCULATE(SUM(VMQ_DREQLIK[VLR.]))
+        )
+    )
+
+RETURN
+IF(Resultado = 0, BLANK(), Resultado)

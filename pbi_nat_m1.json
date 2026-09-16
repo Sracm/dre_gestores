@@ -1,0 +1,662 @@
+﻿[
+    {
+        "Descrnat":  "LUCROS E DIVIDENDOS DISTRIBUIDOS",
+        "Realizado":  -86654.99300235,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MENSALIDADE DE SISTEMAS",
+        "Realizado":  -68275.959999999992,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "ALUGUEL DE IMÓVEIS",
+        "Realizado":  -60275.579967461206,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "IPVA",
+        "Realizado":  -33232.811547448,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "CONTABILIDADE TERCEIRIZADA",
+        "Realizado":  -16005,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "SERVIÇO DE SUPORTE EM SISTEMAS DE TI",
+        "Realizado":  -12410.15,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "SERVIÇOS DE CONSULTORIA E ASSESSORIA",
+        "Realizado":  -12310.650000000001,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "SERVIÇOS ADMINISTRATIVOS",
+        "Realizado":  -12000,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "ASSESSORIA JURIDICA",
+        "Realizado":  -10428.27,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MARCAS E PATENTES (ROYALTIES)",
+        "Realizado":  -10000,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "CONDOMINIO",
+        "Realizado":  -9040.6400262626,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "COMPUTADORES E PERÍFÉRICOS",
+        "Realizado":  -8577.04,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "SERVIÇOS DE CONSUL DE SERVIÇOS FREELANCE",
+        "Realizado":  -8500,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MULTA DE TRANSITO",
+        "Realizado":  -7887.648452552,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MANUTENÇÃO/BENFEITORIA EM IMÓVEIS",
+        "Realizado":  -7564,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESPESAS LOGISTICAS COM CARGA E DESCARGA",
+        "Realizado":  -6601,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "INTERNET",
+        "Realizado":  -5759.59,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "IMPLANTACAO DE SISTEMA",
+        "Realizado":  -5045,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "ENDOMARKETING",
+        "Realizado":  -4825.0399278744007,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "ENERGIA ELETRICA",
+        "Realizado":  -4446.12002132,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "FRETE SOBRE COMPRA",
+        "Realizado":  -3637.7,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "TAXA MUNICIPAL/ESTADUAL/FEDERAL",
+        "Realizado":  -3479.8,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "ASSISTENCIA NOS PRODUTOS MQ",
+        "Realizado":  -2869,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESENVOLVIMENTO DE SISTEMAS",
+        "Realizado":  -2552,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MATERIAL DE COPA E COZINHA",
+        "Realizado":  -2460.57,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "SERVIÇO DE LIMPEZA",
+        "Realizado":  -2100.01,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "CONFRATERNIZAÇÕES E COFFEE BREAK",
+        "Realizado":  -2006.43,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "SEGUROS SOBRE ATIVOS",
+        "Realizado":  -1974.3100058712,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "RESCISÕES DE FUNCIONARIOS",
+        "Realizado":  -1779.28,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "EMBALAGEM PARA VENDA",
+        "Realizado":  -1603.98,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "PROCESSOS JUDICIAIS DRTO CONSUMIDOR",
+        "Realizado":  -1569.37,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MATERIAL DE USO E CONSUMO",
+        "Realizado":  -1389.52,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "TELEFONE",
+        "Realizado":  -1360.4439030729,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESPESAS COM RECRUTAMENTO E SELEÇÃO",
+        "Realizado":  -1043.83,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "ALARMES E MONITORAMENTOS",
+        "Realizado":  -924.34,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MEDICINA DO TRABALHO",
+        "Realizado":  -897.56999999999994,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MATERIAL DE ESCRITÓRIO",
+        "Realizado":  -712.9,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "IPTU",
+        "Realizado":  -639.359979085,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESPESAS COM TAXI/ UBER/ 99",
+        "Realizado":  -496.4469985972,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "CONTRIBUIÇÃO SINDICAL PATRONAL",
+        "Realizado":  -479.7,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MANUT DE MOVEIS, EQUIPAMENTOS E VEICULOS",
+        "Realizado":  -450,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESPESAS COM ALIMENTAÇÃO - VIAGEM",
+        "Realizado":  -381.99,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESPESAS COM COMBUSTIVEL",
+        "Realizado":  -210,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "CERTIFICADOS DIGITAIS",
+        "Realizado":  -189,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "ÁGUA E ESGOTO",
+        "Realizado":  -162.7,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "IOF SOBRE DEMAIS OPERACOES",
+        "Realizado":  -161.78,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESPESAS COM PEDAGIOS",
+        "Realizado":  -94.19,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESPESAS COM CREDITO E COBRANCAS",
+        "Realizado":  -38.42,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "REEMBOLSO DE ST PARA POSTOS",
+        "Realizado":  -35.48,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "- MATERIAL PARA EXPEDIÇÃO",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "IRRF RETIDO FONTE (RET IR 1708 E 8045)",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "PATROCINIO INFLUENCER PRODUTOS",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "CAMPANHAS INSTITUCIONAIS",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MOVEIS",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "CRÉDITO PRESUMIDO TTD 409 E 478",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESPESAS COM ARMAZENAGEM FULFILLMENT",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MIDIA PAGA GOOGLE MQ PROFESSIONAL",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "JUROS E IOF CHEQUE ESPECIAL",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "ASSESSORIA TRIBUTARIA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESPESAS COM ESTACIONAMENTO",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MIDIA PAGA MARKETPLACE",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "COMPRA DE INSUMO",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "REFEIÇÕES DOS REPRESENTANTES",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MARTECH",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "ASSESSORIA EM CERTIFICAÇÃO DE PRODUTOS",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MANUTENCAO SITE",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MANUTENÇÃO DE HARDWARE",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESPESAS COM LANCHES",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "SEGURO DE VIDA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "UTENSILIOS",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MANUTENÇÃO DE INFRAESTRUTURA DE TI",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "TREINAMENTOS DE PRODUTOS MQ",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "RECALL",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "COMBUSTIVEL DOS VEICULOS PROPRIOS",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "ANTIFRAUDE",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "CHARGEBACK",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESPESAS COM ALUGUEL DE CARRO",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "COMISSOES SOBRE VENDAS MARKETPLACE",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "COMPRA EMBALAGEM P/ APLIC. NA PRODUÇÃO",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MENSALIDADE DE ASSOCIAÇÃO DE CLASSE",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MANUTENÇÃO DE SOFTWARE",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESP FCC COMERCIAL",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "TAXA DE REMOÇÃO DE ESTOQUE",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESPESAS COM PASSAGENS AEREAS",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "EQUIPAMENTOS",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "TARIFA DE REGISTRO DE COBRANÇA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "TAXAS CARTORIO E CONSULADO",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "BAIXA DE ESTOQUE PARA PERDA GARANTIA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "ADIANTAMENTO DE DESPESAS",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "FEIRAS E EVENTOS",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "REND SOBRE APLIC FINANCEIRA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "TARIFA DE BAIXA DE COBRANÇA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MANUTENÇÃO DE CONTAS BANCÁRIAS",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "VARIAÇÃO CAMBIAL ATIVA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "ACORDOS COMERCIAIS REEMBOLSO",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "TARIFA DE CÂMBIO",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESPESAS COM HOSPEDAGEM",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "REEMBOLSO DE ASSISTENCIA MEDICA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "TARIFAS PIX/TED/DOC",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MATERIAL GRAFICO PARA PROPAGANDA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESPESAS COM CORRESPONDENCIA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "REEMBOLSO DE KILOMETRAGEM",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "VEICULOS FABRICA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "REMESSA DE PRODUTO GARANTIA/CONSERTO",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESENVOLVIMENTO DE SITE",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MIDIA PAGA FACEBOOK MQ PROFESSIONAL",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "ACORDO JUDICIAL  TRABALHISTA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "EQUIPAMENTOS ALUGADOS PARA O MARKETING",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "UNIFORMES / EPI",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MATERIAIS E EQUIPAMENTOS DE INFORMATICA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESCONTOS CONCEDIDOS",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "BONIF DE PROD SOBRE VENDA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "PRODUTOS MOSTRUARIO OU CONCORRENCIA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "COMISSOES SOBRE VENDAS CLT",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "MATERIAL DE LIMPEZA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "PROMOTORES DE VENDA FREELANCE",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESCONTOS OBTIDOS",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "JUROS SOBRE EMPRESTIMOS",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "RECEITA DE SERVIÇOS PRESTADOS",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "CONTRIBUIÇÃO ASSISTENCIAL",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "PROLABORE",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "PLATAFORMA DE ARMAZEN. DE SISTEMAS - SAS",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "SISCOMEX",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "REVENDA DE MERCADORIA (IMPORT BOOTCOMP)",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "JUROS SOBRE MUTUO",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "PROVISÃO DE DESPESAS",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "DESPESAS COM PASSAGEM RODOVIARIA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "JUROS SOBRE FINANCIAMENTO",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "BAIXA DE IMOBILIZADO",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "RECUPERAÇÃO DE PECAS/ENTRADA MANUAL",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    },
+    {
+        "Descrnat":  "CARTÃO PROMOTORA",
+        "Realizado":  null,
+        "Orcado":  -325410.69
+    }
+]

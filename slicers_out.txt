@@ -1,0 +1,30 @@
+
+SLICER ID: 0548727f3b1a02e4e084
+Projections: {'Values': {'projections': [{'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'DCALENDARIO'}}, 'Property': 'SEM'}}, 'queryRef': 'DCALENDARIO.SEM', 'nativeQueryRef': 'SEM', 'active': True}]}}
+Filters: {}
+Config: None
+
+SLICER ID: 14caba13b30bd875faa0
+Projections: {'Values': {'projections': [{'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'DCALENDARIO'}}, 'Property': 'TRIMESTRE'}}, 'queryRef': 'DCALENDARIO.TRIMESTRE', 'nativeQueryRef': 'TRIMESTRE', 'active': True}]}}
+Filters: {}
+Config: None
+
+SLICER ID: 296ab43839bb43cb387e
+Projections: {'Values': {'projections': [{'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'DCALENDARIO'}}, 'Property': 'ANO'}}, 'queryRef': 'DCALENDARIO.ANO', 'nativeQueryRef': 'ANO', 'active': True}]}}
+Filters: {}
+Config: None
+
+SLICER ID: abba64b4c9b8f8ac612b
+Projections: {'Values': {'projections': [{'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_TSIEMP'}}, 'Property': 'RAZAOABREV'}}, 'queryRef': 'VMQ_TSIEMP.RAZAOABREV', 'nativeQueryRef': 'EMPRESA', 'active': True, 'displayName': 'EMPRESA'}]}}
+Filters: {}
+Config: None
+
+SLICER ID: dbd5a5d85cd409859771
+Projections: {'Values': {'projections': [{'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'DCALENDARIO'}}, 'Property': 'NOMEMES'}}, 'queryRef': 'DCALENDARIO.NOMEMES', 'nativeQueryRef': 'MES', 'active': True, 'displayName': 'MES'}]}}
+Filters: {}
+Config: None
+
+SLICER ID: f1049c8f66de09089802
+Projections: {'Values': {'projections': [{'field': {'Column': {'Expression': {'SourceRef': {'Entity': 'VMQ_TSICUS'}}, 'Property': 'DESCRCENCUS'}}, 'queryRef': 'VMQ_TSICUS.DESCRCENCUS', 'nativeQueryRef': 'CENTRO DE RESULTADO', 'active': True, 'displayName': 'CENTRO DE RESULTADO'}]}}
+Filters: {}
+Config: None

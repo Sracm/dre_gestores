@@ -1,0 +1,4 @@
+﻿{
+    "..":  null,
+    "R/O":  "\nDIVIDE(\n    [REALIZADO (R$)..] - [ORÇADO (R$).],\n    ABS([ORÇADO (R$).]),\n    0\n)"
+}

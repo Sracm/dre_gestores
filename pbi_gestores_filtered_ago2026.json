@@ -1,0 +1,146 @@
+﻿[
+    {
+        "Bloco":  "1.Venda Liquida",
+        "Titulo":  "1.Venda Bruta",
+        "Realizado":  3992513.3000000003,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "1.Venda Liquida",
+        "Titulo":  "2.Devolução",
+        "Realizado":  -120911.04999999999,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "1.Venda Liquida",
+        "Titulo":  "3.Desc Financeiros",
+        "Realizado":  -76685.079999999987,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "1.Venda Liquida",
+        "Titulo":  "4.Imposto",
+        "Realizado":  -406362.52999999997,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "1.Venda Liquida",
+        "Titulo":  "5.IRPJ e CSLL",
+        "Realizado":  -131322.975732,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "3.Despesas com Vendas",
+        "Titulo":  "1.Frete",
+        "Realizado":  -144500.84,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "3.Despesas com Vendas",
+        "Titulo":  "2.Bonificação Clientes",
+        "Realizado":  -419927.33000000013,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "3.Despesas com Vendas",
+        "Titulo":  "3.Impostos s/ bonificações",
+        "Realizado":  -49922.640000000007,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "3.Despesas com Vendas",
+        "Titulo":  "4.Comissões",
+        "Realizado":  -88423.9800495375,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "3.Despesas com Vendas",
+        "Titulo":  "5.Bonificação Gerente",
+        "Realizado":  -6000,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "3.Despesas com Vendas",
+        "Titulo":  "6.Guelta",
+        "Realizado":  -572.94,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "3.Despesas com Vendas",
+        "Titulo":  "9.Meio Pagamento",
+        "Realizado":  -16326.020000000002,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "4.Despesas Comercial Operacional",
+        "Titulo":  "1.Comercial Despesas",
+        "Realizado":  -239614.683574473,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "4.Despesas Comercial Operacional",
+        "Titulo":  "2.Operações Marketplace",
+        "Realizado":  6905.16,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "4.Despesas Comercial Operacional",
+        "Titulo":  "3.Folha de pagamento e Beneficios - Comercial",
+        "Realizado":  -139207.86000619878,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "5.Despesas Administrativa Operacional",
+        "Titulo":  "1.Despesas Administrativas",
+        "Realizado":  -334336.784157744,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "5.Despesas Administrativa Operacional",
+        "Titulo":  "2.Desenvol Produtos",
+        "Realizado":  -27371.112625448797,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "5.Despesas Administrativa Operacional",
+        "Titulo":  "3.Folha de pagamento e Beneficios",
+        "Realizado":  -284769.74042369623,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "5.Despesas Administrativa Operacional",
+        "Titulo":  "4.Outras Despesas Não Operacionais",
+        "Realizado":  -25236.765238933938,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "5.Despesas Administrativa Operacional",
+        "Titulo":  "5.Descontos - Despesas",
+        "Realizado":  0.02,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "6.Receitas/Despesas Financeiras",
+        "Titulo":  "1.Receitas/Depesas Financeiras",
+        "Realizado":  -27731.732729461892,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "6.Receitas/Despesas Financeiras",
+        "Titulo":  "2.Variação Cambial",
+        "Realizado":  6112.5300000000007,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "6.Receitas/Despesas Financeiras",
+        "Titulo":  "3.Multas e Juros recebidos",
+        "Realizado":  2476.93,
+        "Orcado":  null
+    },
+    {
+        "Bloco":  "6.Receitas/Despesas Financeiras",
+        "Titulo":  "4.Multas e Juros pagos",
+        "Realizado":  -1.09,
+        "Orcado":  null
+    }
+]

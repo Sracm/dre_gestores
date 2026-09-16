@@ -1,0 +1,452 @@
+﻿[
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "3.Folha de pagamento e Beneficios",
+        "descrnat":  "SERVIÇOS ADMINISTRATIVOS 13",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -1250,
+        "realizado":  -1250
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "3.Folha de pagamento e Beneficios",
+        "descrnat":  "SERVIÇOS ADMINISTRATIVOS 13",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -1250,
+        "realizado":  -1250
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "3.Folha de pagamento e Beneficios",
+        "descrnat":  "BOLSAS E TREINAMENTOS",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -8000,
+        "realizado":  0
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "SERVIÇOS DE CONSULTORIA E ASSESSORIA",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -6675,
+        "realizado":  0
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "3.Folha de pagamento e Beneficios",
+        "descrnat":  "SERVIÇOS ADMINISTRATIVOS",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -15000,
+        "realizado":  0
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "CONTABILIDADE TERCEIRIZADA",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -3300,
+        "realizado":  0
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MENSALIDADE DE SISTEMAS",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -1330,
+        "realizado":  0
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "ASSESSORIA JURIDICA",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -1518,
+        "realizado":  0
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "ENDOMARKETING",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -2100,
+        "realizado":  0
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "DESPESAS COM RECRUTAMENTO E SELEÇÃO",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -1046,
+        "realizado":  0
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MEDICINA DO TRABALHO",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -1000,
+        "realizado":  0
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "CONFRATERNIZAÇÕES E COFFEE BREAK",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -15800,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "SERVIÇOS DE CONSULTORIA E ASSESSORIA",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -6675,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "3.Folha de pagamento e Beneficios",
+        "descrnat":  "SERVIÇOS ADMINISTRATIVOS",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -15000,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "CONTABILIDADE TERCEIRIZADA",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -3300,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MENSALIDADE DE SISTEMAS",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -1330,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "ASSESSORIA JURIDICA",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -1518,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "ENDOMARKETING",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -2400,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "DESPESAS COM RECRUTAMENTO E SELEÇÃO",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -1046,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MEDICINA DO TRABALHO",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -1000,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "CONFRATERNIZAÇÕES E COFFEE BREAK",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -800,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "3.Folha de pagamento e Beneficios",
+        "descrnat":  "BONUS - PREMIAÇÃO TRIMESTRAL",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -103378,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "3.Folha de pagamento e Beneficios",
+        "descrnat":  "BOLSAS E TREINAMENTOS",
+        "parceiro":  "\u003cSEM PARCEIRO\u003e",
+        "orcado":  -8000,
+        "realizado":  0
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "3.Folha de pagamento e Beneficios",
+        "descrnat":  "BOLSAS E TREINAMENTOS",
+        "parceiro":  "COLABORADORES",
+        "orcado":  0,
+        "realizado":  -1248
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "DESPESAS COM TAXI/ UBER/ 99",
+        "parceiro":  "UBER DO BRASIL TECNOLOGIA LTDA.",
+        "orcado":  0,
+        "realizado":  -539.8596594826
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "CONTRIBUIÇÃO SINDICAL PATRONAL",
+        "parceiro":  "SINDICATO DO COMERCIO ATACADISTA DE ITAJ",
+        "orcado":  0,
+        "realizado":  -60
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "CONTRIBUIÇÃO SINDICAL PATRONAL",
+        "parceiro":  "SINDICATO DO COMERCIO ATACADISTA DE ITAJ",
+        "orcado":  0,
+        "realizado":  -50
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "CONFRATERNIZAÇÕES E COFFEE BREAK",
+        "parceiro":  "MARIA AUXILIADORA DE MACEDO",
+        "orcado":  0,
+        "realizado":  -2988.84
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "ENDOMARKETING",
+        "parceiro":  "MARIA AUXILIADORA DE MACEDO",
+        "orcado":  0,
+        "realizado":  -781.99
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "CONFRATERNIZAÇÕES E COFFEE BREAK",
+        "parceiro":  "63.658.113 ARTHUR AUGUSTO DOS SANTOS",
+        "orcado":  0,
+        "realizado":  -1714
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "CONFRATERNIZAÇÕES E COFFEE BREAK",
+        "parceiro":  "MOTT 6 FORTUNA RESTAURANTE LTDA",
+        "orcado":  0,
+        "realizado":  -11081.87
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MEDICINA DO TRABALHO",
+        "parceiro":  "EPI LIVE",
+        "orcado":  0,
+        "realizado":  -393.41
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "3.Folha de pagamento e Beneficios",
+        "descrnat":  "SERVIÇOS ADMINISTRATIVOS",
+        "parceiro":  "MARIA AUXILIADORA DE MACEDO",
+        "orcado":  0,
+        "realizado":  -15000
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MEDICINA DO TRABALHO",
+        "parceiro":  "EPI LIVE",
+        "orcado":  0,
+        "realizado":  -393.41
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "ASSESSORIA JURIDICA",
+        "parceiro":  "RIZIERI \u0026 GOETTEN ADVOGADOS ASSOCIADOS",
+        "orcado":  0,
+        "realizado":  -1517.999984736
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "ASSESSORIA JURIDICA",
+        "parceiro":  "RIZIERI \u0026 GOETTEN ADVOGADOS ASSOCIADOS",
+        "orcado":  0,
+        "realizado":  -1517.999984736
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "ENDOMARKETING",
+        "parceiro":  "SEM PARAR",
+        "orcado":  0,
+        "realizado":  -1815.249570105
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MENSALIDADE DE SISTEMAS",
+        "parceiro":  "DEPPES",
+        "orcado":  0,
+        "realizado":  -1000
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "CONTABILIDADE TERCEIRIZADA",
+        "parceiro":  "CALLERO CONTABILIDADE",
+        "orcado":  0,
+        "realizado":  -3000
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "SERVIÇOS DE CONSULTORIA E ASSESSORIA",
+        "parceiro":  "INSTITUTO MENTE PRÓSPERA LTDA.",
+        "orcado":  0,
+        "realizado":  -7170
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MENSALIDADE DE SISTEMAS",
+        "parceiro":  "D-SAAS",
+        "orcado":  0,
+        "realizado":  -291
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MEDICINA DO TRABALHO",
+        "parceiro":  "LABOR MESP CLÍNICA MÉDICA DE SÃO PAULO L",
+        "orcado":  0,
+        "realizado":  -419.84
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MEDICINA DO TRABALHO",
+        "parceiro":  "LABOR MESP CLÍNICA MÉDICA DE SÃO PAULO L",
+        "orcado":  0,
+        "realizado":  -419.84
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MENSALIDADE DE SISTEMAS",
+        "parceiro":  "DEPPES",
+        "orcado":  0,
+        "realizado":  -1000
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "TELEFONE",
+        "parceiro":  "MOBIT TECNOLOGIA E SERVIÇOS ADMINISTRATI",
+        "orcado":  0,
+        "realizado":  -48.3799940798
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "TELEFONE",
+        "parceiro":  "SECRETARIA DA RECEITA FEDERAL DO BRASIL",
+        "orcado":  0,
+        "realizado":  -1.0919276214
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "ASSESSORIA JURIDICA",
+        "parceiro":  "SECRETARIA DA RECEITA FEDERAL DO BRASIL",
+        "orcado":  0,
+        "realizado":  -99.4741845192
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "ASSESSORIA JURIDICA",
+        "parceiro":  "SECRETARIA DA RECEITA FEDERAL DO BRASIL",
+        "orcado":  0,
+        "realizado":  -99.4741845192
+    },
+    {
+        "mes":  8,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MEDICINA DO TRABALHO",
+        "parceiro":  "SECRETARIA DA RECEITA FEDERAL DO BRASIL",
+        "orcado":  0,
+        "realizado":  -20.47
+    },
+    {
+        "mes":  9,
+        "bloco":  "5.Despesas Administrativa Operacional",
+        "titulo":  "1.Despesas Administrativas",
+        "descrnat":  "MEDICINA DO TRABALHO",
+        "parceiro":  "SECRETARIA DA RECEITA FEDERAL DO BRASIL",
+        "orcado":  0,
+        "realizado":  -20.47
+    }
+]

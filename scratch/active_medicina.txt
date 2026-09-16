@@ -1,0 +1,4 @@
+﻿Empresa: Consolidação | Parc: <SEM PARCEIRO> | Orc: -1000 | Real: 
+Empresa: MCR - MATRIZ | Parc: EPI LIVE | Orc:  | Real: -393.41
+Empresa: VLS - SP | Parc: LABOR MESP CLÍNICA MÉDICA DE SÃO PAULO L | Orc:  | Real: -419.84
+Empresa: VLS - SP | Parc: SECRETARIA DA RECEITA FEDERAL DO BRASIL | Orc:  | Real: -20.47

@@ -1,0 +1,27 @@
+﻿Mes: 9 (set) | Bloco: 5.Despesas Administrativa Operacional | Tit: 3.Folha de pagamento e Beneficios | Nat: BOLSAS E TREINAMENTOS | Orc: -8000 | Real: -1248
+Mes: 8 (ago) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: CONFRATERNIZAÇÕES E COFFEE BREAK | Orc: -15800 | Real: -15784.71
+Mes: 8 (ago) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: ENDOMARKETING | Orc: -2100 | Real: -2597.239570105
+Mes: 9 (set) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: MEDICINA DO TRABALHO | Orc: -1000 | Real: -833.72
+Mes: 8 (ago) | Bloco: 5.Despesas Administrativa Operacional | Tit: 3.Folha de pagamento e Beneficios | Nat: SERVIÇOS ADMINISTRATIVOS | Orc: -15000 | Real: -15000
+Mes: 8 (ago) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: MEDICINA DO TRABALHO | Orc: -1000 | Real: -833.72
+Mes: 8 (ago) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: ASSESSORIA JURIDICA | Orc: -1518 | Real: -1617.4741692552
+Mes: 9 (set) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: ASSESSORIA JURIDICA | Orc: -1518 | Real: -1617.4741692552
+Mes: 9 (set) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: MENSALIDADE DE SISTEMAS | Orc: -1330 | Real: -1000
+Mes: 8 (ago) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: CONTABILIDADE TERCEIRIZADA | Orc: -3300 | Real: -3000
+Mes: 8 (ago) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: SERVIÇOS DE CONSULTORIA E ASSESSORIA | Orc: -6675 | Real: -7170
+Mes: 8 (ago) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: MENSALIDADE DE SISTEMAS | Orc: -1330 | Real: -1291
+Mes: 9 (set) | Bloco: 5.Despesas Administrativa Operacional | Tit: 3.Folha de pagamento e Beneficios | Nat: SERVIÇOS ADMINISTRATIVOS 13 | Orc: -1250 | Real: -1250
+Mes: 8 (ago) | Bloco: 5.Despesas Administrativa Operacional | Tit: 3.Folha de pagamento e Beneficios | Nat: SERVIÇOS ADMINISTRATIVOS 13 | Orc: -1250 | Real: -1250
+Mes: 8 (ago) | Bloco: 5.Despesas Administrativa Operacional | Tit: 3.Folha de pagamento e Beneficios | Nat: BOLSAS E TREINAMENTOS | Orc: -8000 | Real: 
+Mes: 8 (ago) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: DESPESAS COM RECRUTAMENTO E SELEÇÃO | Orc: -1046 | Real: 
+Mes: 9 (set) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: SERVIÇOS DE CONSULTORIA E ASSESSORIA | Orc: -6675 | Real: 
+Mes: 9 (set) | Bloco: 5.Despesas Administrativa Operacional | Tit: 3.Folha de pagamento e Beneficios | Nat: SERVIÇOS ADMINISTRATIVOS | Orc: -15000 | Real: 
+Mes: 9 (set) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: CONTABILIDADE TERCEIRIZADA | Orc: -3300 | Real: 
+Mes: 9 (set) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: ENDOMARKETING | Orc: -2400 | Real: 
+Mes: 9 (set) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: DESPESAS COM RECRUTAMENTO E SELEÇÃO | Orc: -1046 | Real: 
+Mes: 9 (set) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: CONFRATERNIZAÇÕES E COFFEE BREAK | Orc: -800 | Real: 
+Mes: 9 (set) | Bloco: 5.Despesas Administrativa Operacional | Tit: 3.Folha de pagamento e Beneficios | Nat: BONUS - PREMIAÇÃO TRIMESTRAL | Orc: -103378 | Real: 
+Mes: 8 (ago) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: DESPESAS COM TAXI/ UBER/ 99 | Orc:  | Real: -539.8596594826
+Mes: 8 (ago) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: CONTRIBUIÇÃO SINDICAL PATRONAL | Orc:  | Real: -60
+Mes: 9 (set) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: CONTRIBUIÇÃO SINDICAL PATRONAL | Orc:  | Real: -50
+Mes: 8 (ago) | Bloco: 5.Despesas Administrativa Operacional | Tit: 1.Despesas Administrativas | Nat: TELEFONE | Orc:  | Real: -49.4719217012

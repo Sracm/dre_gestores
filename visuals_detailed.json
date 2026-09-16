@@ -1,0 +1,2908 @@
+{
+  "DRE GESTORES": [
+    {
+      "id": "0548727f3b1a02e4e084",
+      "type": "slicer",
+      "projections": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DCALENDARIO"
+                    }
+                  },
+                  "Property": "SEM"
+                }
+              },
+              "queryRef": "DCALENDARIO.SEM",
+              "nativeQueryRef": "SEM",
+              "active": true
+            }
+          ]
+        }
+      },
+      "filters": {}
+    },
+    {
+      "id": "14caba13b30bd875faa0",
+      "type": "slicer",
+      "projections": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DCALENDARIO"
+                    }
+                  },
+                  "Property": "TRIMESTRE"
+                }
+              },
+              "queryRef": "DCALENDARIO.TRIMESTRE",
+              "nativeQueryRef": "TRIMESTRE",
+              "active": true
+            }
+          ]
+        }
+      },
+      "filters": {}
+    },
+    {
+      "id": "296ab43839bb43cb387e",
+      "type": "slicer",
+      "projections": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DCALENDARIO"
+                    }
+                  },
+                  "Property": "ANO"
+                }
+              },
+              "queryRef": "DCALENDARIO.ANO",
+              "nativeQueryRef": "ANO",
+              "active": true
+            }
+          ]
+        }
+      },
+      "filters": {}
+    },
+    {
+      "id": "3d956585e86550bdd1f4",
+      "type": "card",
+      "projections": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Consulta1"
+                        }
+                      },
+                      "Property": "certo"
+                    }
+                  },
+                  "Function": 3
+                }
+              },
+              "queryRef": "Min(Consulta1.certo)",
+              "nativeQueryRef": "Data Atualização",
+              "displayName": "Data Atualização"
+            }
+          ]
+        }
+      },
+      "filters": {}
+    },
+    {
+      "id": "688f961a41b2f82056d0",
+      "type": "pivotTable",
+      "projections": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DCALENDARIO"
+                    }
+                  },
+                  "Property": "NOMEMES"
+                }
+              },
+              "queryRef": "DCALENDARIO.NOMEMES",
+              "nativeQueryRef": "MES",
+              "active": true,
+              "displayName": "MES"
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Margem de Contribuição"
+                    }
+                  },
+                  "Property": "Item"
+                }
+              },
+              "queryRef": "Margem de Contribuição.Item",
+              "nativeQueryRef": "Item",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "VMQ_DREQLIK"
+                    }
+                  },
+                  "Property": "MARGEM"
+                }
+              },
+              "queryRef": "VMQ_DREQLIK.MARGEM",
+              "nativeQueryRef": "MARGEM",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "VMQ_CADDRE"
+                    }
+                  },
+                  "Property": "BLOCO"
+                }
+              },
+              "queryRef": "VMQ_CADDRE.BLOCO",
+              "nativeQueryRef": "BLOCO",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "VMQ_CADDRE"
+                    }
+                  },
+                  "Property": "TITULO"
+                }
+              },
+              "queryRef": "VMQ_CADDRE.TITULO",
+              "nativeQueryRef": "TITULO",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "VMQ_TGFNAT"
+                    }
+                  },
+                  "Property": "DESCRNAT"
+                }
+              },
+              "queryRef": "VMQ_TGFNAT.DESCRNAT",
+              "nativeQueryRef": "DESCRNAT",
+              "active": false
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "ORÇADO (R$)."
+                }
+              },
+              "queryRef": "MEDIDAS.teste antonio 2",
+              "nativeQueryRef": "ORÇADO (R$).1"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "REALIZADO (R$).."
+                }
+              },
+              "queryRef": "MEDIDAS.REALIZADO (R$) TESTE.",
+              "nativeQueryRef": "REALIZADO (R$).."
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "%s/ VB orçado"
+                }
+              },
+              "queryRef": "MEDIDAS.%s/ VB orçado",
+              "nativeQueryRef": "%s/ VB orçado"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "%s/ VB REALIZADO"
+                }
+              },
+              "queryRef": "MEDIDAS.%s/ VB REALIZADO",
+              "nativeQueryRef": "%s/ VB REALIZADO"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "R/O"
+                }
+              },
+              "queryRef": "MEDIDAS.R/O",
+              "nativeQueryRef": "R/O"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": ".."
+                }
+              },
+              "queryRef": "MEDIDAS...",
+              "nativeQueryRef": ".."
+            }
+          ]
+        }
+      },
+      "filters": {
+        "filters": [
+          {
+            "name": "9301e835f5b1afeb5dbc",
+            "ordinal": 0,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "REF"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "984a5c0efa2fee3fbeed",
+            "ordinal": 1,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "base"
+                  }
+                },
+                "Property": "Total de Soma de valor para bloco"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "92eb93483d34519c1088",
+            "ordinal": 2,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "2.TABELA MEDIDAS"
+                  }
+                },
+                "Property": "SOMA REALIZADO GESTORES"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "f451e22383dcdf9fad2b",
+            "ordinal": 3,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_TGFNAT"
+                  }
+                },
+                "Property": "DESCRNAT"
+              }
+            },
+            "type": "Categorical"
+          },
+          {
+            "name": "57583e0b20d7a5e4a74c",
+            "ordinal": 4,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "SOMA REALIZADO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "28c69e0c8ba1ca621a02",
+            "ordinal": 5,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_CADDRE"
+                  }
+                },
+                "Property": "BLOCO"
+              }
+            },
+            "type": "Categorical",
+            "filter": {
+              "Version": 2,
+              "From": [
+                {
+                  "Name": "v",
+                  "Entity": "VMQ_CADDRE",
+                  "Type": 0
+                }
+              ],
+              "Where": [
+                {
+                  "Condition": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "v"
+                              }
+                            },
+                            "Property": "BLOCO"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'1.Venda Liquida'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'3.Despesas com Vendas'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'4.Despesas Comercial Operacional'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'5.Despesas Administrativa Operacional'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'6.Receitas/Despesas Financeiras'"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "objects": {
+              "general": [
+                {
+                  "properties": {}
+                }
+              ]
+            }
+          },
+          {
+            "name": "b7267ee2679897444884",
+            "ordinal": 6,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_CADDRE"
+                  }
+                },
+                "Property": "TITULO"
+              }
+            },
+            "type": "Categorical",
+            "objects": {
+              "general": [
+                {
+                  "properties": {
+                    "isInvertedSelectionMode": {
+                      "expr": {
+                        "Literal": {
+                          "Value": "true"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "6334fd65b30b56bb9244",
+            "ordinal": 7,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DCALENDARIO"
+                  }
+                },
+                "Property": "NOMEMES"
+              }
+            },
+            "type": "Categorical"
+          },
+          {
+            "name": "8c786cd0ef35a43fede1",
+            "ordinal": 8,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_TSICUS"
+                  }
+                },
+                "Property": "DESCRCENCUS"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "e71ce171b6978ca27bd5",
+            "ordinal": 9,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "NUNOTA"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "e127ccbacdc1321eb0ef",
+            "ordinal": 10,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "TOTAL MATRIZ."
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "c37a142997be66a4c2c5",
+            "ordinal": 11,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "SOMA ORCADO"
+              }
+            },
+            "type": "Advanced",
+            "filter": {
+              "Version": 2,
+              "From": [
+                {
+                  "Name": "m",
+                  "Entity": "MEDIDAS",
+                  "Type": 0
+                }
+              ],
+              "Where": [
+                {
+                  "Condition": {
+                    "Not": {
+                      "Expression": {
+                        "Comparison": {
+                          "ComparisonKind": 0,
+                          "Left": {
+                            "Measure": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Source": "m"
+                                }
+                              },
+                              "Property": "SOMA ORCADO"
+                            }
+                          },
+                          "Right": {
+                            "Literal": {
+                              "Value": "null"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            "howCreated": "User"
+          },
+          {
+            "name": "a6a4a757ea60abc5bfc8",
+            "ordinal": 12,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "ORCAMENTO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "23a459f09604b6a965ad",
+            "ordinal": 13,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "REALIZADO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          }
+        ],
+        "filterSortOrder": "Custom"
+      }
+    },
+    {
+      "id": "7813efba091f4d309c96",
+      "type": "shape",
+      "projections": {},
+      "filters": {}
+    },
+    {
+      "id": "7c0314d22302a12a86c2",
+      "type": "textbox",
+      "projections": {},
+      "filters": {}
+    },
+    {
+      "id": "8533538d2859023170d6",
+      "type": "lineClusteredColumnComboChart",
+      "projections": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DCALENDARIO"
+                    }
+                  },
+                  "Property": "TRI ANO"
+                }
+              },
+              "queryRef": "DCALENDARIO.TRI ANO",
+              "nativeQueryRef": "TRI ANO",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "ORÇADO (R$)."
+                }
+              },
+              "queryRef": "MEDIDAS.ORÇADO (R$).",
+              "nativeQueryRef": "ORÇADO (R$)."
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "REALIZADO (R$).."
+                }
+              },
+              "queryRef": "MEDIDAS.REALIZADO (R$)..",
+              "nativeQueryRef": "REALIZADO (R$).."
+            }
+          ]
+        }
+      },
+      "filters": {
+        "filters": [
+          {
+            "name": "9301e835f5b1afeb5dbc",
+            "ordinal": 0,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "REF"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "984a5c0efa2fee3fbeed",
+            "ordinal": 1,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "base"
+                  }
+                },
+                "Property": "Total de Soma de valor para bloco"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "92eb93483d34519c1088",
+            "ordinal": 2,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "2.TABELA MEDIDAS"
+                  }
+                },
+                "Property": "SOMA REALIZADO GESTORES"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "f451e22383dcdf9fad2b",
+            "ordinal": 3,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_TGFNAT"
+                  }
+                },
+                "Property": "DESCRNAT"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "28c69e0c8ba1ca621a02",
+            "ordinal": 5,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_CADDRE"
+                  }
+                },
+                "Property": "BLOCO"
+              }
+            },
+            "type": "Categorical",
+            "filter": {
+              "Version": 2,
+              "From": [
+                {
+                  "Name": "v",
+                  "Entity": "VMQ_CADDRE",
+                  "Type": 0
+                }
+              ],
+              "Where": [
+                {
+                  "Condition": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "v"
+                              }
+                            },
+                            "Property": "BLOCO"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'1.Venda Liquida'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'3.Despesas com Vendas'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'4.Despesas Comercial Operacional'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'5.Despesas Administrativa Operacional'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'6.Receitas/Despesas Financeiras'"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "howCreated": "User",
+            "objects": {
+              "general": [
+                {
+                  "properties": {}
+                }
+              ]
+            }
+          },
+          {
+            "name": "b7267ee2679897444884",
+            "ordinal": 6,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_CADDRE"
+                  }
+                },
+                "Property": "TITULO"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User",
+            "objects": {
+              "general": [
+                {
+                  "properties": {
+                    "isInvertedSelectionMode": {
+                      "expr": {
+                        "Literal": {
+                          "Value": "true"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "8c786cd0ef35a43fede1",
+            "ordinal": 8,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_TSICUS"
+                  }
+                },
+                "Property": "DESCRCENCUS"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "e71ce171b6978ca27bd5",
+            "ordinal": 9,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "NUNOTA"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "e127ccbacdc1321eb0ef",
+            "ordinal": 10,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "TOTAL MATRIZ."
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "c37a142997be66a4c2c5",
+            "ordinal": 11,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "SOMA ORCADO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "a6a4a757ea60abc5bfc8",
+            "ordinal": 12,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "ORCAMENTO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "23a459f09604b6a965ad",
+            "ordinal": 13,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "REALIZADO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          }
+        ],
+        "filterSortOrder": "Custom"
+      }
+    },
+    {
+      "id": "abba64b4c9b8f8ac612b",
+      "type": "slicer",
+      "projections": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "VMQ_TSIEMP"
+                    }
+                  },
+                  "Property": "RAZAOABREV"
+                }
+              },
+              "queryRef": "VMQ_TSIEMP.RAZAOABREV",
+              "nativeQueryRef": "EMPRESA",
+              "active": true,
+              "displayName": "EMPRESA"
+            }
+          ]
+        }
+      },
+      "filters": {}
+    },
+    {
+      "id": "ce6627c759e4ada8689d",
+      "type": "image",
+      "projections": {},
+      "filters": {}
+    },
+    {
+      "id": "d3eb369d61ffcad86297",
+      "type": "lineChart",
+      "projections": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DCALENDARIO"
+                    }
+                  },
+                  "Property": "NOMEMES"
+                }
+              },
+              "queryRef": "DCALENDARIO.NOMEMES",
+              "nativeQueryRef": "NOMEMES",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "ORÇADO (R$)."
+                }
+              },
+              "queryRef": "MEDIDAS.ORÇADO (R$).",
+              "nativeQueryRef": "ORÇADO (R$)."
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "REALIZADO (R$).."
+                }
+              },
+              "queryRef": "MEDIDAS.REALIZADO (R$)..",
+              "nativeQueryRef": "REALIZADO (R$).."
+            }
+          ]
+        }
+      },
+      "filters": {
+        "filters": [
+          {
+            "name": "9301e835f5b1afeb5dbc",
+            "ordinal": 0,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "REF"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "984a5c0efa2fee3fbeed",
+            "ordinal": 1,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "base"
+                  }
+                },
+                "Property": "Total de Soma de valor para bloco"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "92eb93483d34519c1088",
+            "ordinal": 2,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "2.TABELA MEDIDAS"
+                  }
+                },
+                "Property": "SOMA REALIZADO GESTORES"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "f451e22383dcdf9fad2b",
+            "ordinal": 3,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_TGFNAT"
+                  }
+                },
+                "Property": "DESCRNAT"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "28c69e0c8ba1ca621a02",
+            "ordinal": 5,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_CADDRE"
+                  }
+                },
+                "Property": "BLOCO"
+              }
+            },
+            "type": "Categorical",
+            "filter": {
+              "Version": 2,
+              "From": [
+                {
+                  "Name": "v",
+                  "Entity": "VMQ_CADDRE",
+                  "Type": 0
+                }
+              ],
+              "Where": [
+                {
+                  "Condition": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "v"
+                              }
+                            },
+                            "Property": "BLOCO"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'1.Venda Liquida'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'3.Despesas com Vendas'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'4.Despesas Comercial Operacional'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'5.Despesas Administrativa Operacional'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'6.Receitas/Despesas Financeiras'"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "howCreated": "User",
+            "objects": {
+              "general": [
+                {
+                  "properties": {}
+                }
+              ]
+            }
+          },
+          {
+            "name": "b7267ee2679897444884",
+            "ordinal": 6,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_CADDRE"
+                  }
+                },
+                "Property": "TITULO"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User",
+            "objects": {
+              "general": [
+                {
+                  "properties": {
+                    "isInvertedSelectionMode": {
+                      "expr": {
+                        "Literal": {
+                          "Value": "true"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "8c786cd0ef35a43fede1",
+            "ordinal": 8,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_TSICUS"
+                  }
+                },
+                "Property": "DESCRCENCUS"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "e71ce171b6978ca27bd5",
+            "ordinal": 9,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "NUNOTA"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "e127ccbacdc1321eb0ef",
+            "ordinal": 10,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "TOTAL MATRIZ."
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "c37a142997be66a4c2c5",
+            "ordinal": 11,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "SOMA ORCADO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "a6a4a757ea60abc5bfc8",
+            "ordinal": 12,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "ORCAMENTO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "23a459f09604b6a965ad",
+            "ordinal": 13,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "REALIZADO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          }
+        ],
+        "filterSortOrder": "Custom"
+      }
+    },
+    {
+      "id": "dbd5a5d85cd409859771",
+      "type": "slicer",
+      "projections": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DCALENDARIO"
+                    }
+                  },
+                  "Property": "NOMEMES"
+                }
+              },
+              "queryRef": "DCALENDARIO.NOMEMES",
+              "nativeQueryRef": "MES",
+              "active": true,
+              "displayName": "MES"
+            }
+          ]
+        }
+      },
+      "filters": {}
+    },
+    {
+      "id": "dd9650d925a67637fd34",
+      "type": "textbox",
+      "projections": {},
+      "filters": {}
+    },
+    {
+      "id": "e57a21b217a1c5ff776e",
+      "type": "shape",
+      "projections": {},
+      "filters": {}
+    },
+    {
+      "id": "f1049c8f66de09089802",
+      "type": "slicer",
+      "projections": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "VMQ_TSICUS"
+                    }
+                  },
+                  "Property": "DESCRCENCUS"
+                }
+              },
+              "queryRef": "VMQ_TSICUS.DESCRCENCUS",
+              "nativeQueryRef": "CENTRO DE RESULTADO",
+              "active": true,
+              "displayName": "CENTRO DE RESULTADO"
+            }
+          ]
+        }
+      },
+      "filters": {}
+    }
+  ],
+  "DRE DETALHE": [
+    {
+      "id": "0b9ff26b7b62e30dc98b",
+      "type": "slicer",
+      "projections": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "VMQ_TSICUS"
+                    }
+                  },
+                  "Property": "DESCRCENCUS"
+                }
+              },
+              "queryRef": "VMQ_TSICUS.DESCRCENCUS",
+              "nativeQueryRef": "CENTRO DE RESULTADO",
+              "active": true,
+              "displayName": "CENTRO DE RESULTADO"
+            }
+          ]
+        }
+      },
+      "filters": {}
+    },
+    {
+      "id": "0cc78e3d97d86a0a444c",
+      "type": "card",
+      "projections": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Consulta1"
+                        }
+                      },
+                      "Property": "certo"
+                    }
+                  },
+                  "Function": 3
+                }
+              },
+              "queryRef": "Min(Consulta1.certo)",
+              "nativeQueryRef": "Data Atualização",
+              "displayName": "Data Atualização"
+            }
+          ]
+        }
+      },
+      "filters": {}
+    },
+    {
+      "id": "492fad547c2a5c3fc3f3",
+      "type": "lineChart",
+      "projections": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DCALENDARIO"
+                    }
+                  },
+                  "Property": "NOMEMES"
+                }
+              },
+              "queryRef": "DCALENDARIO.NOMEMES",
+              "nativeQueryRef": "NOMEMES",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "ORÇADO (R$)."
+                }
+              },
+              "queryRef": "MEDIDAS.ORÇADO (R$).",
+              "nativeQueryRef": "ORÇADO (R$)."
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "REALIZADO (R$).."
+                }
+              },
+              "queryRef": "MEDIDAS.REALIZADO (R$)..",
+              "nativeQueryRef": "REALIZADO (R$).."
+            }
+          ]
+        }
+      },
+      "filters": {
+        "filters": [
+          {
+            "name": "9301e835f5b1afeb5dbc",
+            "ordinal": 0,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "REF"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "984a5c0efa2fee3fbeed",
+            "ordinal": 1,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "base"
+                  }
+                },
+                "Property": "Total de Soma de valor para bloco"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "92eb93483d34519c1088",
+            "ordinal": 2,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "2.TABELA MEDIDAS"
+                  }
+                },
+                "Property": "SOMA REALIZADO GESTORES"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "f451e22383dcdf9fad2b",
+            "ordinal": 3,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_TGFNAT"
+                  }
+                },
+                "Property": "DESCRNAT"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "28c69e0c8ba1ca621a02",
+            "ordinal": 5,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_CADDRE"
+                  }
+                },
+                "Property": "BLOCO"
+              }
+            },
+            "type": "Categorical",
+            "filter": {
+              "Version": 2,
+              "From": [
+                {
+                  "Name": "v",
+                  "Entity": "VMQ_CADDRE",
+                  "Type": 0
+                }
+              ],
+              "Where": [
+                {
+                  "Condition": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "v"
+                              }
+                            },
+                            "Property": "BLOCO"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'1.Venda Liquida'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'3.Despesas com Vendas'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'4.Despesas Comercial Operacional'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'5.Despesas Administrativa Operacional'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'6.Receitas/Despesas Financeiras'"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "howCreated": "User",
+            "objects": {
+              "general": [
+                {
+                  "properties": {}
+                }
+              ]
+            }
+          },
+          {
+            "name": "b7267ee2679897444884",
+            "ordinal": 6,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_CADDRE"
+                  }
+                },
+                "Property": "TITULO"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User",
+            "objects": {
+              "general": [
+                {
+                  "properties": {
+                    "isInvertedSelectionMode": {
+                      "expr": {
+                        "Literal": {
+                          "Value": "true"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "8c786cd0ef35a43fede1",
+            "ordinal": 8,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_TSICUS"
+                  }
+                },
+                "Property": "DESCRCENCUS"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "e71ce171b6978ca27bd5",
+            "ordinal": 9,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "NUNOTA"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "e127ccbacdc1321eb0ef",
+            "ordinal": 10,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "TOTAL MATRIZ."
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "c37a142997be66a4c2c5",
+            "ordinal": 11,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "SOMA ORCADO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "a6a4a757ea60abc5bfc8",
+            "ordinal": 12,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "ORCAMENTO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "23a459f09604b6a965ad",
+            "ordinal": 13,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "REALIZADO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          }
+        ],
+        "filterSortOrder": "Custom"
+      }
+    },
+    {
+      "id": "718212e9eda0a74e0189",
+      "type": "textbox",
+      "projections": {},
+      "filters": {}
+    },
+    {
+      "id": "853ebd2cc9e3611f311f",
+      "type": "shape",
+      "projections": {},
+      "filters": {}
+    },
+    {
+      "id": "9a77cda5593eb692a662",
+      "type": "pivotTable",
+      "projections": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DCALENDARIO"
+                    }
+                  },
+                  "Property": "NOMEMES"
+                }
+              },
+              "queryRef": "DCALENDARIO.NOMEMES",
+              "nativeQueryRef": "MES",
+              "active": true,
+              "displayName": "MES"
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Margem de Contribuição"
+                    }
+                  },
+                  "Property": "Item"
+                }
+              },
+              "queryRef": "Margem de Contribuição.Item",
+              "nativeQueryRef": "Item",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "VMQ_DREQLIK"
+                    }
+                  },
+                  "Property": "MARGEM"
+                }
+              },
+              "queryRef": "VMQ_DREQLIK.MARGEM",
+              "nativeQueryRef": "MARGEM",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "VMQ_CADDRE"
+                    }
+                  },
+                  "Property": "BLOCO"
+                }
+              },
+              "queryRef": "VMQ_CADDRE.BLOCO",
+              "nativeQueryRef": "BLOCO",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "VMQ_CADDRE"
+                    }
+                  },
+                  "Property": "TITULO"
+                }
+              },
+              "queryRef": "VMQ_CADDRE.TITULO",
+              "nativeQueryRef": "TITULO",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "VMQ_TGFNAT"
+                    }
+                  },
+                  "Property": "DESCRNAT"
+                }
+              },
+              "queryRef": "VMQ_TGFNAT.DESCRNAT",
+              "nativeQueryRef": "DESCRNAT",
+              "active": false
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "ORÇADO (R$)."
+                }
+              },
+              "queryRef": "MEDIDAS.teste antonio 2",
+              "nativeQueryRef": "ORÇADO (R$).1"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "REALIZADO (R$).."
+                }
+              },
+              "queryRef": "MEDIDAS.REALIZADO (R$) TESTE.",
+              "nativeQueryRef": "REALIZADO (R$).."
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "%s/ VB orçado"
+                }
+              },
+              "queryRef": "MEDIDAS.%s/ VB orçado",
+              "nativeQueryRef": "%s/ VB orçado"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "%s/ VB REALIZADO"
+                }
+              },
+              "queryRef": "MEDIDAS.%s/ VB REALIZADO",
+              "nativeQueryRef": "%s/ VB REALIZADO"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "R/O"
+                }
+              },
+              "queryRef": "MEDIDAS.R/O",
+              "nativeQueryRef": "R/O"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": ".."
+                }
+              },
+              "queryRef": "MEDIDAS...",
+              "nativeQueryRef": ".."
+            }
+          ]
+        }
+      },
+      "filters": {
+        "filters": [
+          {
+            "name": "9301e835f5b1afeb5dbc",
+            "ordinal": 0,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "REF"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "984a5c0efa2fee3fbeed",
+            "ordinal": 1,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "base"
+                  }
+                },
+                "Property": "Total de Soma de valor para bloco"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "92eb93483d34519c1088",
+            "ordinal": 2,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "2.TABELA MEDIDAS"
+                  }
+                },
+                "Property": "SOMA REALIZADO GESTORES"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "f451e22383dcdf9fad2b",
+            "ordinal": 3,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_TGFNAT"
+                  }
+                },
+                "Property": "DESCRNAT"
+              }
+            },
+            "type": "Categorical"
+          },
+          {
+            "name": "57583e0b20d7a5e4a74c",
+            "ordinal": 4,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "SOMA REALIZADO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "28c69e0c8ba1ca621a02",
+            "ordinal": 5,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_CADDRE"
+                  }
+                },
+                "Property": "BLOCO"
+              }
+            },
+            "type": "Categorical",
+            "filter": {
+              "Version": 2,
+              "From": [
+                {
+                  "Name": "v",
+                  "Entity": "VMQ_CADDRE",
+                  "Type": 0
+                }
+              ],
+              "Where": [
+                {
+                  "Condition": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "v"
+                              }
+                            },
+                            "Property": "BLOCO"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'1.Venda Liquida'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'3.Despesas com Vendas'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'4.Despesas Comercial Operacional'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'5.Despesas Administrativa Operacional'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'6.Receitas/Despesas Financeiras'"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "objects": {
+              "general": [
+                {
+                  "properties": {}
+                }
+              ]
+            }
+          },
+          {
+            "name": "b7267ee2679897444884",
+            "ordinal": 6,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_CADDRE"
+                  }
+                },
+                "Property": "TITULO"
+              }
+            },
+            "type": "Categorical",
+            "objects": {
+              "general": [
+                {
+                  "properties": {
+                    "isInvertedSelectionMode": {
+                      "expr": {
+                        "Literal": {
+                          "Value": "true"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "6334fd65b30b56bb9244",
+            "ordinal": 7,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DCALENDARIO"
+                  }
+                },
+                "Property": "NOMEMES"
+              }
+            },
+            "type": "Categorical"
+          },
+          {
+            "name": "8c786cd0ef35a43fede1",
+            "ordinal": 8,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_TSICUS"
+                  }
+                },
+                "Property": "DESCRCENCUS"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "e71ce171b6978ca27bd5",
+            "ordinal": 9,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "NUNOTA"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "e127ccbacdc1321eb0ef",
+            "ordinal": 10,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "TOTAL MATRIZ."
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "c37a142997be66a4c2c5",
+            "ordinal": 11,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "SOMA ORCADO"
+              }
+            },
+            "type": "Advanced",
+            "filter": {
+              "Version": 2,
+              "From": [
+                {
+                  "Name": "m",
+                  "Entity": "MEDIDAS",
+                  "Type": 0
+                }
+              ],
+              "Where": [
+                {
+                  "Condition": {
+                    "Not": {
+                      "Expression": {
+                        "Comparison": {
+                          "ComparisonKind": 0,
+                          "Left": {
+                            "Measure": {
+                              "Expression": {
+                                "SourceRef": {
+                                  "Source": "m"
+                                }
+                              },
+                              "Property": "SOMA ORCADO"
+                            }
+                          },
+                          "Right": {
+                            "Literal": {
+                              "Value": "null"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            "howCreated": "User"
+          },
+          {
+            "name": "a6a4a757ea60abc5bfc8",
+            "ordinal": 12,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "ORCAMENTO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "23a459f09604b6a965ad",
+            "ordinal": 13,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "REALIZADO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          }
+        ],
+        "filterSortOrder": "Custom"
+      }
+    },
+    {
+      "id": "a3738260bd6837032c4c",
+      "type": "lineClusteredColumnComboChart",
+      "projections": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DCALENDARIO"
+                    }
+                  },
+                  "Property": "TRI ANO"
+                }
+              },
+              "queryRef": "DCALENDARIO.TRI ANO",
+              "nativeQueryRef": "TRI ANO",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "ORÇADO (R$)."
+                }
+              },
+              "queryRef": "MEDIDAS.ORÇADO (R$).",
+              "nativeQueryRef": "ORÇADO (R$)."
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "MEDIDAS"
+                    }
+                  },
+                  "Property": "REALIZADO (R$).."
+                }
+              },
+              "queryRef": "MEDIDAS.REALIZADO (R$)..",
+              "nativeQueryRef": "REALIZADO (R$).."
+            }
+          ]
+        }
+      },
+      "filters": {
+        "filters": [
+          {
+            "name": "9301e835f5b1afeb5dbc",
+            "ordinal": 0,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "REF"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "984a5c0efa2fee3fbeed",
+            "ordinal": 1,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "base"
+                  }
+                },
+                "Property": "Total de Soma de valor para bloco"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "92eb93483d34519c1088",
+            "ordinal": 2,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "2.TABELA MEDIDAS"
+                  }
+                },
+                "Property": "SOMA REALIZADO GESTORES"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "f451e22383dcdf9fad2b",
+            "ordinal": 3,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_TGFNAT"
+                  }
+                },
+                "Property": "DESCRNAT"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "28c69e0c8ba1ca621a02",
+            "ordinal": 5,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_CADDRE"
+                  }
+                },
+                "Property": "BLOCO"
+              }
+            },
+            "type": "Categorical",
+            "filter": {
+              "Version": 2,
+              "From": [
+                {
+                  "Name": "v",
+                  "Entity": "VMQ_CADDRE",
+                  "Type": 0
+                }
+              ],
+              "Where": [
+                {
+                  "Condition": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "v"
+                              }
+                            },
+                            "Property": "BLOCO"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'1.Venda Liquida'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'3.Despesas com Vendas'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'4.Despesas Comercial Operacional'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'5.Despesas Administrativa Operacional'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'6.Receitas/Despesas Financeiras'"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "howCreated": "User",
+            "objects": {
+              "general": [
+                {
+                  "properties": {}
+                }
+              ]
+            }
+          },
+          {
+            "name": "b7267ee2679897444884",
+            "ordinal": 6,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_CADDRE"
+                  }
+                },
+                "Property": "TITULO"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User",
+            "objects": {
+              "general": [
+                {
+                  "properties": {
+                    "isInvertedSelectionMode": {
+                      "expr": {
+                        "Literal": {
+                          "Value": "true"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "8c786cd0ef35a43fede1",
+            "ordinal": 8,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_TSICUS"
+                  }
+                },
+                "Property": "DESCRCENCUS"
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "e71ce171b6978ca27bd5",
+            "ordinal": 9,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "NUNOTA"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "e127ccbacdc1321eb0ef",
+            "ordinal": 10,
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "VMQ_DREQLIK"
+                  }
+                },
+                "Property": "TOTAL MATRIZ."
+              }
+            },
+            "type": "Categorical",
+            "howCreated": "User"
+          },
+          {
+            "name": "c37a142997be66a4c2c5",
+            "ordinal": 11,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "SOMA ORCADO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "a6a4a757ea60abc5bfc8",
+            "ordinal": 12,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "ORCAMENTO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          },
+          {
+            "name": "23a459f09604b6a965ad",
+            "ordinal": 13,
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "MEDIDAS"
+                  }
+                },
+                "Property": "REALIZADO"
+              }
+            },
+            "type": "Advanced",
+            "howCreated": "User"
+          }
+        ],
+        "filterSortOrder": "Custom"
+      }
+    },
+    {
+      "id": "a781a733bc39b26af658",
+      "type": "slicer",
+      "projections": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DCALENDARIO"
+                    }
+                  },
+                  "Property": "ANO"
+                }
+              },
+              "queryRef": "DCALENDARIO.ANO",
+              "nativeQueryRef": "ANO",
+              "active": true
+            }
+          ]
+        }
+      },
+      "filters": {}
+    },
+    {
+      "id": "ad01bfcf0c7283616715",
+      "type": "slicer",
+      "projections": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DCALENDARIO"
+                    }
+                  },
+                  "Property": "TRIMESTRE"
+                }
+              },
+              "queryRef": "DCALENDARIO.TRIMESTRE",
+              "nativeQueryRef": "TRIMESTRE",
+              "active": true
+            }
+          ]
+        }
+      },
+      "filters": {}
+    },
+    {
+      "id": "ae03bd19c7d4d3694451",
+      "type": "textbox",
+      "projections": {},
+      "filters": {}
+    },
+    {
+      "id": "b429d4a6536a4c17748f",
+      "type": "slicer",
+      "projections": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DCALENDARIO"
+                    }
+                  },
+                  "Property": "NOMEMES"
+                }
+              },
+              "queryRef": "DCALENDARIO.NOMEMES",
+              "nativeQueryRef": "MES",
+              "active": true,
+              "displayName": "MES"
+            }
+          ]
+        }
+      },
+      "filters": {}
+    },
+    {
+      "id": "bd446fd7c84460250008",
+      "type": "shape",
+      "projections": {},
+      "filters": {}
+    },
+    {
+      "id": "d6d40b74e447cf434f32",
+      "type": "slicer",
+      "projections": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DCALENDARIO"
+                    }
+                  },
+                  "Property": "SEM"
+                }
+              },
+              "queryRef": "DCALENDARIO.SEM",
+              "nativeQueryRef": "SEM",
+              "active": true
+            }
+          ]
+        }
+      },
+      "filters": {}
+    },
+    {
+      "id": "e6a23392826b71610834",
+      "type": "slicer",
+      "projections": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "VMQ_TSIEMP"
+                    }
+                  },
+                  "Property": "RAZAOABREV"
+                }
+              },
+              "queryRef": "VMQ_TSIEMP.RAZAOABREV",
+              "nativeQueryRef": "EMPRESA",
+              "active": true,
+              "displayName": "EMPRESA"
+            }
+          ]
+        }
+      },
+      "filters": {}
+    },
+    {
+      "id": "f0be2db6fd23484be61a",
+      "type": "image",
+      "projections": {},
+      "filters": {}
+    }
+  ]
+}
