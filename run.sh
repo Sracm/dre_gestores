@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 # Servidor DRE Gestores - Geral (Porta 5100)
 
 cd "$(dirname "$0")"
