@@ -9,9 +9,16 @@ ORACLE_USER = os.getenv("ORACLE_USER", "sankhya")
 ORACLE_PASSWORD = os.getenv("ORACLE_PASSWORD", "")
 ORACLE_DSN = os.getenv("ORACLE_DSN", "192.168.1.55/ORCL")
 
-# Banco SQLite consumido pelo app.py (recomendado: fora do OneDrive)
+# Banco SQLite consumido como staging/cache local
 DB_PATH = os.getenv("DRE_DB_PATH", os.path.join(BASE_DIR, "dre_cache.db"))
 LOG_DIR = os.getenv("DRE_LOG_DIR", os.path.join(BASE_DIR, "logs"))
+
+# Conexão MariaDB
+MARIADB_HOST = os.getenv("MARIADB_HOST", "192.168.1.22")
+MARIADB_PORT = int(os.getenv("MARIADB_PORT", "3306"))
+MARIADB_USER = os.getenv("MARIADB_USER", "antonio")
+MARIADB_PASSWORD = os.getenv("MARIADB_PASSWORD", "")
+MARIADB_DB = os.getenv("MARIADB_DB", "dre_gestores")
 
 # Quantidade de meses atualizados na carga incremental, contando o mês atual
 # (2 = mês anterior + mês atual). Meses mais antigos não são tocados.

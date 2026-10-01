@@ -16,12 +16,8 @@ app = Flask(__name__)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 load_dotenv(os.path.join(BASE_DIR, ".env"))
-DB_PATH = os.getenv("DRE_DB_PATH", os.path.join(BASE_DIR, "dre_cache.db"))
 
-def get_db():
-    conn = sqlite3.connect(DB_PATH, timeout=30.0)
-    conn.row_factory = sqlite3.Row
-    return conn
+from db import get_db, get_db_connection
 
 # ── Versão dos dados (gravada pelo ETL em etl_status) ───────────────────────
 _versao = {"info": None, "ts": 0.0}
@@ -46,8 +42,8 @@ def versao_dados():
             info["versao"], info["atualizado_em"] = ok["id"], ok["fim"]
         if ultima:
             info["status"], info["erro"] = ultima["status"], ultima["erro"]
-    except sqlite3.OperationalError:
-        pass  # etl_status ainda não existe (banco gerado pelo processo antigo)
+    except Exception:
+        pass  # etl_status ainda não existe ou tabela em transição
     with _versao_lock:
         _versao["info"], _versao["ts"] = info, time.time()
     return info

@@ -20,3 +20,6 @@ env/
 # Logs
 *.log
 
+# Scratch e arquivos de teste locais
+scratch/
+

@@ -370,6 +370,74 @@ def publicar(conn, dt_ini, dt_fim):
         raise
 
 
+def sincronizar_mariadb(conn, dt_ini, dt_fim, run_id, view_hash, n_dre, n_det, modo):
+    try:
+        import pymysql
+        log.info("Sincronizando com MariaDB (%s:%s/%s)...", config.MARIADB_HOST, config.MARIADB_PORT, config.MARIADB_DB)
+        m_conn = pymysql.connect(
+            host=config.MARIADB_HOST,
+            port=config.MARIADB_PORT,
+            user=config.MARIADB_USER,
+            password=config.MARIADB_PASSWORD,
+            database=config.MARIADB_DB,
+            charset="utf8mb4",
+            autocommit=False
+        )
+        with m_conn.cursor() as m_cur:
+            faixa = "(ano * 100 + mes) >= %s AND (ano * 100 + mes) < %s"
+            p = (dt_ini.year * 100 + dt_ini.month, dt_fim.year * 100 + dt_fim.month)
+
+            m_cur.execute(f"DELETE FROM dre_data WHERE {faixa}", p)
+            rows = conn.execute("SELECT ano, mes, trimestre, semestre, empresa, codcencus, descrcencus, bloco, titulo, descrnat, orcado, realizado, vb_orcado, vb_realizado FROM stg_dre").fetchall()
+            if rows:
+                m_cur.executemany("INSERT INTO dre_data VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", rows)
+
+            m_cur.execute(f"DELETE FROM dre_resumo_mensal WHERE {faixa}", p)
+            rows = conn.execute("""
+                SELECT ano, mes, empresa, codcencus, bloco, SUM(realizado), SUM(orcado)
+                FROM stg_dre GROUP BY ano, mes, empresa, codcencus, bloco
+            """).fetchall()
+            if rows:
+                m_cur.executemany("INSERT INTO dre_resumo_mensal VALUES (%s,%s,%s,%s,%s,%s,%s)", rows)
+
+            m_cur.execute(f"DELETE FROM dre_detalhe_rh WHERE {faixa}", p)
+            rows = conn.execute("SELECT ano, mes, nomemes, tri_ano, bloco, titulo, descrnat, parceiro, orcado, realizado FROM stg_detalhe").fetchall()
+            if rows:
+                m_cur.executemany("INSERT INTO dre_detalhe_rh VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", rows)
+
+            m_cur.execute(f"DELETE FROM dre_detalhe_fsp WHERE {faixa}", p)
+            rows = conn.execute("SELECT ano, mes, nomemes, tri_ano, codcencus, bloco, titulo, descrnat, parceiro, orcado, realizado FROM stg_detalhe_fsp").fetchall()
+            if rows:
+                m_cur.executemany("INSERT INTO dre_detalhe_fsp VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", rows)
+
+            m_cur.execute("TRUNCATE TABLE dre_filtros_anos")
+            rows = conn.execute("SELECT ano FROM main.dre_filtros_anos").fetchall()
+            if rows:
+                m_cur.executemany("INSERT INTO dre_filtros_anos (ano) VALUES (%s)", rows)
+
+            m_cur.execute("TRUNCATE TABLE dre_filtros_empresas")
+            rows = conn.execute("SELECT nome FROM main.dre_filtros_empresas").fetchall()
+            if rows:
+                m_cur.executemany("INSERT INTO dre_filtros_empresas (nome) VALUES (%s)", rows)
+
+            m_cur.execute("TRUNCATE TABLE dre_filtros_centros")
+            rows = conn.execute("SELECT codcencus, nome FROM main.dre_filtros_centros").fetchall()
+            if rows:
+                m_cur.executemany("INSERT INTO dre_filtros_centros (codcencus, nome) VALUES (%s, %s)", rows)
+
+            m_cur.execute("""
+                INSERT INTO etl_status (inicio, fim, modo, periodo_ini, periodo_fim, linhas_dre, linhas_detalhe, view_hash, status)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, 'sucesso')
+            """, (dt.datetime.now().isoformat(timespec="seconds"), dt.datetime.now().isoformat(timespec="seconds"),
+                  modo, dt_ini.date().isoformat(), dt_fim.date().isoformat(), n_dre, n_det, view_hash))
+
+            m_conn.commit()
+            log.info("Sincronização com MariaDB concluída com sucesso.")
+        m_conn.close()
+    except Exception as me:
+        log.warning("Falha na sincronização com MariaDB: %s", me)
+
+
 # ═══════════════════════════════════════════════════════════════════════════
 #  Execução
 # ═══════════════════════════════════════════════════════════════════════════
@@ -417,6 +485,7 @@ def executar(desde=None, forcar=False):
         conn.execute("""UPDATE etl_status SET fim=?, status='sucesso', linhas_dre=?, linhas_detalhe=?, view_hash=?
                         WHERE id=?""",
                      (dt.datetime.now().isoformat(timespec="seconds"), n_dre, n_det, view_hash, run_id))
+        sincronizar_mariadb(conn, dt_ini, dt_fim, run_id, view_hash, n_dre, n_det, modo)
         log.info("Concluído: %d linhas DRE, %d linhas detalhe em %.1fs", n_dre, n_det, time.time() - t0)
         return 0
     except Exception as e:
