@@ -1,3 +1,5 @@
-﻿flask
+flask
 python-dotenv
 oracledb
+pymysql
+cryptography
