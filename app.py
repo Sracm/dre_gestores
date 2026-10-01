@@ -142,6 +142,24 @@ REGIONAIS = {
         "centros": [
             1010100
         ]
+    },
+    "mkt": {
+        "slug": "mkt",
+        "nome": "Marketing",
+        "gestor": "Marketing",
+        "centros": [
+            10010000,
+            10011001,
+            10011002,
+            10011003,
+            10011005,
+            11010100,
+            11010200,
+            11010300,
+            11010400,
+            11010500,
+            20090000
+        ]
     }
 }
 # Aliases amigáveis
@@ -157,6 +175,7 @@ REGIONAIS["assistencia-tecnica"] = REGIONAIS["assistencia"]
 REGIONAIS["assistenciatecnica"] = REGIONAIS["assistencia"]
 REGIONAIS["sac"] = REGIONAIS["assistencia"]
 REGIONAIS["varejo-sp"] = REGIONAIS["regional-sp"]
+REGIONAIS["marketing"] = REGIONAIS["mkt"]
 
 # ═══════════════════════════════════════════════════════════════════════════
 #  ROTAS DE PÁGINAS (DIRETORIA & LINKS DEDICADOS POR REGIONAL)
