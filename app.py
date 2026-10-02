@@ -1,6 +1,5 @@
 import os
 import sys
-import sqlite3
 import traceback
 import threading
 import time
@@ -449,7 +448,7 @@ def dre():
                 where.append(f"empresa IN ({placeholders})")
                 params.extend(ALLOWED_COMPANIES)
 
-        if cenc_list:
+        if cenc_list and not is_rh:
             if len(cenc_list) == 1:
                 where.append("codcencus = ?")
                 params.append(cenc_list[0])
