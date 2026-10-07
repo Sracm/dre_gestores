@@ -1352,17 +1352,46 @@ function pctBadge(v) {
 // Mostra quando os DADOS foram carregados do Oracle (não quando a tela abriu)
 function atualizarTimestamp(ultimaCargaFalhou = false) {
   const el = document.getElementById('lastUpdate');
+  iniciarContadorProximaCarga();
   if (!state.dadosAtualizadosEm) {
-    el.textContent = 'Dados: carga ainda não registrada';
+    el.textContent = 'Última atualização: carga ainda não registrada';
     return;
   }
-  el.textContent = 'Dados de: ' + new Date(state.dadosAtualizadosEm).toLocaleString('pt-BR', {
-    day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'
+  el.textContent = 'Última atualização: ' + new Date(state.dadosAtualizadosEm).toLocaleString('pt-BR', {
+    day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit'
   });
   el.classList.toggle('last-update-erro', ultimaCargaFalhou);
   el.title = ultimaCargaFalhou
     ? 'A última tentativa de atualização falhou; exibindo a carga anterior.'
     : '';
+}
+
+// ── Próxima atualização: contagem regressiva até a carga diária do ETL ───
+const ETL_HORA_CARGA = 21; // agendamento diário (etl/agendar_tarefa.ps1)
+let contadorProximaCarga = null;
+
+function proximaCargaETL() {
+  const agora = new Date();
+  const alvo = new Date(agora);
+  alvo.setHours(ETL_HORA_CARGA, 0, 0, 0);
+  if (alvo <= agora) alvo.setDate(alvo.getDate() + 1);
+  return alvo;
+}
+
+function renderProximaCarga() {
+  const el = document.getElementById('nextUpdate');
+  if (!el) return;
+  const seg = Math.max(0, Math.floor((proximaCargaETL() - new Date()) / 1000));
+  const h = String(Math.floor(seg / 3600)).padStart(2, '0');
+  const m = String(Math.floor((seg % 3600) / 60)).padStart(2, '0');
+  const s = String(seg % 60).padStart(2, '0');
+  el.textContent = `Próxima atualização em: ${h}:${m}:${s}`;
+}
+
+function iniciarContadorProximaCarga() {
+  if (contadorProximaCarga) return;
+  renderProximaCarga();
+  contadorProximaCarga = setInterval(renderProximaCarga, 1000);
 }
 
 // ── Export CSV ───────────────────────────────────────────────────────────
