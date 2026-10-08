@@ -7,7 +7,7 @@
   <meta name="description" content="Demonstrativo de Resultado do Exercício para Gestores MQ Hair — Realizado vs Orçado por centro de custo e empresa." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20261007_lastupdate" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20261008_lastupdate" />
   <script>
     window.CURRENT_REGIONAL = {{ (regional.slug if regional else '')|tojson }};
     window.CURRENT_REGIONAL_NOME = {{ (regional.nome if regional else '')|tojson }};
@@ -32,7 +32,7 @@
   <div class="navbar-right">
 
     <div class="header-meta-info" id="headerMetaInfo" title="Carga automática diária do ETL às 21:00">
-      <div class="last-update" id="lastUpdate">Última atualização: --/--/---- --:--</div>
+      <div class="last-update" id="lastUpdate">Última atualização: --/--/---- --:--:--</div>
       <div class="next-update" id="nextUpdate">Próxima atualização em: --:--:--</div>
     </div>
     <button class="btn-refresh" id="btnUpdateData" title="Sincronizar dados financeiros dos últimos 2 meses (Direto do Oracle)" style="margin-right: 12px; width: auto; padding: 8px 16px; font-weight: 700; font-size: 14px; color: #fff; background-color: #10B981; border: none; border-radius: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.4); transition: all 0.2s;">
@@ -389,6 +389,6 @@
 <div class="toast" id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-<script src="{{ url_for('static', filename='js/app.js') }}?v=20261007_lastupdate"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}?v=20261008_fixcharts"></script>
 </body>
 </html>

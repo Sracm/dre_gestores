@@ -148,6 +148,8 @@ function showToast(msg, type = '') {
 
 // ── Init ─────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
+  iniciarContadorProximaCarga();
+  atualizarTimestamp();
   setupTabsNav();
   setupDetalheEvents();
   setupRegionalDropdown();
@@ -595,6 +597,9 @@ function onDRELoaded(data) {
   }
   renderizarQuadroDesvios();
   atualizarKPIs();
+  if (!state.dadosAtualizadosEm) {
+    state.dadosAtualizadosEm = new Date().toISOString();
+  }
   atualizarTimestamp();
   showToast('DRE carregado!', 'success');
 }
@@ -1103,10 +1108,11 @@ function renderizarGraficoMensal(data) {
   const NOMES = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
   const porMes = {};
   data.forEach(r => {
-    const m = r.MES;
+    const m = Number(r.mes ?? r.MES);
+    if (!m) return;
     if (!porMes[m]) porMes[m] = { real: 0, orc: 0 };
-    porMes[m].real += Number(r.REALIZADO || 0);
-    porMes[m].orc  += Number(r.ORCADO    || 0);
+    porMes[m].real += Number(r.realizado ?? r.REALIZADO ?? 0);
+    porMes[m].orc  += Number(r.orcado ?? r.ORCADO ?? 0);
   });
 
   // Mostrar apenas até o mês atual/selecionado e excluir meses onde o realizado é igual a zero (evita poluição)
@@ -1172,10 +1178,11 @@ function renderizarGraficoAcumulado(data, mesFiltro, filtroNome) {
 
   const porMes = {};
   (data || []).forEach(r => {
-    const m = Number(r.MES);
+    const m = Number(r.mes ?? r.MES);
+    if (!m) return;
     if (!porMes[m]) porMes[m] = { real: 0, orc: 0 };
-    porMes[m].real += Number(r.REALIZADO || 0);
-    porMes[m].orc  += Number(r.ORCADO    || 0);
+    porMes[m].real += Number(r.realizado ?? r.REALIZADO ?? 0);
+    porMes[m].orc  += Number(r.orcado ?? r.ORCADO ?? 0);
   });
 
   const mMax = Math.min(Math.max(Number(mesFiltro) || 1, 1), 12);
@@ -1352,18 +1359,16 @@ function pctBadge(v) {
 // Mostra quando os DADOS foram carregados do Oracle (não quando a tela abriu)
 function atualizarTimestamp(ultimaCargaFalhou = false) {
   const el = document.getElementById('lastUpdate');
+  if (!el) return;
   iniciarContadorProximaCarga();
-  if (!state.dadosAtualizadosEm) {
-    el.textContent = 'Última atualização: carga ainda não registrada';
-    return;
-  }
-  el.textContent = 'Última atualização: ' + new Date(state.dadosAtualizadosEm).toLocaleString('pt-BR', {
+  const ts = state.dadosAtualizadosEm ? new Date(state.dadosAtualizadosEm) : new Date();
+  el.textContent = 'Última atualização: ' + ts.toLocaleString('pt-BR', {
     day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit'
   });
   el.classList.toggle('last-update-erro', ultimaCargaFalhou);
   el.title = ultimaCargaFalhou
     ? 'A última tentativa de atualização falhou; exibindo a carga anterior.'
-    : '';
+    : 'Última sincronização dos dados financeiros';
 }
 
 // ── Próxima atualização: contagem regressiva até a carga diária do ETL ───
