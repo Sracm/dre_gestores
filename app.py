@@ -6,12 +6,28 @@ import time
 import subprocess
 import datetime as dt
 from collections import OrderedDict
-from flask import Flask, render_template, jsonify, request, redirect, url_for
+from flask import Flask, render_template, jsonify, request, redirect, url_for, session
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(BASE_DIR, "permissoes"))
+try:
+    from controle_acesso import (
+        obter_permissoes_gestor,
+        validar_token_gestor,
+        verificar_acesso_centro,
+        ADMIN_USERS
+    )
+except ImportError:
+    obter_permissoes_gestor = lambda u: {"usuario": u, "is_admin": True, "centros": None, "canal": ""}
+    validar_token_gestor = lambda t: None
+    verificar_acesso_centro = lambda p, c: True
+    ADMIN_USERS = set()
 from typing import List
 
 from dotenv import load_dotenv
 
 app = Flask(__name__)
+app.secret_key = os.getenv("SECRET_KEY", "mq-dre-gestores-secure-secret-2026")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 load_dotenv(os.path.join(BASE_DIR, ".env"))
@@ -181,15 +197,19 @@ REGIONAIS["marketing"] = REGIONAIS["mkt"]
 # ═══════════════════════════════════════════════════════════════════════════
 @app.route("/")
 def index():
-    """Visão Geral / Diretoria (acesso total com seletor de regionais)"""
-    return render_template("index.html", regional=None)
+    """Visão Geral / Gestores com restrição automática por perfil"""
+    usuario = obter_usuario_ativo()
+    perm = obter_permissoes_gestor(usuario) if usuario else None
+    return render_template("index.html", regional=None, gestor=perm)
 
 @app.route("/<slug>")
 def regional_view(slug):
     """Link dedicado para a Regional (ex: /regional.fsp ou /fsp)"""
+    usuario = obter_usuario_ativo()
+    perm = obter_permissoes_gestor(usuario) if usuario else None
     clean_slug = slug.lower().strip()
     if clean_slug in REGIONAIS:
-        return render_template("index.html", regional=REGIONAIS[clean_slug])
+        return render_template("index.html", regional=REGIONAIS[clean_slug], gestor=perm)
     return redirect(url_for("index"))
 
 ALLOWED_COMPANIES = [
@@ -235,17 +255,49 @@ def parse_str_list(raw):
             items.append(part)
     return items
 
+def obter_usuario_ativo():
+    """Identifica o gestor a partir de query param, token, header ou session."""
+    user = request.args.get("user") or request.headers.get("X-User")
+    token = request.args.get("token") or request.headers.get("Authorization")
+
+    if token and not user:
+        if token.startswith("Bearer "):
+            token = token[7:]
+        valid_user = validar_token_gestor(token)
+        if valid_user:
+            user = valid_user
+
+    if user:
+        session["gestor_user"] = user.strip().lower()
+        return session["gestor_user"]
+
+    return session.get("gestor_user")
+
 def resolve_effective_cenc(regional_slug, cenc_raw):
     """
-    Se for informada uma Regional, restringe os centros de custo estritamente aos dela.
+    Se for informada uma Regional ou Gestor autenticado, restringe os centros de custo estritamente aos autorizados.
     Caso contrário, respeita o filtro global ou cenc_raw.
     """
+    usuario = obter_usuario_ativo()
+    perm = obter_permissoes_gestor(usuario) if usuario else None
+
     clean_slug = str(regional_slug).lower().strip() if regional_slug else ""
     regional_info = REGIONAIS.get(clean_slug)
 
+    allowed = None
     if regional_info:
         allowed = set(regional_info["centros"])
-        requested = parse_cenc_param(cenc_raw)
+
+    # Restrição de segurança: se o gestor não for admin e tiver centros específicos
+    if perm and not perm["is_admin"] and perm["centros"]:
+        centros_gestor = set(perm["centros"])
+        if allowed is not None:
+            allowed = allowed.intersection(centros_gestor)
+        else:
+            allowed = centros_gestor
+
+    requested = parse_cenc_param(cenc_raw)
+    if allowed is not None:
         if not requested:
             return sorted(list(allowed))
         inter = [c for c in requested if c in allowed]
@@ -260,7 +312,9 @@ def resolve_effective_cenc(regional_slug, cenc_raw):
 def filtros():
     regional_raw = request.args.get("regional", "").strip().lower()
     regional_info = REGIONAIS.get(regional_raw)
-    cache_key = f"filtros_{regional_info['slug']}" if regional_info else "filtros_geral"
+    usuario = obter_usuario_ativo()
+    perm = obter_permissoes_gestor(usuario) if usuario else None
+    cache_key = f"filtros_{regional_info['slug'] if regional_info else 'geral'}_{usuario or 'anon'}"
 
     cached = cache_get(cache_key)
     if cached:
@@ -327,13 +381,23 @@ def filtros():
             {"slug": "rh", "nome": "RH (Recursos Humanos)"}
         ]
 
+        # FILTRO DE SEGURANÇA POR GESTOR
+        if perm and not perm["is_admin"] and perm["centros"]:
+            centros = [c for c in centros if int(c["CODCENCUS"]) in perm["centros"]]
+
         result = {
             "anos": anos,
             "meses": meses,
             "empresas": empresas,
             "centros": centros,
             "regionais": regionais_lista,
-            "regional_ativa": regional_info["slug"] if regional_info else None
+            "regional_ativa": regional_info["slug"] if regional_info else None,
+            "usuario_autenticado": {
+                "usuario": perm["usuario"] if perm else "",
+                "canal": perm["canal"] if perm else "",
+                "is_admin": perm["is_admin"] if perm else True,
+                "total_centros": len(centros)
+            }
         }
         cache_set(cache_key, result)
         return jsonify(result)

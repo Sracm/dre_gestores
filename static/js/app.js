@@ -401,6 +401,22 @@ async function carregarFiltros() {
     state.mesesLista = data.meses || MESES;
     state.empresasLista = data.empresas || [];
     state.centrosLista = data.centros || [];
+    state.usuarioAutenticado = data.usuario_autenticado || null;
+
+    // Renderiza badge do Gestor autenticado se houver
+    if (state.usuarioAutenticado && state.usuarioAutenticado.usuario && !state.usuarioAutenticado.is_admin) {
+      let badge = document.getElementById('userAccessBadge');
+      if (!badge) {
+        const brand = document.querySelector('.navbar-brand');
+        if (brand) {
+          badge = document.createElement('div');
+          badge.id = 'userAccessBadge';
+          badge.style.cssText = 'display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(203, 151, 39, 0.15); border: 1px solid rgba(203, 151, 39, 0.4); border-radius: 6px; font-size: 11px; font-weight: 600; color: #E5B242; margin-left: 8px;';
+          badge.innerHTML = `<svg style="width: 13px; height: 13px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Gestor: ${state.usuarioAutenticado.usuario} (${state.usuarioAutenticado.canal || 'Restrito'})</span>`;
+          brand.appendChild(badge);
+        }
+      }
+    }
 
   } catch (e) {
     const anoAtual = new Date().getFullYear();
@@ -445,7 +461,7 @@ async function carregarFiltros() {
     getSearchText: it => `${it.CODCENCUS} ${it.NOME}`,
     getSelected: () => state.cenc,
     setSelected: vals => { state.cenc = vals; },
-    allLabel: state.selectedRegional ? 'Centros da Regional' : 'Todos os Centros',
+    allLabel: state.selectedRegional ? 'Centros da Regional' : (state.usuarioAutenticado && !state.usuarioAutenticado.is_admin ? `Todos os Meus Centros (${state.centrosLista.length})` : 'Todos os Centros'),
     unitPlural: 'Centros'
   });
 }
