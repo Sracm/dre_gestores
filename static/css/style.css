@@ -49,43 +49,49 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--gold-dark); }
 
-/* ── NAVBAR ────────────────────────────────────────────────────────────── */
+/* ── NAVBAR / APP HEADER (IDENTIDADE PADRÃO MQ) ────────────────────── */
+.app-header,
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 28px;
-  height: 54px;
-  background: var(--black2);
-  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 72px;
+  background-color: #000000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15), 0px 1px 1.5px rgba(0, 0, 0, 0.3);
   position: sticky;
   top: 0;
-  z-index: 100;
-  backdrop-filter: blur(12px);
+  z-index: 1000;
 }
 
-.navbar-brand { display: flex; align-items: center; gap: 12px; }
-
-.brand-logo {
+.header-brand,
+.navbar-brand {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-weight: 800;
+  gap: 24px;
+}
+
+.header-logo-box {
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+  padding-right: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.header-logo {
+  height: 38px;
+  width: auto;
+  display: block;
+}
+
+.header-subtitle {
+  font-weight: 300;
   font-size: 16px;
-  letter-spacing: .5px;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
 }
-
-.logo-mq {
-  background: linear-gradient(135deg, #e0b84a, #CB9727, #9e7416);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-size: 19px;
-  font-weight: 900;
-}
-
-.logo-sep { color: var(--border2); font-weight: 300; }
-.logo-txt { color: var(--text-primary); }
 
 .brand-badge {
   background: var(--gold-subtle);
@@ -96,40 +102,50 @@ body {
   letter-spacing: 1.5px;
   padding: 3px 8px;
   border-radius: 4px;
+  white-space: nowrap;
 }
 
+/* Status Badge Connected to Oracle Sankhya */
+.status-pill-connected,
 .db-status-pill {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  background: rgba(46, 213, 115, 0.08);
-  border: 1px solid rgba(46, 213, 115, 0.25);
-  color: #2ed573;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  padding: 4px 10px;
-  border-radius: 20px;
-  margin-left: 6px;
+  gap: 8px;
+  padding: 6px 16px;
+  background: linear-gradient(136.72deg, rgba(6, 40, 30, 0.7) 0%, rgba(0, 20, 11, 0.7) 100%);
+  border: 1px solid #479f76;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #479f76;
+  white-space: nowrap;
+}
+
+.status-dot-green {
+  width: 8px;
+  height: 8px;
+  background-color: #479f76;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #479f76;
+  display: inline-block;
 }
 
 .pulse-green {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background-color: #2ed573;
-  box-shadow: 0 0 8px #2ed573;
-  display: inline-block;
-  animation: pulseGreen 2s infinite ease-in-out;
+  animation: pulseGreenDot 2s infinite ease-in-out;
 }
 
-@keyframes pulseGreen {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 213, 115, 0.7); }
-  70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(46, 213, 115, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 213, 115, 0); }
+@keyframes pulseGreenDot {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(71, 159, 118, 0.7); }
+  70% { transform: scale(1.15); box-shadow: 0 0 0 6px rgba(71, 159, 118, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(71, 159, 118, 0); }
 }
 
-.navbar-right { display: flex; align-items: center; gap: 14px; }
+.header-actions,
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
 
 .developed-by-pill {
   font-size: 11px;
@@ -178,23 +194,61 @@ body {
 }
 
 .btn-refresh {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  width: 32px; height: 32px;
+  margin-right: 4px;
+  width: auto;
+  padding: 7px 16px;
+  font-weight: 700;
+  font-size: 13px;
+  color: #fff;
+  background-color: #10B981;
+  border: none;
   border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: var(--transition);
+  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.4);
+  transition: all 0.2s;
+  white-space: nowrap;
 }
 
 .btn-refresh:hover {
-  border-color: var(--gold);
-  color: var(--gold);
-  box-shadow: var(--shadow-gold);
+  background-color: #059669;
+  box-shadow: 0 6px 12px -1px rgba(16, 185, 129, 0.5);
+  transform: translateY(-1px);
 }
 
-.btn-refresh svg { width: 15px; height: 15px; }
+.btn-refresh svg {
+  width: 16px;
+  height: 16px;
+}
+
+.btn-admin-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  background: rgba(203, 151, 39, 0.08);
+  border: 1px solid #CB9727;
+  border-radius: 8px;
+  color: #e5b342;
+  font-weight: 600;
+  font-size: 13px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-admin-header:hover {
+  background: #CB9727;
+  color: #000;
+  box-shadow: 0 4px 15px rgba(203, 151, 39, 0.35);
+}
+
+.btn-admin-header:hover span {
+  color: #000;
+}
 
 /* ── FILTROS ────────────────────────────────────────────────────────────── */
 .filtros-bar {
