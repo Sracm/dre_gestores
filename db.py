@@ -10,7 +10,7 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 DB_HOST = os.getenv("MARIADB_HOST", "192.168.1.22")
 DB_PORT = int(os.getenv("MARIADB_PORT", "3306"))
 DB_USER = os.getenv("MARIADB_USER", "antonio")
-DB_PASS = os.getenv("MARIADB_PASSWORD", "")
+DB_PASS = os.getenv("MARIADB_PASSWORD") or "yzmpq100"
 DB_NAME = os.getenv("MARIADB_DB", "dre_gestores")
 
 
