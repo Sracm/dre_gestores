@@ -658,7 +658,7 @@ def dre_mensal():
                 where.append(f"empresa IN ({placeholders})")
                 params.extend(ALLOWED_COMPANIES)
 
-        if cenc_list:
+        if cenc_list and not is_rh:
             if len(cenc_list) == 1:
                 where.append("codcencus = ?")
                 params.append(cenc_list[0])
@@ -877,6 +877,7 @@ def _build_dre_tree(detalhe, bonif_total):
         if vb_real:
             break
 
+    has_vb = bool(vb_real and abs(vb_real) > 1.0)
     if not vb_real:
         vb_real = 1.0
     if not vb_orc:
@@ -891,7 +892,9 @@ def _build_dre_tree(detalhe, bonif_total):
     margem_real_ytd_ant = sum(bd["real_ytd_ant"] for bd in blocos_dict.values())
 
     def pct(n, d):
-        return round((n / d) * 100, 1) if d else None
+        if not has_vb or not d or abs(d) <= 1.0:
+            return None
+        return round((n / d) * 100, 1)
 
     # DAX formula oficial: DIVIDE(Realizado - Orçado, ABS(Orçado), 0)
     def ro(r, o):
