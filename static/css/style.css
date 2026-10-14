@@ -193,6 +193,13 @@ body {
   cursor: help;
 }
 
+#btnUpdateData {
+  display: none !important;
+}
+body.is-admin #btnUpdateData {
+  display: inline-flex !important;
+}
+
 .btn-refresh {
   margin-right: 4px;
   width: auto;

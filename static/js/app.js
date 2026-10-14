@@ -165,7 +165,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
   
   const btnUpdate = document.getElementById('btnUpdateData');
-  if (btnUpdate) {
+  const urlUser = (new URLSearchParams(window.location.search).get('user') || '').toLowerCase().trim();
+  if (btnUpdate && urlUser && urlUser !== 'admin') {
+    btnUpdate.remove();
+  } else if (btnUpdate) {
     btnUpdate.addEventListener('click', async () => {
       if (confirm('Deseja iniciar a sincronização com o banco Oracle para os últimos 2 meses? O processo leva cerca de 1 minuto.')) {
         btnUpdate.disabled = true;
@@ -404,14 +407,14 @@ async function carregarFiltros() {
     state.usuarioAutenticado = data.usuario_autenticado || null;
 
     // Garante que o botão ATUALIZAR DADOS e seu ícone só fiquem visíveis se o login for estritamente 'admin'
+    const isStrictAdmin = state.usuarioAutenticado && state.usuarioAutenticado.usuario === 'admin';
     const btnUpdateCheck = document.getElementById('btnUpdateData');
-    if (btnUpdateCheck) {
-      const isStrictAdmin = state.usuarioAutenticado && state.usuarioAutenticado.usuario === 'admin';
-      if (!isStrictAdmin) {
-        btnUpdateCheck.remove();
-      } else {
-        btnUpdateCheck.style.display = 'inline-flex';
-      }
+    if (isStrictAdmin) {
+      document.body.classList.add('is-admin');
+      if (btnUpdateCheck) btnUpdateCheck.style.display = 'inline-flex';
+    } else {
+      document.body.classList.remove('is-admin');
+      if (btnUpdateCheck) btnUpdateCheck.remove();
     }
 
     // Renderiza badge do Gestor autenticado se houver

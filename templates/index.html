@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20261009_identity" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}?v=20261012_adaptive" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20261014_dre_security_v3" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}?v=20261014_dre_security_v3" />
   <script>
     window.CURRENT_REGIONAL = {{ (regional.slug if regional else '')|tojson }};
     window.CURRENT_REGIONAL_NOME = {{ (regional.nome if regional else '')|tojson }};
@@ -394,6 +394,6 @@
 <div class="toast" id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-<script src="{{ url_for('static', filename='js/app.js') }}?v=20261008_gestores_sec"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}?v=20261014_dre_security_v3"></script>
 </body>
 </html>

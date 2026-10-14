@@ -127,6 +127,20 @@ REGIONAIS = {
             4010800
         ]
     },
+    "ecommerce": {
+        "slug": "ecommerce",
+        "nome": "E-commerce",
+        "gestor": "Vinícius Resina",
+        "centros": [
+            12040000,
+            12050000,
+            12090000,
+            12130000,
+            12140000,
+            12190000,
+            24000000
+        ]
+    },
     "comex": {
         "slug": "comex",
         "nome": "Comex",
