@@ -406,7 +406,18 @@ async function carregarFiltros() {
     state.centrosLista = data.centros || [];
     state.usuarioAutenticado = data.usuario_autenticado || null;
 
-    // Garante que o botão ATUALIZAR DADOS e seu ícone só fiquem visíveis se o login for estritamente 'admin'
+    // Regra específica: se for Vinícius Resina (ou canal ecommerce), oculta Guelta, Folha e Bonificação
+    const activeUser = (state.usuarioAutenticado?.usuario || '').toLowerCase();
+    const activeReg = (state.regionalAtiva || '').toLowerCase();
+    if (activeUser.includes('vinicius') || activeReg === 'ecommerce') {
+      document.body.classList.add('is-vinicius');
+      ['kpiGuelta', 'kpiFolha', 'kpiBonif'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.remove();
+      });
+    }
+
+    const isStrictAdmin = state.usuarioAutenticado && state.usuarioAutenticado.usuario === 'admin';
     const isStrictAdmin = state.usuarioAutenticado && state.usuarioAutenticado.usuario === 'admin';
     const btnUpdateCheck = document.getElementById('btnUpdateData');
     if (isStrictAdmin) {

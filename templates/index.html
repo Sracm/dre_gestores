@@ -15,7 +15,8 @@
     window.CURRENT_REGIONAL_NOME = {{ (regional.nome if regional else '')|tojson }};
   </script>
 </head>
-<body>
+{% set is_vinicius = (gestor and ('vinicius' in gestor.usuario)) or (regional and regional.slug == 'ecommerce') %}
+<body class="{{ 'is-vinicius' if is_vinicius else '' }}">
 
 <!-- ════ NAVBAR ════════════════════════════════════════════════════════════ -->
 <header class="app-header navbar">
@@ -179,31 +180,37 @@
       <div class="kpi-value" id="kpiMargemVal">—</div>
       <div class="kpi-sub" id="kpiMargemSub"></div>
     </div>
+    {% if not is_vinicius %}
     <div class="kpi-card" id="kpiBonif" data-kpi="bonif" title="Clique para filtrar no gráfico">
       <div class="kpi-label" style="color: #CB9727 !important;">Bonificação</div>
       <div class="kpi-value" id="kpiBonifVal">—</div>
       <div class="kpi-sub" id="kpiBonifSub"></div>
     </div>
+    {% endif %}
     <div class="kpi-card" id="kpiComissao" data-kpi="comissao" title="Clique para filtrar no gráfico">
       <div class="kpi-label" style="color: #CB9727 !important;">Comissão</div>
       <div class="kpi-value" id="kpiComissaoVal">—</div>
       <div class="kpi-sub" id="kpiComissaoSub"></div>
     </div>
+    {% if not is_vinicius %}
     <div class="kpi-card" id="kpiGuelta" data-kpi="guelta" title="Clique para filtrar no gráfico">
       <div class="kpi-label" style="color: #CB9727 !important;">Guelta</div>
       <div class="kpi-value" id="kpiGueltaVal">—</div>
       <div class="kpi-sub" id="kpiGueltaSub"></div>
     </div>
+    {% endif %}
     <div class="kpi-card" id="kpiDespComercial" data-kpi="despCom" title="Clique para filtrar no gráfico">
       <div class="kpi-label" style="color: #CB9727 !important;">Despesa Comercial Operacional</div>
       <div class="kpi-value" id="kpiDespComercialVal">—</div>
       <div class="kpi-sub" id="kpiDespComercialSub"></div>
     </div>
+    {% if not is_vinicius %}
     <div class="kpi-card" id="kpiFolha" data-kpi="folha" title="Clique para filtrar no gráfico">
       <div class="kpi-label" style="color: #CB9727 !important;">Folha e Benefícios</div>
       <div class="kpi-value" id="kpiFolhaVal">—</div>
       <div class="kpi-sub" id="kpiFolhaSub"></div>
     </div>
+    {% endif %}
   </section>
 
   <!-- ════ CONTEÚDO PRINCIPAL GESTORES ═════════════════════════════════════════ -->

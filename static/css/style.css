@@ -1858,3 +1858,14 @@ td.col-desvio-bloco {
 }
 
 
+
+/* ── Layout Ajustado para Gestor Vinicius Resina (4 cards sem Guelta, Folha e Bonif) ── */
+body.is-vinicius .kpi-section {
+  grid-template-columns: repeat(4, 1fr) !important;
+}
+@media (max-width: 1150px) {
+  body.is-vinicius .kpi-section { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 560px) {
+  body.is-vinicius .kpi-section { grid-template-columns: 1fr !important; }
+}
