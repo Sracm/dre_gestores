@@ -39,6 +39,7 @@
       <div class="last-update" id="lastUpdate">Última atualização: --/--/---- --:--:--</div>
       <div class="next-update" id="nextUpdate">Próxima atualização em: --:--:--</div>
     </div>
+    {% if gestor and gestor.usuario == 'admin' %}
     <button class="btn-refresh" id="btnUpdateData" title="Sincronizar dados financeiros dos últimos 2 meses (Direto do Oracle)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 16px; height: 16px;">
         <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.22-10.27l-5.63 5.63" stroke-linecap="round" stroke-linejoin="round"/>
@@ -46,6 +47,7 @@
       </svg>
       <span>ATUALIZAR DADOS</span>
     </button>
+    {% endif %}
     <a href="http://10.11.1.100:5080/portal" class="btn-admin-header" style="text-decoration: none;" title="Voltar ao Portal MQ">
       <span class="material-symbols-outlined" style="font-size: 18px;">grid_view</span>
       <span>Portal Intranet</span>
@@ -167,10 +169,6 @@
       <span class="tab-icon">📑</span>
       <span class="tab-title">DRE DETALHE</span>
     </button>
-    <a href="http://10.11.1.162:5150/" target="_blank" class="tab-btn" style="text-decoration:none; display:flex; align-items:center;" title="Acessar DRE Consolidado Empresa em nova aba">
-      <span class="tab-icon">🏢</span>
-      <span class="tab-title">DRE EMPRESA</span>
-    </a>
   </div>
 </div>
 

@@ -403,6 +403,17 @@ async function carregarFiltros() {
     state.centrosLista = data.centros || [];
     state.usuarioAutenticado = data.usuario_autenticado || null;
 
+    // Garante que o botão ATUALIZAR DADOS e seu ícone só fiquem visíveis se o login for estritamente 'admin'
+    const btnUpdateCheck = document.getElementById('btnUpdateData');
+    if (btnUpdateCheck) {
+      const isStrictAdmin = state.usuarioAutenticado && state.usuarioAutenticado.usuario === 'admin';
+      if (!isStrictAdmin) {
+        btnUpdateCheck.remove();
+      } else {
+        btnUpdateCheck.style.display = 'inline-flex';
+      }
+    }
+
     // Renderiza badge do Gestor autenticado se houver
     if (state.usuarioAutenticado && state.usuarioAutenticado.usuario && !state.usuarioAutenticado.is_admin) {
       let badge = document.getElementById('userAccessBadge');

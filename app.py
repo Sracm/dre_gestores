@@ -395,7 +395,7 @@ def filtros():
             "usuario_autenticado": {
                 "usuario": perm["usuario"] if perm else "",
                 "canal": perm["canal"] if perm else "",
-                "is_admin": perm["is_admin"] if perm else True,
+                "is_admin": perm["is_admin"] if perm else False,
                 "total_centros": len(centros)
             }
         }
@@ -1331,6 +1331,9 @@ def api_dre_detalhe():
 
 @app.route("/api/dre/update", methods=["POST"])
 def dre_update():
+    usuario = obter_usuario_ativo()
+    if not usuario or usuario.strip().lower() != "admin":
+        return jsonify({"success": False, "error": "Acesso negado. Apenas o administrador (login admin) pode atualizar os dados."}), 403
     try:
         # Executa o ETL de forma síncrona
         result = subprocess.run([sys.executable, "-m", "etl.atualizar_dados"], cwd=BASE_DIR, capture_output=True, text=True)
