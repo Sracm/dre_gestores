@@ -1103,7 +1103,12 @@ def api_dre_detalhe():
         elif clean_slug in ("regional-sp", "varejo-sp"):
             is_sp = True
 
-    is_special = is_rh or is_fsp or is_produto or is_logistica or is_comex or is_assistencia or is_sp
+        elif clean_slug in ("ecommerce", "e-commerce"):
+            pass
+
+    # dre_detalhe_fsp contem parceiros para todos os 53 centros de custo da empresa (e dre_detalhe_rh para o RH).
+    # Usar sempre tabela detalhada para nunca exibir <SEM PARCEIRO> na guia Detalhe.
+    is_special = True
 
     ph_meses = ",".join("?" for _ in meses_ativos)
     ph_ytd = ",".join("?" for _ in meses_ytd)
@@ -1111,21 +1116,19 @@ def api_dre_detalhe():
     where_busca = ""
     extra_params = []
     if busca:
-        where_busca = " AND (LOWER(bloco) LIKE ? OR LOWER(titulo) LIKE ? OR LOWER(descrnat) LIKE ? "
-        if is_special:
-            where_busca += "OR LOWER(parceiro) LIKE ?)"
-            extra_params = [f"%{busca}%"] * 4
-        else:
-            where_busca += ")"
-            extra_params = [f"%{busca}%"] * 3
+        where_busca = " AND (LOWER(bloco) LIKE ? OR LOWER(titulo) LIKE ? OR LOWER(descrnat) LIKE ? OR LOWER(parceiro) LIKE ?)"
+        extra_params = [f"%{busca}%"] * 4
 
     if is_special:
         tabela = "dre_detalhe_rh" if is_rh else "dre_detalhe_fsp"
         
-        if tabela == "dre_detalhe_fsp" and cenc_list:
-            ph_cenc = ",".join(["?"] * len(cenc_list))
-            where_busca += f" AND codcencus IN ({ph_cenc})"
-            extra_params.extend(cenc_list)
+        if tabela == "dre_detalhe_fsp":
+            if cenc_list:
+                ph_cenc = ",".join(["?"] * len(cenc_list))
+                where_busca += f" AND codcencus IN ({ph_cenc})"
+                extra_params.extend(cenc_list)
+            else:
+                where_busca += f" AND codcencus != {EXCLUDED_CODCENCUS}"
             
         sql = f"""
             SELECT bloco, titulo, descrnat, parceiro,
