@@ -418,7 +418,6 @@ async function carregarFiltros() {
     }
 
     const isStrictAdmin = state.usuarioAutenticado && state.usuarioAutenticado.usuario === 'admin';
-    const isStrictAdmin = state.usuarioAutenticado && state.usuarioAutenticado.usuario === 'admin';
     const btnUpdateCheck = document.getElementById('btnUpdateData');
     if (isStrictAdmin) {
       document.body.classList.add('is-admin');
