@@ -1789,7 +1789,6 @@ function renderizarDREDetalhe(dre) {
               <div class="natureza-row-content" ${hasParceiros ? `onclick="toggleLinhaDetalhe('${linhaId}')" style="cursor:pointer;" title="Clique para ver parceiros"` : ''}>
                 ${hasParceiros ? `<span class="chevron">▼</span>` : `<span class="chevron empty">&nbsp;</span>`}
                 <span class="natureza-nome" style="${hasParceiros ? 'font-weight: 600;' : ''}">${ln.descr || '—'}</span>
-                ${hasParceiros ? `<span class="count-parceiros-badge" title="${ln.parceiros.length} parceiro(s)">${ln.parceiros.length} ${ln.parceiros.length === 1 ? 'parceiro' : 'parceiros'}</span>` : ''}
               </div>
             </td>
             <td class="col-num ${numClass(ln.orcado)}">${fmtBRL(ln.orcado)}</td>
