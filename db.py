@@ -1,6 +1,9 @@
 import os
 import re
 import sys
+import socket
+import time
+import sqlite3
 import pymysql
 from dotenv import load_dotenv
 
@@ -12,6 +15,26 @@ DB_PORT = int(os.getenv("MARIADB_PORT", "3306"))
 DB_USER = os.getenv("MARIADB_USER", "antonio")
 DB_PASS = os.getenv("MARIADB_PASSWORD") or "yzmpq100"
 DB_NAME = os.getenv("MARIADB_DB", "dre_gestores")
+SQLITE_DB_PATH = os.path.join(BASE_DIR, "dre_cache.db")
+
+_DB_NETWORK_AVAILABLE = None
+_DB_NETWORK_CHECK_TS = 0
+
+def is_db_network_available() -> bool:
+    global _DB_NETWORK_AVAILABLE, _DB_NETWORK_CHECK_TS
+    now = time.time()
+    if (now - _DB_NETWORK_CHECK_TS < 60) and (_DB_NETWORK_AVAILABLE is not None):
+        return _DB_NETWORK_AVAILABLE
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(0.7)
+        s.connect((DB_HOST, DB_PORT))
+        s.close()
+        _DB_NETWORK_AVAILABLE = True
+    except Exception:
+        _DB_NETWORK_AVAILABLE = False
+    _DB_NETWORK_CHECK_TS = now
+    return _DB_NETWORK_AVAILABLE
 
 
 class MariaDBRow:
@@ -133,7 +156,8 @@ class MariaDBConnection:
             'password': DB_PASS,
             'database': DB_NAME,
             'charset': 'utf8mb4',
-            'autocommit': False
+            'autocommit': False,
+            'connect_timeout': 2
         }
         config.update(kwargs)
         self._kwargs = config
@@ -170,9 +194,103 @@ class MariaDBConnection:
         self.close()
 
 
+class SQLiteCursorWrapper:
+    def __init__(self, cur):
+        self._cur = cur
+        self.description = cur.description
+
+    def execute(self, sql, params=None):
+        if params is not None:
+            if isinstance(params, list):
+                params = tuple(params)
+            self._cur.execute(sql, params)
+        else:
+            self._cur.execute(sql)
+        self.description = self._cur.description
+        return self
+
+    def executemany(self, sql, seq_of_params):
+        self._cur.executemany(sql, seq_of_params)
+        self.description = self._cur.description
+        return self
+
+    def fetchone(self):
+        row = self._cur.fetchone()
+        if row is None or not self.description:
+            return None
+        keys = [d[0] for d in self.description]
+        return MariaDBRow(keys, row)
+
+    def fetchall(self):
+        rows = self._cur.fetchall()
+        if not rows or not self.description:
+            return []
+        keys = [d[0] for d in self.description]
+        return [MariaDBRow(keys, r) for r in rows]
+
+    @property
+    def rowcount(self):
+        return self._cur.rowcount
+
+    @property
+    def lastrowid(self):
+        return self._cur.lastrowid
+
+    def close(self):
+        self._cur.close()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
+
+
+class SQLiteConnectionWrapper:
+    def __init__(self, db_path):
+        self._conn = sqlite3.connect(db_path, check_same_thread=False)
+
+    def cursor(self):
+        return SQLiteCursorWrapper(self._conn.cursor())
+
+    def execute(self, sql, params=None):
+        cur = self.cursor()
+        cur.execute(sql, params)
+        return cur
+
+    def commit(self):
+        self._conn.commit()
+
+    def rollback(self):
+        self._conn.rollback()
+
+    def close(self):
+        try:
+            self._conn.close()
+        except Exception:
+            pass
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if exc_type is not None:
+            self.rollback()
+        else:
+            self.commit()
+        self.close()
+
+
 def get_db_connection():
+    if is_db_network_available():
+        try:
+            return MariaDBConnection()
+        except Exception:
+            pass
+    if os.path.exists(SQLITE_DB_PATH):
+        return SQLiteConnectionWrapper(SQLITE_DB_PATH)
     return MariaDBConnection()
 
 
 def get_db():
-    return MariaDBConnection()
+    return get_db_connection()

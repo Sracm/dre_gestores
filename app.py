@@ -990,6 +990,14 @@ def api_dre_detalhe():
     trimestre = request.args.get("trimestre", None)
     busca = request.args.get("q", "").strip().lower()
     mes_raw = request.args.get("mes", None)
+    regional_raw = request.args.get("regional", None)
+    emp_raw = request.args.get("emp", "ALL")
+    cenc_raw = request.args.get("cenc", "ALL")
+
+    cache_k = f"detalhe_{ano}_{mes_raw}_{emp_raw}_{cenc_raw}_{regional_raw}_{busca}"
+    cached = cache_get(cache_k)
+    if cached:
+        return jsonify(cached)
 
     conn = get_db()
     cur = conn.cursor()
@@ -1340,14 +1348,16 @@ def api_dre_detalhe():
             "titulos": titulos_list
         })
 
-    return jsonify({
+    result_payload = {
         "status": "success",
         "ano": ano,
         "anos_disponiveis": anos_disp,
         "quarterly": quarterly,
         "monthly": monthly,
         "dre": dre_tree
-    })
+    }
+    cache_set(cache_k, result_payload)
+    return jsonify(result_payload)
 
 @app.route("/api/dre/update", methods=["POST"])
 def dre_update():
