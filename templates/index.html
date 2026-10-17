@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20261014_dre_security_v3" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}?v=20261014_dre_security_v3" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=20261017_adaptive" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}?v=20261017_adaptive" />
   <script>
     window.CURRENT_REGIONAL = {{ (regional.slug if regional else '')|tojson }};
     window.CURRENT_REGIONAL_NOME = {{ (regional.nome if regional else '')|tojson }};
@@ -41,6 +41,10 @@
       <div class="next-update" id="nextUpdate">Próxima atualização em: --:--:--</div>
     </div>
     
+    <button type="button" class="btn-fullscreen-header" id="btnFullscreen" title="Ativar Modo Tela Cheia (F11 ou tecla F)">
+      <span class="material-symbols-outlined" id="fsIcon" style="font-size: 18px;">fullscreen</span>
+      <span id="fsText">Modo Tela Cheia</span>
+    </button>
     <a href="http://10.11.1.100:5080/portal" class="btn-admin-header" style="text-decoration: none;" title="Voltar ao Portal MQ">
       <span class="material-symbols-outlined" style="font-size: 18px;">grid_view</span>
       <span>Portal Intranet</span>
@@ -200,7 +204,7 @@
     </div>
     {% endif %}
     <div class="kpi-card" id="kpiDespComercial" data-kpi="despCom" title="Clique para filtrar no gráfico">
-      <div class="kpi-label" style="color: #CB9727 !important;">Despesa Comercial Operacional</div>
+      <div class="kpi-label" style="color: #CB9727 !important;" title="Despesa Comercial Operacional">Despesa Cml Operacional</div>
       <div class="kpi-value" id="kpiDespComercialVal">—</div>
       <div class="kpi-sub" id="kpiDespComercialSub"></div>
     </div>
@@ -393,6 +397,6 @@
 <div class="toast" id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-<script src="{{ url_for('static', filename='js/app.js') }}?v=20261014_dre_fix_js_v4"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}?v=20261017_adaptive"></script>
 </body>
 </html>

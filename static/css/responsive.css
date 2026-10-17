@@ -77,6 +77,7 @@ html, body {
 }
 
 .btn-admin-header,
+.btn-fullscreen-header,
 .btn-refresh {
   white-space: nowrap !important;
   font-size: clamp(11px, 0.85vw, 13px) !important;
@@ -130,37 +131,43 @@ html, body {
 /* ── Grid de KPIs Dinâmico e Responsivo ── */
 .kpi-section {
   display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)) !important;
-  gap: clamp(8px, 1vw, 14px) !important;
-  padding: 12px clamp(12px, 2vw, 28px) 6px !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr)) !important;
+  gap: clamp(6px, 0.75vw, 10px) !important;
+  padding: 10px clamp(12px, 2vw, 28px) 6px !important;
   width: 100% !important;
 }
 
 .kpi-card {
-  padding: clamp(10px, 1vw, 14px) clamp(10px, 1.2vw, 16px) !important;
+  padding: 8px 10px 8px 10px !important;
   min-width: 0 !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
+  box-sizing: border-box !important;
 }
 
 .kpi-label {
-  font-size: clamp(10px, 0.75vw, 12px) !important;
+  font-size: clamp(9px, 0.65vw, 10.5px) !important;
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
+  letter-spacing: 0.2px !important;
 }
 
 .kpi-value {
-  font-size: clamp(17px, 1.35vw, 24px) !important;
-  letter-spacing: -0.3px !important;
+  font-size: clamp(13px, 0.95vw, 16.5px) !important;
+  letter-spacing: -0.4px !important;
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
+  font-variant-numeric: tabular-nums !important;
+  line-height: 1.15 !important;
+  margin-top: 3px !important;
+  margin-bottom: 2px !important;
 }
 
 .kpi-sub {
-  font-size: clamp(10px, 0.7vw, 11.5px) !important;
+  font-size: clamp(8px, 0.58vw, 9.5px) !important;
 }
 
 /* ── Abas de Navegação Fluidas ── */
